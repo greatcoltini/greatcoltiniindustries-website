@@ -97,10 +97,9 @@ test('works without JavaScript and with reduced motion', async ({
     .evaluateAll((links) => [
       ...new Set(links.map((link) => link.getAttribute('href'))),
     ]);
-  expect(projectLinks).toHaveLength(14);
+  expect(projectLinks).toHaveLength(13);
   expect(projectLinks).toEqual(
     expect.arrayContaining([
-      '/projects/meccha-minecraft/',
       '/projects/meccha-mcjannek-station/',
       '/projects/meccha-swiftbroom/',
     ]),

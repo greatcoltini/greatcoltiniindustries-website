@@ -3,7 +3,7 @@
 ## Production checks
 
 - Astro type-check: zero errors, warnings, or hints.
-- Twenty static HTML pages generated (Home, three categories, About, fourteen projects, 404).
+- Nineteen static HTML pages generated (Home, three categories, About, thirteen projects, 404).
 - Generated internal links, local assets, section anchors, and canonical/description metadata verified.
 - All nine external project actions returned HTTP 200.
 - Dependencies audited with zero known vulnerabilities at implementation time.
