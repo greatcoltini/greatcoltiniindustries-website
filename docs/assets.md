@@ -17,6 +17,8 @@ These files come from Colton’s existing project assets. They are used directly
 
 The R.E.P.O. mod has a clearly styled text/icon tile because no verified original promotional image was selected. The favicon and brand monogram use native vector/text styling. No generated mockup is used as page content.
 
-Cinzel and Source Sans 3 are self-hosted Fontsource packages, distributed under the SIL Open Font License. Their license files are included in the installed packages.
+Anton and Source Sans 3 are self-hosted Fontsource packages, distributed under the SIL Open Font License. Their license files are included in the installed packages.
 
 The launch selection contains eleven projects. Seven external destinations were verified: the two Steam games, four Steam Workshop mods, and GreatColtini’s MinecraftAdditions on Thunderstore. Apps and Valheim mods have no external actions until a public destination is verified. Private or unavailable GitHub repositories are not linked as public source.
+
+The scrolling homepage additionally uses `kingdom-gameplay.png` from `godot-defenders/marketing/screenshots/grasslands-1.png` and `lone-team.png` from `lone-survivors-ordered/lone-survivors-ordered/library-team.png`. These are original project assets, not generated substitutes. The small arrows and board-game die are decorative SVG shapes.

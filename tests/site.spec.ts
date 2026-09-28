@@ -76,8 +76,8 @@ test('keyboard navigation and browser history', async ({
     .getByRole('navigation', { name: 'Main navigation' })
     .getByRole('link', { name: 'Apps', exact: true })
     .click();
-  await expect(page).toHaveURL(/\/apps\/$/);
-  await expect(page.locator('[aria-current="page"]')).toHaveText('Apps');
+  await expect(page).toHaveURL(/\/#apps$/);
+  await expect(page.locator('[aria-current="location"]')).toHaveText('Apps↗');
   await page.goBack();
   await expect(page).toHaveURL(/\/#main$/);
 });
@@ -91,8 +91,22 @@ test('works without JavaScript and with reduced motion', async ({
   });
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4321/');
+  const projectLinks = await page
+    .locator('a[href^="/projects/"]')
+    .evaluateAll((links) => [
+      ...new Set(links.map((link) => link.getAttribute('href'))),
+    ]);
+  expect(projectLinks).toHaveLength(11);
+  for (const name of ['Games', 'Apps', 'Mods', 'About']) {
+    await page
+      .getByRole('navigation', { name: 'Main navigation' })
+      .getByRole('link', { name, exact: true })
+      .click();
+    await expect(page).toHaveURL(new RegExp('#' + name.toLowerCase() + '$'));
+    await expect(page.locator('#' + name.toLowerCase())).toBeVisible();
+  }
   await page
-    .getByRole('link', { name: 'Explore the game', exact: true })
+    .getByRole('link', { name: 'Explore Kingdom TD', exact: true })
     .click();
   await expect(page.getByRole('link', { name: 'View on Steam' })).toBeVisible();
   await page.getByRole('link', { name: 'Development', exact: true }).click();
@@ -122,7 +136,12 @@ test('200% text and landscape do not overflow', async ({ page }) => {
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,
         ),
-        `${route} ${width}`,
+        `${route} ${width}: ${await page.locator('body *').evaluateAll((els) =>
+          els
+            .filter((el) => el.getBoundingClientRect().right > innerWidth + 1)
+            .map((el) => el.tagName + '.' + el.className)
+            .join(', '),
+        )}`,
       ).toBe(true);
     }
   }

@@ -1,102 +1,470 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import hero from '../assets/kingdom-td-hero.png';
-import ProjectCard from '../components/ProjectCard.astro';
 import Icon from '../components/Icon.astro';
-import { projectsIn } from '../lib/projects';
-const projects = (await projectsIn()).filter((p) => p.data.category !== 'mods');
+import ProjectArt from '../components/ProjectArt.astro';
+import kingdomCover from '../assets/kingdom-td.jpg';
+import loneCover from '../assets/lone-survivors.png';
+import boulderWall from '../assets/boulderlog-wall.png';
+import shelfIcon from '../assets/shelf-and-score.png';
+import gameplay from '../assets/kingdom-gameplay.png';
+import loneTeam from '../assets/lone-team.png';
+import { projectsIn, projectUrl } from '../lib/projects';
+const projects = await projectsIn();
+const games = projects.filter((p) => p.data.category === 'games');
+const apps = projects.filter((p) => p.data.category === 'apps');
+const groups = [
+  { name: 'Necesse', note: 'A more capable settlement.', number: '01' },
+  { name: 'R.E.P.O.', note: 'A familiar kind of trouble.', number: '02' },
+  { name: 'Valheim', note: 'More reasons to explore.', number: '03' },
+];
 ---
 
 <Layout
   title="Home"
-  description="Games, apps, and mods by Colton Donkersgoed. Explore Kingdom TD, Lone Survivors, BoulderLog, and Shelf & Score."
+  description="Games, apps, and mods by Colton Donkersgoed. Explore Kingdom TD, Lone Survivors, BoulderLog, Shelf & Score, and the things I make for the way I like to play."
 >
-  <header class="page-top">
-    <span class="eyebrow">THE GREAT COLTINI COLLECTION</span>
-    <a href="/about/">
-      Made by Colton Donkersgoed <Icon name="arrow" size={16} />
-    </a>
-  </header>
-  <section class="hero" aria-labelledby="hero-title">
-    <Image
-      class="hero-image"
-      src={hero}
-      alt="A mounted rider and defensive towers face a horde beneath a stormy fantasy sky."
-      widths={[640, 1024, 1600, 2400]}
-      sizes="(min-width: 1024px) calc(100vw - 304px), 100vw"
-      loading="eager"
-      fetchpriority="high"
-      format="webp"
-    />
-    <div class="hero-shade"></div>
-    <div class="hero-copy">
-      <p class="eyebrow">
-        <span class="gold-dash"></span> FEATURED GAME
-      </p>
-      <h1 id="hero-title">
-        Kingdom TD<span>Draft Your Demise</span>
+  <section class="intro-section content-width" aria-labelledby="intro-title">
+    <div class="intro-copy">
+      <p class="eyebrow">THE PERSONAL PROJECTS OF COLTON DONKERSGOED</p>
+      <h1 id="intro-title" class="big-type">
+        <span>PLAY.</span>
+        <span class="blue-text">MAKE.</span>
+        <span>REPEAT.</span>
       </h1>
-      <p>
-        Choose the enemies.
-        <br />
-        Build the defense.
-        <br />
-        Survive your decisions.
+      <p class="intro-note">
+        Hi, I’m <strong>Colton.</strong> I make games, apps, and mods—usually
+        starting with something I want to play or use myself.
       </p>
-      <a class="button" href="/projects/kingdom-td/">
-        Explore the game <Icon name="arrow" />
+      <a class="text-action" href="#about">
+        A little about me <Icon name="arrow" />
       </a>
-      <span class="hero-genre">
-        TOWER DEFENSE <span aria-hidden="true">/</span> STRATEGY
+    </div>
+    <div class="project-collage" aria-label="Explore my projects">
+      <div class="collage-grid" aria-hidden="true"></div>
+      <a
+        class="collage-piece collage-kingdom"
+        href="/projects/kingdom-td/"
+        aria-label="Explore Kingdom TD"
+      >
+        <Image
+          src={kingdomCover}
+          alt="Kingdom TD: Draft Your Demise"
+          widths={[400, 640, 960]}
+          sizes="(max-width: 700px) 70vw, 42vw"
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <span class="collage-label">
+          01 / KINGDOM TD <Icon name="arrow" />
+        </span>
+      </a>
+      <a
+        class="collage-piece collage-lone"
+        href="/projects/lone-survivors/"
+        aria-label="Explore Lone Survivors"
+      >
+        <Image
+          src={loneCover}
+          alt="Lone Survivors"
+          widths={[400, 640, 960]}
+          sizes="(max-width: 700px) 70vw, 40vw"
+          format="webp"
+          loading="eager"
+        />
+        <span class="collage-label">
+          02 / LONE SURVIVORS <Icon name="arrow" />
+        </span>
+      </a>
+      <a
+        class="collage-piece collage-boulder"
+        href="/projects/boulderlog/"
+        aria-label="Explore BoulderLog"
+      >
+        <Image
+          src={boulderWall}
+          alt="BoulderLog climbing artwork"
+          width={400}
+          format="webp"
+          loading="eager"
+        />
+        <span class="small-sticker">BoulderLog ↗</span>
+      </a>
+      <a
+        class="collage-piece collage-shelf"
+        href="/projects/shelf-and-score/"
+        aria-label="Explore Shelf & Score"
+      >
+        <Image
+          src={shelfIcon}
+          alt="Shelf & Score app icon"
+          width={256}
+          format="webp"
+          loading="eager"
+        />
+      </a>
+      <span class="margin-note" aria-hidden="true">
+        One more
+        <br /> run.
+        <svg viewBox="0 0 100 55" fill="none">
+          <path
+            d="M6 5c54-5 66 21 65 39m-15-9 15 12 12-15"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+        </svg>
+      </span>
+      <span class="collage-cross" aria-hidden="true">
+        +
       </span>
     </div>
-    <span class="hero-index" aria-hidden="true">
-      01 <span>/ THE COLLECTION</span>
-    </span>
   </section>
-  <section class="library" aria-labelledby="library-title">
-    <div class="section-heading">
+  <div class="scroll-cue content-width">
+    <a href="#games">
+      SCROLL TO EXPLORE <span aria-hidden="true">↓</span>
+    </a>
+    <span>GAMES / APPS / MODS / THE PERSON BEHIND THEM</span>
+  </div>
+  <section
+    class="games-section content-width scroll-section"
+    id="games"
+    aria-labelledby="games-title"
+  >
+    <header class="section-opening">
       <div>
-        <p class="eyebrow">MADE TO PLAY. MADE TO USE.</p>
-        <h2 id="library-title">
-          The project library<span class="count">04</span>
+        <span class="section-index">
+          01 <span aria-hidden="true"></span> GAMES
+        </span>
+        <h2 class="big-type" id="games-title">
+          One more run.
         </h2>
       </div>
       <p>
-        I’m Colton. I build games, useful apps,
-        <br class="desktop-break" /> and mods for the way I like to play.
+        Different worlds.
+        <br /> The same “what if?” that gets me building.
       </p>
-    </div>
-    <div class="project-grid">
-      {projects.map((project) => (
-        <ProjectCard project={project} />
-      ))}
+    </header>
+    {games.map((project, index) => (
+      <article
+        class:list={[
+          'game-feature',
+          'scroll-reveal',
+          { 'game-reverse': index === 1 },
+        ]}
+      >
+        <a
+          class="game-visual"
+          href={projectUrl(project)}
+          aria-label={`Explore ${project.data.title}`}
+        >
+          <Image
+            src={index === 0 ? gameplay : loneTeam}
+            alt={
+              index === 0
+                ? 'Kingdom TD gameplay: towers defend a winding route across the grasslands.'
+                : 'Lone Survivors warrior, mage, and barbarian artwork.'
+            }
+            widths={[480, 800, 1200, 1600]}
+            sizes="(max-width: 800px) 92vw, 55vw"
+            format="webp"
+            loading="lazy"
+          />
+          <span class="image-caption">
+            {index === 0
+              ? 'IN-GAME / KINGDOM TD'
+              : 'MEET THE HORDE / LONE SURVIVORS'}
+            <Icon name="arrow" size={18} />
+          </span>
+          <span class="corner-number" aria-hidden="true">
+            0{index + 1}
+          </span>
+        </a>
+        <div class="game-copy">
+          <span class="eyebrow">
+            {index === 0
+              ? 'DRAFT. BUILD. DEFEND.'
+              : 'SURVIVE. UPGRADE. GO AGAIN.'}
+          </span>
+          <h3 class="big-type">
+            {project.data.shortTitle || project.data.title}
+          </h3>
+          {index === 0 && <p class="game-subtitle">Draft Your Demise</p>}
+          <p class="feature-summary">{project.data.summary}</p>
+          <p>
+            {index === 0
+              ? 'The next wave starts with your choice. Draft the enemies, shape their route, and build a defense that can handle the consequences.'
+              : 'Pick a class, find the upgrades that click, and take on a growing horde. There’s always another build to try.'}
+          </p>
+          <div class="feature-actions">
+            {project.data.links.map((link) => (
+              <a class="button" href={link.url}>
+                {link.label}
+                <Icon name="external" size={18} />
+              </a>
+            ))}
+            <a
+              class="text-action"
+              href={projectUrl(project)}
+              aria-label={`About ${project.data.title}`}
+            >
+              Inside the project <Icon name="arrow" />
+            </a>
+          </div>
+          <p class="project-credit">{project.data.tech.join(' / ')}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+  <section
+    class="apps-section scroll-section"
+    id="apps"
+    aria-labelledby="apps-title"
+  >
+    <div class="content-width">
+      <header class="section-opening">
+        <div>
+          <span class="section-index">
+            02 <span aria-hidden="true"></span> APPS
+          </span>
+          <h2 class="big-type" id="apps-title">
+            Useful outside
+            <br /> the game, too.
+          </h2>
+        </div>
+        <p>
+          From the climbing wall
+          <br /> to the board game table.
+        </p>
+        <span class="apps-mark" aria-hidden="true">
+          ↗
+        </span>
+      </header>
+      <div class="app-stories">
+        {apps.map((project, index) => (
+          <article class="app-story scroll-reveal">
+            <a
+              class:list={[
+                'app-canvas',
+                index === 0 ? 'climbing-canvas' : 'boardgame-canvas',
+              ]}
+              href={projectUrl(project)}
+              aria-label={`Explore ${project.data.title}`}
+            >
+              <ProjectArt project={project} />
+              {index === 1 && (
+                <svg
+                  class="decorative-die"
+                  viewBox="0 0 110 110"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="10"
+                    y="10"
+                    width="90"
+                    height="90"
+                    rx="10"
+                    fill="#fafaf7"
+                    stroke="#141414"
+                    stroke-width="3"
+                  />
+                  {[
+                    [32, 32],
+                    [78, 32],
+                    [55, 55],
+                    [32, 78],
+                    [78, 78],
+                  ].map(([cx, cy]) => (
+                    <circle cx={cx} cy={cy} r="7" fill="#141414" />
+                  ))}
+                </svg>
+              )}
+              <span class="canvas-label">
+                {index === 0 ? 'FOR THE NEXT CLIMB' : 'FOR THE NEXT GAME NIGHT'}
+              </span>
+              <span class="canvas-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+            <div class="app-description">
+              <h3>{project.data.title}</h3>
+              <p>
+                {index === 0
+                  ? 'Track climbs, log sessions, and see your progress. A place for the details worth remembering between trips to the wall.'
+                  : 'Track your board game collection, log plays, and keep the scores and stories from game night.'}
+              </p>
+              <a
+                class="text-action"
+                href={projectUrl(project)}
+                aria-label={`About ${project.data.title}`}
+              >
+                About the project <Icon name="arrow" />
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
-  <div class="bottom-panels">
-    <a class="promo-panel mods-promo" href="/mods/">
-      <span class="promo-icon">
-        <Icon name="mods" size={34} />
-      </span>
+  <section
+    class="mods-section content-width scroll-section"
+    id="mods"
+    aria-labelledby="mods-title"
+  >
+    <header class="section-opening">
       <div>
-        <span class="eyebrow">CUSTOMIZE YOUR NEXT ADVENTURE</span>
-        <h2>Your game. A little more yours.</h2>
-        <p>Mods for Necesse, R.E.P.O., and Valheim.</p>
-        <span class="text-action">
-          Explore the mods <Icon name="arrow" />
+        <span class="section-index">
+          03 <span aria-hidden="true"></span> MODS
+        </span>
+        <h2 class="big-type" id="mods-title">
+          A few changes.
+          <br /> A different game.
+        </h2>
+      </div>
+      <p>
+        I mod the games I love
+        <br /> to play them a little more my way.
+      </p>
+    </header>
+    <div class="mod-index">
+      {groups.map((group) => (
+        <section
+          class="mod-index-group scroll-reveal"
+          aria-label={`${group.name} mods`}
+        >
+          <div class="mod-host">
+            <span class="eyebrow">{group.number} / MODDED WORLD</span>
+            <h3>{group.name}</h3>
+            <p>{group.note}</p>
+          </div>
+          <div class="mod-index-links">
+            {projects
+              .filter((p) => p.data.hostGame === group.name)
+              .map((project) => (
+                <a class="mod-index-link" href={projectUrl(project)}>
+                  {project.data.artwork ? (
+                    <Image
+                      src={project.data.artwork}
+                      alt=""
+                      width={80}
+                      height={80}
+                      format="webp"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span class="mod-letter" aria-hidden="true">
+                      M
+                    </span>
+                  )}
+                  <span>
+                    <strong>
+                      {project.data.shortTitle || project.data.title}
+                    </strong>
+                    <span>{project.data.summary}</span>
+                  </span>
+                  <Icon name="arrow" />
+                </a>
+              ))}
+          </div>
+        </section>
+      ))}
+    </div>
+    <p class="mod-footnote">
+      Fan-made projects. Original games belong to their creators.
+    </p>
+  </section>
+  <section
+    class="about-section scroll-section"
+    id="about"
+    aria-labelledby="about-title"
+  >
+    <div class="content-width about-home-grid">
+      <div>
+        <span class="section-index">
+          04 <span aria-hidden="true"></span> ABOUT
+        </span>
+        <h2 class="big-type" id="about-title">
+          Built by
+          <br /> <span>Colton.</span>
+        </h2>
+        <span class="about-signoff" aria-hidden="true">
+          Still playing.
+          <br /> Still building.<span>↗</span>
         </span>
       </div>
-    </a>
-    <a class="promo-panel maker-promo" href="/about/">
-      <div>
-        <span class="eyebrow">THE DEVELOPER BEHIND IT ALL</span>
-        <h2>Player first. Builder always.</h2>
-        <p>A love of games, and a habit of making things.</p>
-        <span class="text-action">
-          Meet Colton <Icon name="arrow" />
-        </span>
+      <div class="about-home-copy">
+        <h3>Colton Donkersgoed</h3>
+        <p>
+          I’m an AI software developer at Kinaxis and a lifelong gaming
+          enthusiast. I create games, apps, and mods, often starting with
+          something I want to use myself.
+        </p>
+        <p>
+          Modding lets me configure the games I love around the way I like to
+          play. I’ve also reached Master rank in League of Legends.
+        </p>
+        <p>Great Coltini Industries is where my personal projects live.</p>
+        <a class="contact-link" href="mailto:coltonmdonk@gmail.com">
+          coltonmdonk@gmail.com <Icon name="external" size={22} />
+        </a>
+        <div class="about-fact-line">
+          <span>AT WORK</span>
+          <strong>AI software development · Kinaxis</strong>
+        </div>
+        <div class="about-fact-line">
+          <span>AFTER HOURS</span>
+          <strong>Games, apps, and a little tinkering.</strong>
+        </div>
       </div>
-    </a>
-  </div>
+    </div>
+  </section>
 </Layout>
+<script>
+  const sections = [
+    ...document.querySelectorAll<HTMLElement>('.scroll-section'),
+  ];
+  const links = [
+    ...document.querySelectorAll<HTMLAnchorElement>(
+      '.main-nav a[data-section]',
+    ),
+  ];
+  let scheduled = false;
+  const updateActiveSection = () => {
+    const boundary = Math.min(innerHeight * 0.35, 220);
+    const active = sections
+      .filter((section) => section.getBoundingClientRect().top <= boundary)
+      .at(-1)?.id;
+    links.forEach((link) =>
+      active === link.dataset.section
+        ? link.setAttribute('aria-current', 'location')
+        : link.removeAttribute('aria-current'),
+    );
+    scheduled = false;
+  };
+  const scheduleUpdate = () => {
+    if (!scheduled) {
+      scheduled = true;
+      requestAnimationFrame(updateActiveSection);
+    }
+  };
+  addEventListener('scroll', scheduleUpdate, { passive: true });
+  addEventListener('resize', scheduleUpdate);
+  updateActiveSection();
+  if ('IntersectionObserver' in window) {
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const revealObserver = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('arrived');
+              revealObserver.unobserve(entry.target);
+            }
+          }),
+        { threshold: 0.08 },
+      );
+      document
+        .querySelectorAll('.scroll-reveal')
+        .forEach((element) => revealObserver.observe(element));
+    }
+  }
+</script>

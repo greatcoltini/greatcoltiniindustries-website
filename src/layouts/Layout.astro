@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import '@fontsource/cinzel/latin-500.css';
+import '@fontsource/anton/latin-400.css';
 import '@fontsource/source-sans-3/latin-400.css';
 import '@fontsource/source-sans-3/latin-600.css';
 import Icon from '../components/Icon.astro';
@@ -11,7 +11,11 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description, active, noindex = false } = Astro.props;
+const isHome = title === 'Home';
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const pageTitle = isHome
+  ? 'Great Coltini Industries — Games, Apps & Mods'
+  : `${title} · Great Coltini Industries`;
 const nav = [
   { id: 'games', label: 'Games' },
   { id: 'apps', label: 'Apps' },
@@ -25,68 +29,65 @@ const nav = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title === 'Home' ? 'Great Coltini Industries — Games, Apps & Mods' : `${title} · Great Coltini Industries`}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#10151e" />
+    <meta name="theme-color" content="#fafaf7" />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta property="og:title" content={`${title} · Great Coltini Industries`} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />
   </head>
-  <body>
+  <body class:list={[isHome ? 'home-page' : 'interior-page']}>
     <a class="skip-link" href="#main">
       Skip to content
     </a>
-    <header class="site-header">
-      <a class="wordmark" href="/" aria-label="Great Coltini Industries — Home">
-        <span class="brand-mark" aria-hidden="true">
-          G<span>C</span>
-        </span>
-        <span>
-          GREAT COLTINI<small>INDUSTRIES</small>
-        </span>
-      </a>
-      <p class="nav-label">EXPLORE THE COLLECTION</p>
-      <nav class="chapter-nav" aria-label="Main navigation">
-        <a href="/" aria-current={title === 'Home' ? 'page' : undefined}>
-          <Icon name="compass" />
-          <span>Discover</span>
+    <header class="site-header" id="top">
+      <div class="header-inner">
+        <a
+          class="wordmark"
+          href="/"
+          aria-label="Great Coltini Industries — Home"
+        >
+          <span>GREAT COLTINI</span> INDUSTRIES
+          <span class="brand-dot" aria-hidden="true">
+            +
+          </span>
         </a>
-        {nav.map((item) => (
-          <a
-            href={`/${item.id}/`}
-            aria-current={active === item.id ? 'page' : undefined}
-          >
-            <Icon name={item.id === 'about' ? 'quill' : item.id} />
-            <span>{item.label}</span>
-          </a>
-        ))}
-      </nav>
-      <div class="sidebar-note">
-        <span class="status-dot"></span> INDEPENDENTLY CREATED
-        <p>
-          Games to get lost in.
-          <br />
-          Tools to take with you.
-        </p>
-        <a href="/about/">
-          Meet Colton <Icon name="arrow" size={16} />
-        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          {nav.map((item) => (
+            <a
+              href={isHome ? `#${item.id}` : `/#${item.id}`}
+              data-section={item.id}
+              aria-current={active === item.id ? 'true' : undefined}
+            >
+              {item.label}
+              <span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </nav>
       </div>
     </header>
-    <main id="main" tabindex="-1">
+    <main
+      id="main"
+      class:list={[isHome ? 'home-main' : 'interior-main']}
+      tabindex="-1"
+    >
       <slot />
     </main>
     <footer class="site-footer">
-      <span>PERSONAL PROJECTS. BUILT WITH CURIOSITY.</span>
-      <a href="mailto:coltonmdonk@gmail.com">
-        <Icon name="mail" size={17} /> Get in touch
-      </a>
-      <small>© {new Date().getFullYear()} Colton Donkersgoed</small>
+      <div class="footer-inner">
+        <a class="footer-wordmark" href="/">
+          GREAT COLTINI INDUSTRIES
+        </a>
+        <small>© {new Date().getFullYear()} Colton Donkersgoed</small>
+        <a href="#top">
+          Back to top <Icon name="arrow" size={18} />
+        </a>
+      </div>
     </footer>
   </body>
 </html>

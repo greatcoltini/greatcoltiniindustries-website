@@ -1,6 +1,6 @@
 # Great Coltini Industries
 
-Colton Donkersgoed’s personal portfolio, styled as a game launcher. Built with Astro, TypeScript, typed Markdown collections, and CSS. All navigation and project content work without JavaScript.
+Colton Donkersgoed’s personal portfolio, built around a single scrolling page with bold cobalt typography, original artwork, alternating game features, and an illustrated project collage. Built with Astro, TypeScript, typed Markdown collections, and CSS. All navigation and project content work without JavaScript.
 
 Canonical domain: **greatcoltiniindustries.com**
 

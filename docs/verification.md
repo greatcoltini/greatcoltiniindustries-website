@@ -14,7 +14,7 @@ Automated checks cover Home, Games, Apps, Mods, About, and representative game/a
 
 Chromium and Edge passed locally. WebKit passed responsive, accessibility, no-JavaScript, text enlargement, and trailer checks. Its Windows headless runtime reports the document unfocused and does not dispatch keyboard traversal; that keyboard test is explicitly skipped on Windows and runs on Linux CI. The local Firefox runtime could not start because Windows reported an incorrect side-by-side configuration. The deployment workflow installs and runs Chromium, Firefox, and WebKit on Ubuntu before publishing.
 
-The axe scan found no WCAG A/AA violations in the tested pages. Manual inspection covers the desktop launcher, phone navigation, artwork proportions, readable contrast, category pages, and detail reading order. Browser engines and viewport emulation do not substitute for testing on physical iOS/Android devices.
+The axe scan found no WCAG A/AA violations in the tested pages. Manual inspection covers the desktop scrolling portfolio, phone navigation, artwork proportions, readable contrast, category pages, and detail reading order. Browser engines and viewport emulation do not substitute for testing on physical iOS/Android devices.
 
 ## Launch checks still dependent on DNS
 
