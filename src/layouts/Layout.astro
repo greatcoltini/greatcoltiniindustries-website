@@ -4,6 +4,7 @@ import '@fontsource/anton/latin-400.css';
 import '@fontsource/source-sans-3/latin-400.css';
 import '@fontsource/source-sans-3/latin-600.css';
 import Icon from '../components/Icon.astro';
+import ThemeControl from '../components/ThemeControl.astro';
 interface Props {
   title: string;
   description: string;
@@ -32,6 +33,17 @@ const nav = [
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#fafaf7" />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      // Apply a saved override before the first paint; otherwise CSS follows the browser.
+      try {
+        const theme = localStorage.getItem('gci-theme');
+        if (theme === 'light' || theme === 'dark')
+          document.documentElement.dataset.theme = theme;
+      } catch {
+        /* System preference remains the default. */
+      }
+    </script>
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -69,6 +81,7 @@ const nav = [
             </a>
           ))}
         </nav>
+        <ThemeControl />
       </div>
     </header>
     <main

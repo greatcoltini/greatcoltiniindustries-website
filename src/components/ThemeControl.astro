@@ -1,0 +1,45 @@
+<label class="theme-control" hidden>
+  <span class="sr-only">Color theme</span>
+  <select id="color-theme" aria-label="Color theme">
+    <option value="system">System</option>
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+  </select>
+</label>
+<script>
+  const control = document.querySelector<HTMLSelectElement>('#color-theme');
+  if (control) {
+    control.value = document.documentElement.dataset.theme || 'system';
+    control.closest<HTMLElement>('.theme-control')!.hidden = false;
+    const system = matchMedia('(prefers-color-scheme: dark)');
+    const update = () => {
+      const mode = control.value;
+      if (mode === 'system') delete document.documentElement.dataset.theme;
+      else document.documentElement.dataset.theme = mode;
+      const dark = mode === 'dark' || (mode === 'system' && system.matches);
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute('content', dark ? '#13151b' : '#fafaf7');
+    };
+    control.addEventListener('change', () => {
+      try {
+        if (control.value === 'system') localStorage.removeItem('gci-theme');
+        else localStorage.setItem('gci-theme', control.value);
+      } catch {
+        /* Theme selection still works when storage is unavailable. */
+      }
+      update();
+    });
+    system.addEventListener('change', update);
+    addEventListener('storage', (event) => {
+      if (event.key === 'gci-theme' || event.key === null) {
+        control.value =
+          event.newValue === 'light' || event.newValue === 'dark'
+            ? event.newValue
+            : 'system';
+        update();
+      }
+    });
+    update();
+  }
+</script>

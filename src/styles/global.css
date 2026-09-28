@@ -4,6 +4,8 @@
   --ink: #171817;
   --muted: #555953;
   --blue: #1748ee;
+  --cobalt: #1748ee;
+  --surface: #eeeee9;
   --line: #d8dad4;
   --gutter: clamp(20px, 5vw, 80px);
   font:
@@ -105,7 +107,7 @@ h3 {
   position: fixed;
   top: -100px;
   left: 20px;
-  background: var(--blue);
+  background: var(--cobalt);
   color: white;
   padding: 14px 22px;
   z-index: 150;
@@ -223,7 +225,7 @@ main:focus {
   gap: 28px;
   min-height: 50px;
   padding: 12px 22px;
-  background: var(--blue);
+  background: var(--cobalt);
   color: #fff;
   font-size: 17px;
   font-weight: 600;
@@ -369,7 +371,7 @@ main:focus {
   overflow-wrap: anywhere;
   max-width: 100%;
   background: #e3f684;
-  color: var(--ink);
+  color: #171817;
   padding: 6px 10px;
   font-size: 12px;
   font-weight: 600;
@@ -505,7 +507,7 @@ main:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--ink);
+  background: #171817;
   color: white;
   font-size: 9px;
   font-weight: 600;
@@ -513,7 +515,7 @@ main:focus {
   padding: 12px 16px;
 }
 .game-reverse .image-caption {
-  background: var(--blue);
+  background: var(--cobalt);
 }
 .corner-number {
   position: absolute;
@@ -568,7 +570,7 @@ main:focus {
   letter-spacing: 1.5px;
 }
 .apps-section {
-  background: var(--blue);
+  background: var(--cobalt);
   color: #fff;
   padding: 90px 0 100px;
   position: relative;
@@ -736,7 +738,7 @@ main:focus {
 .mod-letter {
   display: grid;
   place-items: center;
-  background: var(--blue);
+  background: var(--cobalt);
   color: #fff;
   font:
     32px 'Anton',
@@ -773,8 +775,8 @@ main:focus {
 }
 .about-section {
   padding: 90px 0 75px;
-  background: var(--ink);
-  color: var(--paper);
+  background: #171817;
+  color: #fafaf7;
 }
 .about-home-grid {
   display: grid;
@@ -854,7 +856,7 @@ main:focus {
   font-size: 16px;
 }
 .site-footer {
-  background: var(--ink);
+  background: #171817;
   color: #d1d4cf;
 }
 .footer-inner {
@@ -937,7 +939,7 @@ main:focus {
 .shelf-art-label {
   font-size: 10px;
   letter-spacing: 1px;
-  color: var(--ink);
+  color: #171817;
 }
 .shelf-art-label strong {
   display: block;
@@ -1012,7 +1014,7 @@ main:focus {
   align-items: center;
   min-height: 44px;
   padding: 10px 16px;
-  background: #eeeee9;
+  background: var(--surface);
 }
 .mod-group {
   margin-bottom: 40px;
@@ -1058,7 +1060,7 @@ main:focus {
 .mod-entry-icon {
   display: grid;
   place-items: center;
-  background: var(--blue);
+  background: var(--cobalt);
   color: white;
 }
 .mod-entry h3 {
@@ -1177,8 +1179,8 @@ main:focus {
   line-height: 1.7;
 }
 .trailer {
-  background: var(--ink);
-  color: var(--paper);
+  background: #171817;
+  color: #fafaf7;
 }
 .trailer summary {
   cursor: pointer;
@@ -1208,7 +1210,7 @@ main:focus {
   justify-content: center;
   gap: 14px;
   text-align: center;
-  background: var(--blue);
+  background: var(--cobalt);
   color: white;
   width: 100%;
   height: 100%;
@@ -1224,7 +1226,7 @@ main:focus {
 }
 .profile-panel {
   padding: 30px;
-  background: var(--blue);
+  background: var(--cobalt);
   color: #fff;
 }
 .profile-panel p,
@@ -1236,7 +1238,7 @@ main:focus {
   display: grid;
   place-items: center;
   background: #e3f684;
-  color: var(--ink);
+  color: #171817;
   font:
     65px 'Anton',
     sans-serif;
@@ -1971,5 +1973,87 @@ main:focus {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* Keep artwork and the cobalt/lime panels intact while adapting the reading surfaces. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #13151b;
+  --ink: #f3f3ee;
+  --muted: #bec2ce;
+  --blue: #9cb3ff;
+  --cobalt: #203da9;
+  --line: #414652;
+  --surface: #262b36;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --paper: #13151b;
+    --ink: #f3f3ee;
+    --muted: #bec2ce;
+    --blue: #9cb3ff;
+    --cobalt: #203da9;
+    --line: #414652;
+    --surface: #262b36;
+  }
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.header-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+}
+.theme-control {
+  min-width: 0;
+}
+.theme-control[hidden] {
+  display: none;
+}
+.theme-control select {
+  font: inherit;
+  font-size: 16px;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 8px 6px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+.theme-control select:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+@media (max-width: 1100px) {
+  .header-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 4px 16px;
+    padding-top: 12px;
+  }
+  .main-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .theme-control {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+}
+
+@media (max-width: 1100px) {
+  .brand-dot {
+    display: none;
   }
 }

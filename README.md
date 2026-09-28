@@ -35,3 +35,5 @@ Keep a `## Development` heading because detail pages link to it. Use project-own
 Fonts are self-hosted through Fontsource. Astro generates responsive WebP images. The local gameplay video loads only on request and never autoplays.
 
 See [deployment](docs/deployment.md), [asset sources](docs/assets.md), and [verification](docs/verification.md).
+
+The header theme selector defaults to System, following the browser's light/dark preference. Explicit Light or Dark choices are saved locally; selecting System clears that override. System styling also works without JavaScript.
