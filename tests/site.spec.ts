@@ -97,6 +97,10 @@ test('works without JavaScript and with reduced motion', async ({
   await expect(page.getByRole('link', { name: 'View on Steam' })).toBeVisible();
   await page.getByRole('link', { name: 'Development', exact: true }).click();
   await expect(page).toHaveURL(/#development$/);
+  await page.getByText('Watch gameplay trailer', { exact: true }).click();
+  await expect(
+    page.getByRole('link', { name: 'Open the gameplay trailer' }),
+  ).toHaveAttribute('href', '/media/kingdom-td-gameplay.mp4');
   await page.goto('http://127.0.0.1:4321/about/');
   await expect(
     page.getByRole('link', { name: 'coltonmdonk@gmail.com' }),
@@ -133,5 +137,9 @@ test('trailer loads only on request', async ({ page }) => {
   expect(media).toEqual([]);
   await page.getByText('Watch gameplay trailer', { exact: true }).click();
   await expect(page.locator('video')).toBeVisible();
+  await expect(page.locator('video')).toHaveAttribute(
+    'src',
+    '/media/kingdom-td-gameplay.mp4',
+  );
   await expect(page.locator('video')).not.toHaveAttribute('autoplay');
 });

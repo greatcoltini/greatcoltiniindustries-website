@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import { getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import ProjectArt from '../../components/ProjectArt.astro';
+import Trailer from '../../components/Trailer.astro';
 import Icon from '../../components/Icon.astro';
 import { projectsIn, chapterNames, type Project } from '../../lib/projects';
 export async function getStaticPaths() {
@@ -67,23 +68,11 @@ const poster =
       <div class="detail-media">
         <ProjectArt project={project} eager />
         {data.trailer && (
-          <details class="trailer" id="trailer">
-            <summary>
-              <Icon name="play" /> Watch gameplay trailer
-            </summary>
-            <video
-              controls
-              preload="none"
-              poster={poster?.src}
-              width="1920"
-              height="1080"
-              aria-label="Kingdom TD gameplay trailer"
-            >
-              <source src={data.trailer} type="video/mp4" />
-              Your browser does not support this video.{' '}
-              <a href={data.trailer}>Open the gameplay trailer</a>.
-            </video>
-          </details>
+          <Trailer
+            src={data.trailer}
+            poster={poster?.src}
+            title={data.shortTitle || data.title}
+          />
         )}
       </div>
     </div>

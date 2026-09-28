@@ -1,0 +1,57 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  src: string;
+  poster?: string;
+  title: string;
+}
+const { src, poster, title } = Astro.props;
+---
+
+<details class="trailer" id="trailer" data-trailer>
+  <summary>
+    <Icon name="play" /> Watch gameplay trailer
+  </summary>
+  <video
+    hidden
+    controls
+    preload="none"
+    data-src={src}
+    poster={poster}
+    width="1920"
+    height="1080"
+    aria-label={`${title} gameplay trailer`}
+  ></video>
+  <noscript>
+    <p class="trailer-fallback">
+      <a class="text-action" href={src}>
+        Open the gameplay trailer <Icon name="external" />
+      </a>
+    </p>
+  </noscript>
+</details>
+<script>
+  document
+    .querySelectorAll<HTMLDetailsElement>('[data-trailer]')
+    .forEach((details) => {
+      details.addEventListener('toggle', () => {
+        const video = details.querySelector('video');
+        if (!video) return;
+        if (details.open && !video.getAttribute('src')) {
+          video.src = video.dataset.src!;
+          video.hidden = false;
+          video.load();
+        } else if (!details.open) {
+          video.pause();
+        }
+      });
+    });
+</script>
+<style>
+  video[hidden] {
+    display: none;
+  }
+  .trailer-fallback {
+    padding: 0 20px;
+  }
+</style>
