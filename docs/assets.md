@@ -25,7 +25,13 @@ The Kingdom TD homepage feature uses its original `kingdom-td.jpg` cover. The sc
 
 The Meccha Chameleon map previews come from `meccha-chameleon-repo-snow/build/preview.png` and `meccha-chameleon-repo-wizard/build/preview.png`. Their original R.E.P.O. setting/assets are credited on the detail pages. Steam's GetPublishedFileDetails API verified creator 76561198038365196, public visibility, and non-banned status for Workshop items 3759385002 and 3755237299 on 2026-09-28.
 
-Game-inspired headings use self-hosted Bungee (Meccha Chameleon), Black Ops One (R.E.P.O.), Cinzel (Valheim), and Silkscreen (Necesse), all under the SIL Open Font License. These are styled display fonts, not the games' official wordmarks or proprietary fonts. Body text remains Source Sans 3.
+Mod group headings use the games' original logos from Steam and Necesse's official website, stored locally in `src/assets/game-logos/`. Transparent outer margins are trimmed and images are resized without altering the wordmarks. A dark backing preserves their original colors in both site themes. Screen-reader headings and text jump links retain the game names. Logos remain the property of their respective creators.
+
+Official asset sources (retrieved 2026-09-28):
+- Meccha Chameleon: https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4704690/47ca71d0efd73bb9f7552e6d4076840a5a4b114b/logo_2x.png
+- R.E.P.O.: https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3241660/0792bd657a88c95b72c337de40de3f80151557a1/logo_2x.png
+- Valheim: https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/892970/1637482fa841381d2b9d7a88fe3dc4d9aee17485/logo_2x.png
+- Necesse: https://necesse-website.s3.eu-central-1.amazonaws.com/assets/necesse_logo.png
 
 ## Screenshot galleries (2026-09-28)
 

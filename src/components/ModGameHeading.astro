@@ -1,49 +1,52 @@
 ---
-import '@fontsource/bungee/latin-400.css';
-import '@fontsource/black-ops-one/latin-400.css';
-import '@fontsource/cinzel/latin-700.css';
-import '@fontsource/silkscreen/latin-400.css';
+import { Image } from 'astro:assets';
+import meccha from '../assets/game-logos/meccha.webp';
+import repo from '../assets/game-logos/repo.webp';
+import valheim from '../assets/game-logos/valheim.webp';
+import necesse from '../assets/game-logos/necesse.webp';
+const logos = { meccha, repo, valheim, necesse };
 interface Props {
   name: string;
-  game: string;
+  game: keyof typeof logos;
   level?: 'h2' | 'h3';
 }
 const { name, game, level: Tag = 'h3' } = Astro.props;
 ---
 
-<Tag class:list={['game-heading', `game-heading-${game}`]}>{name}</Tag>
+<Tag class="game-heading">
+  <span class="sr-only">{name}</span>
+  <span class="game-logo-frame" aria-hidden="true">
+    <Image
+      src={logos[game]}
+      alt=""
+      width={560}
+      widths={[280, 560, 840]}
+      sizes="280px"
+      loading="lazy"
+      decoding="async"
+    />
+  </span>
+</Tag>
 <style>
   .game-heading {
-    font-size: clamp(26px, 3vw, 44px);
-    line-height: 1.25;
-    text-transform: uppercase;
     margin: 12px 0;
-    overflow-wrap: anywhere;
-    letter-spacing: 0;
+    width: min(100%, 280px);
+    flex-shrink: 0;
   }
-  .game-heading-meccha {
-    font-family: 'Bungee', sans-serif;
-    font-weight: 400;
-    color: var(--mod-meccha);
-    letter-spacing: -0.045em;
+  .game-logo-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 2.5;
+    padding: 16px;
+    background: #16191f;
+    border: 1px solid #353a43;
   }
-  .game-heading-repo {
-    font-family: 'Black Ops One', sans-serif;
-    font-weight: 400;
-    color: var(--mod-repo);
-    letter-spacing: 0.035em;
-  }
-  .game-heading-valheim {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    color: var(--mod-valheim);
-    letter-spacing: 0.015em;
-  }
-  .game-heading-necesse {
-    font-family: 'Silkscreen', monospace;
-    font-weight: 400;
-    color: var(--mod-necesse);
-    font-size: clamp(24px, 2.7vw, 38px);
-    letter-spacing: -0.06em;
+  .game-logo-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 </style>
