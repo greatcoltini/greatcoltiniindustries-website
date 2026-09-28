@@ -25,7 +25,7 @@ The Kingdom TD homepage feature uses its original `kingdom-td.jpg` cover. The sc
 
 The Meccha Chameleon map previews come from `meccha-chameleon-repo-snow/build/preview.png` and `meccha-chameleon-repo-wizard/build/preview.png`. Their original R.E.P.O. setting/assets are credited on the detail pages. Steam's GetPublishedFileDetails API verified creator 76561198038365196, public visibility, and non-banned status for Workshop items 3759385002 and 3755237299 on 2026-09-28.
 
-Mod group headings use the games' original logos from Steam and Necesse's official website, stored locally in `src/assets/game-logos/`. Transparent outer margins are trimmed and images are resized without altering the wordmarks. A dark backing preserves their original colors in both site themes. Screen-reader headings and text jump links retain the game names. Logos remain the property of their respective creators.
+Mod group headings use the games' original logos from Steam and Necesse's official website, stored locally in `src/assets/game-logos/`. Transparent outer margins are trimmed and images are resized without altering the wordmarks. The logos retain transparent backgrounds in both site themes and link to each game’s verified Steam product page in a new tab. Screen-reader headings and text jump links retain the game names. Logos remain the property of their respective creators.
 
 Official asset sources (retrieved 2026-09-28):
 - Meccha Chameleon: https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4704690/47ca71d0efd73bb9f7552e6d4076840a5a4b114b/logo_2x.png

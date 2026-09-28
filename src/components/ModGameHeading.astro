@@ -5,6 +5,12 @@ import repo from '../assets/game-logos/repo.webp';
 import valheim from '../assets/game-logos/valheim.webp';
 import necesse from '../assets/game-logos/necesse.webp';
 const logos = { meccha, repo, valheim, necesse };
+const productPages = {
+  meccha: 'https://store.steampowered.com/app/4704690/',
+  repo: 'https://store.steampowered.com/app/3241660/',
+  valheim: 'https://store.steampowered.com/app/892970/',
+  necesse: 'https://store.steampowered.com/app/1169040/',
+};
 interface Props {
   name: string;
   game: keyof typeof logos;
@@ -13,9 +19,16 @@ interface Props {
 const { name, game, level: Tag = 'h3' } = Astro.props;
 ---
 
-<Tag class="game-heading">
-  <span class="sr-only">{name}</span>
-  <span class="game-logo-frame" aria-hidden="true">
+<Tag class="game-heading" aria-label={name}>
+  <a
+    class="game-logo-link"
+    href={productPages[game]}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`View ${name} on Steam (opens in a new tab)`}
+    title={`View ${name} on Steam (opens in a new tab)`}
+  >
+    <span class="sr-only">{name}</span>
     <Image
       src={logos[game]}
       alt=""
@@ -25,7 +38,7 @@ const { name, game, level: Tag = 'h3' } = Astro.props;
       loading="lazy"
       decoding="async"
     />
-  </span>
+  </a>
 </Tag>
 <style>
   .game-heading {
@@ -33,17 +46,17 @@ const { name, game, level: Tag = 'h3' } = Astro.props;
     width: min(100%, 280px);
     flex-shrink: 0;
   }
-  .game-logo-frame {
+  .game-logo-link {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     aspect-ratio: 2.5;
     padding: 16px;
-    background: #16191f;
-    border: 1px solid #353a43;
+    background: transparent;
+    text-decoration: none;
   }
-  .game-logo-frame img {
+  .game-logo-link img {
     display: block;
     width: 100%;
     height: 100%;
