@@ -19,6 +19,10 @@ The R.E.P.O. mod has a clearly styled text/icon tile because no verified origina
 
 Anton and Source Sans 3 are self-hosted Fontsource packages, distributed under the SIL Open Font License. Their license files are included in the installed packages.
 
-The launch selection contains eleven projects. Seven external destinations were verified: the two Steam games, four Steam Workshop mods, and GreatColtini’s MinecraftAdditions on Thunderstore. Apps and Valheim mods have no external actions until a public destination is verified. Private or unavailable GitHub repositories are not linked as public source.
+The collection contains fourteen projects. Nine external destinations were verified: two Steam games, six Steam Workshop entries, and MinecraftAdditions on Thunderstore. Apps and Valheim mods have no external actions until a public destination is verified. Private or unavailable GitHub repositories are not linked as public source.
 
 The scrolling homepage additionally uses `kingdom-gameplay.png` from `godot-defenders/marketing/screenshots/grasslands-1.png` and `lone-team.png` from `lone-survivors-ordered/lone-survivors-ordered/library-team.png`. These are original project assets, not generated substitutes. The small arrows and board-game die are decorative SVG shapes.
+
+The Meccha Chameleon map previews come from `meccha-chameleon-repo-snow/build/preview.png` and `meccha-chameleon-repo-wizard/build/preview.png`. Their original R.E.P.O. setting/assets are credited on the detail pages. Steam's GetPublishedFileDetails API verified creator 76561198038365196, public visibility, and non-banned status for Workshop items 3759385002 and 3755237299 on 2026-09-28. The Minecraft map is included from the owner's requested content; no verified public link or preview is available yet.
+
+Game-inspired headings use self-hosted Bungee (Meccha Chameleon), Black Ops One (R.E.P.O.), Cinzel (Valheim), and Silkscreen (Necesse), all under the SIL Open Font License. These are styled display fonts, not the games' official wordmarks or proprietary fonts. Body text remains Source Sans 3.

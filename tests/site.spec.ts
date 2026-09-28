@@ -9,6 +9,7 @@ const routes = [
   '/projects/kingdom-td/',
   '/projects/boulderlog/',
   '/projects/deconstructor/',
+  '/projects/meccha-swiftbroom/',
 ];
 for (const width of [320, 390, 768, 1024, 1440]) {
   test(`responsive pages at ${width}px`, async ({ page }) => {
@@ -96,7 +97,14 @@ test('works without JavaScript and with reduced motion', async ({
     .evaluateAll((links) => [
       ...new Set(links.map((link) => link.getAttribute('href'))),
     ]);
-  expect(projectLinks).toHaveLength(11);
+  expect(projectLinks).toHaveLength(14);
+  expect(projectLinks).toEqual(
+    expect.arrayContaining([
+      '/projects/meccha-minecraft/',
+      '/projects/meccha-mcjannek-station/',
+      '/projects/meccha-swiftbroom/',
+    ]),
+  );
   for (const name of ['Games', 'Apps', 'Mods', 'About']) {
     await page
       .getByRole('navigation', { name: 'Main navigation' })
@@ -161,4 +169,18 @@ test('trailer loads only on request', async ({ page }) => {
     '/media/kingdom-td-gameplay.mp4',
   );
   await expect(page.locator('video')).not.toHaveAttribute('autoplay');
+});
+
+test('mod groups use the requested popularity order on both pages', async ({
+  page,
+}) => {
+  for (const route of ['/', '/mods/']) {
+    await page.goto(route);
+    await expect(page.locator('.game-heading')).toHaveText([
+      'Meccha Chameleon',
+      'R.E.P.O.',
+      'Valheim',
+      'Necesse',
+    ]);
+  }
 });

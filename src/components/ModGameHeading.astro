@@ -1,0 +1,49 @@
+---
+import '@fontsource/bungee/latin-400.css';
+import '@fontsource/black-ops-one/latin-400.css';
+import '@fontsource/cinzel/latin-700.css';
+import '@fontsource/silkscreen/latin-400.css';
+interface Props {
+  name: string;
+  game: string;
+  level?: 'h2' | 'h3';
+}
+const { name, game, level: Tag = 'h3' } = Astro.props;
+---
+
+<Tag class:list={['game-heading', `game-heading-${game}`]}>{name}</Tag>
+<style>
+  .game-heading {
+    font-size: clamp(26px, 3vw, 44px);
+    line-height: 1.25;
+    text-transform: uppercase;
+    margin: 12px 0;
+    overflow-wrap: anywhere;
+    letter-spacing: 0;
+  }
+  .game-heading-meccha {
+    font-family: 'Bungee', sans-serif;
+    font-weight: 400;
+    color: var(--mod-meccha);
+    letter-spacing: -0.045em;
+  }
+  .game-heading-repo {
+    font-family: 'Black Ops One', sans-serif;
+    font-weight: 400;
+    color: var(--mod-repo);
+    letter-spacing: 0.035em;
+  }
+  .game-heading-valheim {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--mod-valheim);
+    letter-spacing: 0.015em;
+  }
+  .game-heading-necesse {
+    font-family: 'Silkscreen', monospace;
+    font-weight: 400;
+    color: var(--mod-necesse);
+    font-size: clamp(24px, 2.7vw, 38px);
+    letter-spacing: -0.06em;
+  }
+</style>

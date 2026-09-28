@@ -28,8 +28,11 @@ for (const file of html) {
   if (!text.includes('rel="canonical"') || !text.includes('name="description"'))
     failures.push(`${file}: missing metadata`);
 }
-if (html.length !== 17)
-  failures.push(`Expected 17 HTML pages, found ${html.length}`);
+const expectedPages =
+  walk('src/content/projects').filter((file) => file.endsWith('.md')).length +
+  6;
+if (html.length !== expectedPages)
+  failures.push(`Expected ${expectedPages} HTML pages, found ${html.length}`);
 if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);

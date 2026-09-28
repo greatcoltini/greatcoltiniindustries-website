@@ -37,3 +37,5 @@ Fonts are self-hosted through Fontsource. Astro generates responsive WebP images
 See [deployment](docs/deployment.md), [asset sources](docs/assets.md), and [verification](docs/verification.md).
 
 The header theme selector defaults to System, following the browser's light/dark preference. Explicit Light or Dark choices are saved locally; selecting System clears that override. System styling also works without JavaScript.
+
+The mod group display order follows Colton's requested popularity order: Meccha Chameleon, R.E.P.O., Valheim, Necesse. It is curated in `src/lib/mod-groups.ts`; no live or inferred download totals are displayed.

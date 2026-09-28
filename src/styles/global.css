@@ -2057,3 +2057,24 @@ main:focus {
     display: none;
   }
 }
+
+:root {
+  --mod-meccha: #267042;
+  --mod-repo: #916000;
+  --mod-valheim: #aa3d34;
+  --mod-necesse: #766014;
+}
+:root[data-theme='dark'] {
+  --mod-meccha: #89db8f;
+  --mod-repo: #ffd35c;
+  --mod-valheim: #ff9e88;
+  --mod-necesse: #e5c575;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --mod-meccha: #89db8f;
+    --mod-repo: #ffd35c;
+    --mod-valheim: #ff9e88;
+    --mod-necesse: #e5c575;
+  }
+}

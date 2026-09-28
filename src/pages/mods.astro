@@ -1,18 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ModGameHeading from '../components/ModGameHeading.astro';
+import { modGroups as groups } from '../lib/mod-groups';
 import ModEntry from '../components/ModEntry.astro';
 import { projectsIn } from '../lib/projects';
 const mods = await projectsIn('mods');
-const groups = [
-  { name: 'Necesse', id: 'necesse', note: 'Build a more capable settlement.' },
-  { name: 'R.E.P.O.', id: 'repo', note: 'A familiar kind of trouble.' },
-  { name: 'Valheim', id: 'valheim', note: 'More reasons to explore.' },
-];
 ---
 
 <Layout
   title="Mods"
-  description="Mods for Necesse, R.E.P.O., and Valheim by Colton Donkersgoed."
+  description="Maps and mods for Meccha Chameleon, R.E.P.O., Valheim, and Necesse by Colton Donkersgoed."
   active="mods"
 >
   <header class="page-title">
@@ -32,7 +29,7 @@ const groups = [
   {groups.map((g) => (
     <section class="mod-group" id={g.id}>
       <div class="section-heading">
-        <h2>{g.name}</h2>
+        <ModGameHeading name={g.name} game={g.id} level="h2" />
         <p>{g.note}</p>
       </div>
       <div class="mod-grid">

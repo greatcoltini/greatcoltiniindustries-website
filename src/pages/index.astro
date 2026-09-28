@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ModGameHeading from '../components/ModGameHeading.astro';
+import { modGroups as groups } from '../lib/mod-groups';
 import { Image } from 'astro:assets';
 import Icon from '../components/Icon.astro';
 import ProjectArt from '../components/ProjectArt.astro';
@@ -13,11 +15,6 @@ import { projectsIn, projectUrl } from '../lib/projects';
 const projects = await projectsIn();
 const games = projects.filter((p) => p.data.category === 'games');
 const apps = projects.filter((p) => p.data.category === 'apps');
-const groups = [
-  { name: 'Necesse', note: 'A more capable settlement.', number: '01' },
-  { name: 'R.E.P.O.', note: 'A familiar kind of trouble.', number: '02' },
-  { name: 'Valheim', note: 'More reasons to explore.', number: '03' },
-];
 ---
 
 <Layout
@@ -327,14 +324,16 @@ const groups = [
       </p>
     </header>
     <div class="mod-index">
-      {groups.map((group) => (
+      {groups.map((group, index) => (
         <section
           class="mod-index-group scroll-reveal"
           aria-label={`${group.name} mods`}
         >
           <div class="mod-host">
-            <span class="eyebrow">{group.number} / MODDED WORLD</span>
-            <h3>{group.name}</h3>
+            <span class="eyebrow">
+              {String(index + 1).padStart(2, '0')} / MODDED WORLD
+            </span>
+            <ModGameHeading name={group.name} game={group.id} />
             <p>{group.note}</p>
           </div>
           <div class="mod-index-links">
