@@ -4,6 +4,7 @@ import { getImage, Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import ProjectArt from '../../components/ProjectArt.astro';
 import Trailer from '../../components/Trailer.astro';
+import ProjectUpdates from '../../components/ProjectUpdates.astro';
 import ProjectAvailability from '../../components/ProjectAvailability.astro';
 import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
 import Icon from '../../components/Icon.astro';
@@ -118,44 +119,55 @@ const isWide = (p: Project) =>
       <a href="#features">Features</a>
       {data.screenshots.length > 0 && <a href="#screenshots">Screenshots</a>}
       <a href="#development">Development</a>
+      {data.updates.length > 0 && <a href="#updates">Updates</a>}
     </nav>
-    <div class="detail-body">
-      <section class="prose" id="overview" aria-labelledby="overview-title">
-        <h2 id="overview-title">{data.overviewTitle}</h2>
-        {data.overview.map((paragraph) => (
-          <p>{paragraph}</p>
-        ))}
-      </section>
-      <section
-        id="features"
-        class="features-panel"
-        aria-labelledby="features-title"
-      >
-        <span class="eyebrow">THE EXPERIENCE</span>
-        <h2 id="features-title">
-          {data.category === 'games' ? 'How it plays' : 'What it does'}
-        </h2>
-        <ul class="app-features">
-          {data.features.map((feature, index) => (
-            <li>
-              <span class="feature-number" aria-hidden="true">
-                0{index + 1}
-              </span>
-              <div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
+    <div
+      class:list={[
+        'project-details-layout',
+        { 'has-updates': data.updates.length > 0 },
+      ]}
+    >
+      <div class="project-main-content">
+        <div class="detail-body">
+          <section class="prose" id="overview" aria-labelledby="overview-title">
+            <h2 id="overview-title">{data.overviewTitle}</h2>
+            {data.overview.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </section>
+          <section
+            id="features"
+            class="features-panel"
+            aria-labelledby="features-title"
+          >
+            <span class="eyebrow">THE EXPERIENCE</span>
+            <h2 id="features-title">
+              {data.category === 'games' ? 'How it plays' : 'What it does'}
+            </h2>
+            <ul class="app-features">
+              {data.features.map((feature, index) => (
+                <li>
+                  <span class="feature-number" aria-hidden="true">
+                    0{index + 1}
+                  </span>
+                  <div>
+                    <h3>{feature.title}</h3>
+                    <p>{feature.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+        {data.screenshots.length > 0 && (
+          <ScreenshotGallery screenshots={data.screenshots} />
+        )}
+        <section class="prose development-notes" aria-label="Development notes">
+          <Content />
+        </section>
+      </div>
+      {data.updates.length > 0 && <ProjectUpdates updates={data.updates} />}
     </div>
-    {data.screenshots.length > 0 && (
-      <ScreenshotGallery screenshots={data.screenshots} />
-    )}
-    <section class="prose development-notes" aria-label="Development notes">
-      <Content />
-    </section>
     {related.length > 0 && (
       <section class="onward" aria-labelledby="onward-title">
         <h2 id="onward-title">{relatedTitle}</h2>

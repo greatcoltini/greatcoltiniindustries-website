@@ -8,8 +8,10 @@ const urls = [
   ...new Set(
     sources.flatMap((file) =>
       [
-        ...readFileSync(file, 'utf8').matchAll(/url: '?(https:\/\/[^\s']+)/g),
-      ].map((m) => m[1]),
+        ...readFileSync(file, 'utf8').matchAll(
+          /url: ['"]?(https:\/\/[^\s'"]+)/g,
+        ),
+      ].map((m) => m[1].split('#')[0]),
     ),
   ),
 ];

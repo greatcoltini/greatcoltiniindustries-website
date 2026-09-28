@@ -39,3 +39,7 @@ Thirty-six authentic screenshots across ten projects were visually reviewed. The
 - Local Edge: 20 of 20 Playwright tests passed. New checks cover the section redirects without JavaScript, onward links and breadcrumbs, the mod heading order and Steam text links, visible button focus, the theme toggle, and all-visible galleries.
 - Chromium and WebKit did not run locally because their Playwright browser binaries are not installed on this machine; CI installs and runs Chromium, Firefox, and WebKit.
 - Manual review at 1366px (light and dark), 1024, 900, 700, and 390px covered the hero collage labels, the Apps heading arrow, the Kingdom TD trailer poster, gallery grids, onward links, the phone mods layout, and focus outlines.
+
+## Version-history sidebar (2026-09-28)
+
+The optional project changelog uses typed Markdown frontmatter and native details/summary controls; no new client JavaScript is required. Twenty sourced entries populate Lone Survivors and six Workshop mods. Local checks passed: the 60 existing applicable browser tests plus all nine new no-JavaScript changelog tests; three existing Windows WebKit keyboard checks remain covered by Linux CI. The sidebar was manually reviewed at 1440px and 390px in light/dark themes. The production build, internal links/anchors, and source URLs passed. Steam briefly rate-limited repeated anchor requests; the checker now deduplicates by document URL and the affected pages returned 200 on recheck.

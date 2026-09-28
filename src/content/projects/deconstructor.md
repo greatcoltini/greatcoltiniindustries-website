@@ -1,4 +1,5 @@
 ---
+
 title: Deconstructor
 category: mods
 hostGame: Necesse
@@ -32,6 +33,28 @@ overview:
 availability:
   label: "Workshop release"
   platform: "Necesse · Steam Workshop"
+updates:
+  - id: "v1-2-0"
+    date: "2026-06-29"
+    version: "1.2.0"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523#1782754423"
+  - id: "v1-1-2"
+    date: "2026-05-25"
+    version: "1.1.2"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523#1779688625"
+  - id: "v1-1-1"
+    date: "2026-05-25"
+    version: "1.1.1"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523#1779675593"
 ---
 
 ## Development

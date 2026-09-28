@@ -47,3 +47,24 @@ The home page is the only section page. `/games/`, `/apps/`, `/mods/`, and `/abo
 Profile links for the About section and footer live in `src/lib/profiles.ts`; `npm run test:links` checks them with the project links.
 
 Social cards are generated from project titles and original artwork by `scripts/generate-social-images.mjs` during dev/build. The generated `public/social/` directory is ignored by Git; it is included in the published build. Each project has its own Open Graph and large Twitter preview.
+
+## Project changelogs
+
+Add an optional `updates` list to a project's Markdown frontmatter. The sidebar appears only when this list contains entries. It sits beside the project body at widths of 1200px and above, and follows Development on smaller screens. The Updates section link takes visitors directly to it. The newest entry starts expanded; older entries use native disclosures that work without JavaScript.
+
+Each entry needs a unique stable `id`, ISO date (quoted `YYYY-MM-DD`), title, and one or more change notes. Version and public source URL are optional, so this also supports unversioned development updates for local apps. Dates sort newest first; write same-day entries newest first. An entry can be shared as `/projects/lone-survivors/#update-v1-2-10`.
+
+Example from Lone Survivors (edit the values for a new release):
+
+```yaml
+updates:
+  - id: v1-2-10
+    date: '2026-08-10'
+    version: '1.2.10'
+    title: Queen Bee
+    changes:
+      - Added the Queen Bee boss to late Grasslands Endless runs.
+      - Defeating her unlocks the Royal Apiary weapon.
+```
+
+Commit and push to `main` to publish through the existing deployment workflow. This is a curated history, not an automatic feed: new Steam/Workshop releases do not appear until added here. Never derive public release dates or versions from local files.

@@ -1,4 +1,5 @@
 ---
+
 title: Mine It All
 category: mods
 hostGame: Necesse
@@ -29,6 +30,28 @@ overview:
 availability:
   label: "Workshop release"
   platform: "Necesse · Steam Workshop"
+updates:
+  - id: "v1-0-9"
+    date: "2026-05-26"
+    version: "1.0.9"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779814547"
+  - id: "v1-0-8"
+    date: "2026-05-26"
+    version: "1.0.8"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779813781"
+  - id: "v1-0-7"
+    date: "2026-05-23"
+    version: "1.0.7"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779578553"
 ---
 
 ## Development

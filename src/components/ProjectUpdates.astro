@@ -1,0 +1,176 @@
+---
+import type { Project } from '../lib/projects';
+import Icon from './Icon.astro';
+interface Props {
+  updates: Project['data']['updates'];
+}
+const { updates } = Astro.props;
+// ISO date strings sort chronologically; preserve authored order on the same day.
+const ordered = [...updates].sort((a, b) => b.date.localeCompare(a.date));
+const dateLabel = (date: string) =>
+  new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${date}T00:00:00Z`));
+---
+
+<aside class="project-updates" id="updates" aria-labelledby="updates-title">
+  <header>
+    <p class="eyebrow">CHANGELOG</p>
+    <h2 id="updates-title">Version updates</h2>
+    <p class="updates-intro">Release notes and progress, newest first.</p>
+  </header>
+  <ol class="update-list">
+    {ordered.map((update, index) => (
+      <li>
+        <details
+          class="update-entry"
+          id={`update-${update.id}`}
+          open={index === 0}
+        >
+          <summary>
+            <span class="update-meta">
+              <span>{update.version ? `v${update.version}` : 'Update'}</span>
+              <time datetime={update.date}>{dateLabel(update.date)}</time>
+            </span>
+            <span class="update-title">{update.title}</span>
+          </summary>
+          <div class="update-content">
+            <ul>
+              {update.changes.map((change) => (
+                <li>{change}</li>
+              ))}
+            </ul>
+            {update.url && (
+              <a class="update-source" href={update.url}>
+                Full release notes <Icon name="external" size={16} />
+              </a>
+            )}
+            <a
+              class="update-permalink"
+              href={`#update-${update.id}`}
+              aria-label={`Link to update: ${update.title}${update.version ? `, v${update.version}` : ''}`}
+            >
+              Link to this update
+            </a>
+          </div>
+        </details>
+      </li>
+    ))}
+  </ol>
+</aside>
+<style>
+  .project-updates {
+    min-width: 0;
+    padding: 26px;
+    background: var(--surface);
+    border-top: 3px solid var(--blue);
+    align-self: start;
+    scroll-margin-top: 110px;
+  }
+  .project-updates h2 {
+    font-size: 28px;
+    line-height: 1.2;
+    margin: 10px 0 12px;
+  }
+  .updates-intro {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+  .update-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .update-list > li {
+    border-top: 1px solid var(--line);
+  }
+  .update-entry {
+    scroll-margin-top: 110px;
+  }
+  summary {
+    position: relative;
+    cursor: pointer;
+    padding: 20px 24px 20px 0;
+    min-height: 44px;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 20px;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--blue);
+  }
+  details[open] > summary::after {
+    content: '−';
+  }
+  summary:hover .update-title {
+    color: var(--blue);
+  }
+  .update-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .update-meta > span {
+    color: var(--blue);
+    font-weight: 600;
+  }
+  .update-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-top: 8px;
+    overflow-wrap: anywhere;
+  }
+  .update-content {
+    font-size: 16px;
+    line-height: 1.5;
+    padding-bottom: 20px;
+  }
+  .update-content ul {
+    padding-left: 20px;
+    margin: 0 0 12px;
+  }
+  .update-content li + li {
+    margin-top: 10px;
+  }
+  .update-source,
+  .update-permalink {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    min-height: 44px;
+    color: var(--blue);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .update-permalink {
+    font-size: 14px;
+  }
+  @media (max-width: 600px) {
+    .project-updates {
+      padding: 22px;
+      scroll-margin-top: 20px;
+    }
+    .update-entry {
+      scroll-margin-top: 20px;
+    }
+  }
+</style>

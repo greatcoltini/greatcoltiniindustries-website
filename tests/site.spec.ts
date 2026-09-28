@@ -3,6 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 const routes = [
   '/',
   '/projects/kingdom-td/',
+  '/projects/lone-survivors/',
   '/projects/boulderlog/',
   '/projects/shelf-and-score/',
   '/projects/deconstructor/',

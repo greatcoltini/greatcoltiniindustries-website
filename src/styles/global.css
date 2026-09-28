@@ -1993,3 +1993,30 @@ main:focus {
     gap: 10px;
   }
 }
+
+/* Optional release history alongside the project body, stacked on smaller screens. */
+.project-details-layout,
+.project-main-content {
+  min-width: 0;
+}
+.project-details-layout.has-updates {
+  margin: 45px 0;
+}
+.has-updates .detail-body {
+  margin-top: 0;
+}
+@media (min-width: 1200px) {
+  .project-details-layout.has-updates {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 320px);
+    align-items: start;
+    gap: 48px;
+  }
+  .has-updates .detail-body {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .has-updates .detail-body .app-features {
+    margin-bottom: 0;
+  }
+}

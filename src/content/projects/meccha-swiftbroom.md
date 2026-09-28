@@ -1,4 +1,5 @@
 ---
+
 title: Swiftbroom Academy (Wizard)
 category: mods
 hostGame: Meccha Chameleon
@@ -36,6 +37,19 @@ availability:
   label: "Workshop release"
   platform: "Meccha Chameleon · Steam Workshop"
 listingName: R.E.P.O - Swiftbroom
+updates:
+  - id: "props-and-lighting"
+    date: "2026-07-07"
+    title: "More hiding props"
+    changes:
+      - "Added more props to hide with and adjusted the lights."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3755237299#1783446767"
+  - id: "lighting-refactor"
+    date: "2026-07-07"
+    title: "Lighting rework"
+    changes:
+      - "Refactored the map lighting."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3755237299#1783399897"
 ---
 
 ## Development

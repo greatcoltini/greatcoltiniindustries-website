@@ -1,4 +1,5 @@
 ---
+
 title: Necesse Power
 category: mods
 hostGame: Necesse
@@ -35,6 +36,21 @@ overview:
 availability:
   label: "Workshop release"
   platform: "Necesse · Steam Workshop"
+updates:
+  - id: "v1-0-1"
+    date: "2026-05-28"
+    version: "1.0.1"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3732508344#1779933891"
+  - id: "v1-0-0"
+    date: "2026-05-25"
+    version: "1.0.0"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3732508344#1779687788"
 ---
 
 ## Development

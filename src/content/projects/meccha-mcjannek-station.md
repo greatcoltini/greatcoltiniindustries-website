@@ -1,4 +1,5 @@
 ---
+
 title: McJannek Station
 category: mods
 hostGame: Meccha Chameleon
@@ -33,6 +34,25 @@ availability:
   label: "Workshop release"
   platform: "Meccha Chameleon · Steam Workshop"
 listingName: R.E.P.O - McJannek Station
+updates:
+  - id: "lighting-rework"
+    date: "2026-07-07"
+    title: "Lighting improvements"
+    changes:
+      - "Reworked the lighting."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3759385002#1783394427"
+  - id: "floor-adjustment"
+    date: "2026-07-07"
+    title: "Floor adjustment"
+    changes:
+      - "Adjusted the floor outside the starting area."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3759385002#1783384146"
+  - id: "collision-fixes"
+    date: "2026-07-07"
+    title: "Collision and camera fixes"
+    changes:
+      - "Fixed collision issues and added camera blocking to the walls."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3759385002#1783383635"
 ---
 
 ## Development

@@ -1,4 +1,5 @@
 ---
+
 title: Lone Survivors
 category: games
 summary: Face the horde. Find your build. Push a little further.
@@ -36,6 +37,40 @@ overview:
 availability:
   label: "Available now"
   platform: "Windows · Steam"
+updates:
+  - id: "v1-2-10"
+    date: "2026-08-10"
+    version: "1.2.10"
+    title: "Queen Bee"
+    changes:
+      - "Added the Queen Bee boss to late Grasslands Endless runs."
+      - "Defeating her unlocks the Royal Apiary weapon."
+      - "Unattended Alchemy Tables relocate after a countdown."
+    url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352466"
+  - id: "v1-2-9"
+    date: "2026-07-12"
+    version: "1.2.9"
+    title: "Placement and leaderboard fixes"
+    changes:
+      - "Tightened Alchemy Table placement to avoid out-of-bounds spawns."
+      - "Made the Endless level cap visible in the pause menu and fixed a leaderboard issue."
+    url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1837955055361712"
+  - id: "v1-2-8"
+    date: "2026-06-29"
+    version: "1.2.8"
+    title: "Endless and ability fixes"
+    changes:
+      - "Fixed Beach Endless music and Village Endless boss spawning."
+      - "Fixed errors involving grab-all powerups, magic beams, and rescued NPC abilities persisting after death."
+    url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165559377"
+  - id: "v1-2-7"
+    date: "2026-06-27"
+    version: "1.2.7"
+    title: "Damage summary and weapons menu"
+    changes:
+      - "Expanded the damage summary with separate weapon, status, amplifier, and crowd-control tracking."
+      - "Reworked the weapons menu and fixed visibility, speed-buff, and Weekly Challenge leaderboard issues."
+    url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165555968"
 ---
 
 ## Development

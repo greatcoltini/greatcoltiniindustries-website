@@ -1,4 +1,5 @@
 ---
+
 title: Forge Upgrades
 category: mods
 hostGame: Necesse
@@ -32,6 +33,28 @@ overview:
 availability:
   label: "Workshop release"
   platform: "Necesse · Steam Workshop"
+updates:
+  - id: "v1-2-0"
+    date: "2026-06-29"
+    version: "1.2.0"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3731042527#1782752393"
+  - id: "v1-1-1"
+    date: "2026-05-24"
+    version: "1.1.1"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3731042527#1779606360"
+  - id: "v1-1-0"
+    date: "2026-05-23"
+    version: "1.1.0"
+    title: "Workshop release"
+    changes:
+      - "Listed for Necesse 1.2.0 in the Workshop release notes."
+    url: "https://steamcommunity.com/sharedfiles/filedetails/changelog/3731042527#1779579341"
 ---
 
 ## Development

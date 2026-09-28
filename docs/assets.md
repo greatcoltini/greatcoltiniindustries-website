@@ -51,3 +51,11 @@ Social preview cards are generated at build time from these existing project tit
 ## Profile links (2026-09-28)
 
 The About section and footer link to https://github.com/greatcoltini (a public GitHub user named Colton Donkersgoed) and to the Steam Workshop items of creator 76561198038365196, which list the published mods. Both were checked on 2026-09-28.
+
+## Initial project changelogs (2026-09-28)
+
+The optional sidebar starts with 20 verified entries across Lone Survivors and six Workshop mods. Dates use the UTC day of each source timestamp. Same-day Workshop entries retain the source's newest-first order. Each entry links to its public source.
+
+- Lone Survivors: four patch announcements (1.2.10, 1.2.9, 1.2.8, 1.2.7) from Steam's GetNewsForApp API for app 3629280, authored by GreatColtini. Cross-project announcements are excluded. Change bullets are concise summaries.
+- Workshop: the latest two or three notes from each project's linked Change Notes page. Versions are included only where explicitly published; Meccha map updates remain unversioned. Necesse entries report the version recorded in the release notes without implying present-day compatibility.
+- Projects without verified dated notes have no sidebar until the owner adds entries. No placeholder releases, inferred app versions, or invented dates are published.

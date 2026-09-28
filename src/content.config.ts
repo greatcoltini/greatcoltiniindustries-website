@@ -31,6 +31,29 @@ const projects = defineCollection({
         .array(z.object({ title: z.string(), description: z.string() }))
         .default([]),
       links: z.array(z.object({ label: z.string(), url: z.url() })).default([]),
+      updates: z
+        .array(
+          z.object({
+            id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+            date: z.iso.date(),
+            version: z.string().optional(),
+            title: z.string(),
+            changes: z.array(z.string()).min(1),
+            url: z
+              .url()
+              .refine(
+                (value) => /^https?:\/\//.test(value),
+                'Use an HTTP(S) release-notes URL',
+              )
+              .optional(),
+          }),
+        )
+        .default([])
+        .refine(
+          (updates) =>
+            new Set(updates.map((update) => update.id)).size === updates.length,
+          'Update IDs must be unique within a project',
+        ),
       trailer: z.string().optional(),
       screenshots: z
         .array(
