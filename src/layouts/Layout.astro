@@ -1,0 +1,92 @@
+---
+import '../styles/global.css';
+import '@fontsource/cinzel/latin-500.css';
+import '@fontsource/source-sans-3/latin-400.css';
+import '@fontsource/source-sans-3/latin-600.css';
+import Icon from '../components/Icon.astro';
+interface Props {
+  title: string;
+  description: string;
+  active?: string;
+  noindex?: boolean;
+}
+const { title, description, active, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const nav = [
+  { id: 'games', label: 'Games' },
+  { id: 'apps', label: 'Apps' },
+  { id: 'mods', label: 'Mods' },
+  { id: 'about', label: 'About' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === 'Home' ? 'Great Coltini Industries — Games, Apps & Mods' : `${title} · Great Coltini Industries`}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#10151e" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={`${title} · Great Coltini Industries`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Great Coltini Industries — Home">
+        <span class="brand-mark" aria-hidden="true">
+          G<span>C</span>
+        </span>
+        <span>
+          GREAT COLTINI<small>INDUSTRIES</small>
+        </span>
+      </a>
+      <p class="nav-label">EXPLORE THE COLLECTION</p>
+      <nav class="chapter-nav" aria-label="Main navigation">
+        <a href="/" aria-current={title === 'Home' ? 'page' : undefined}>
+          <Icon name="compass" />
+          <span>Discover</span>
+        </a>
+        {nav.map((item) => (
+          <a
+            href={`/${item.id}/`}
+            aria-current={active === item.id ? 'page' : undefined}
+          >
+            <Icon name={item.id === 'about' ? 'quill' : item.id} />
+            <span>{item.label}</span>
+          </a>
+        ))}
+      </nav>
+      <div class="sidebar-note">
+        <span class="status-dot"></span> INDEPENDENTLY CREATED
+        <p>
+          Games to get lost in.
+          <br />
+          Tools to take with you.
+        </p>
+        <a href="/about/">
+          Meet Colton <Icon name="arrow" size={16} />
+        </a>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <span>PERSONAL PROJECTS. BUILT WITH CURIOSITY.</span>
+      <a href="mailto:coltonmdonk@gmail.com">
+        <Icon name="mail" size={17} /> Get in touch
+      </a>
+      <small>© {new Date().getFullYear()} Colton Donkersgoed</small>
+    </footer>
+  </body>
+</html>

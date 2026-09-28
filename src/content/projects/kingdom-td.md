@@ -1,0 +1,33 @@
+---
+title: 'Kingdom TD: Draft Your Demise'
+shortTitle: Kingdom TD
+category: games
+summary: Choose the enemies. Build the defense. Survive your decisions.
+artwork: ../../assets/kingdom-td.jpg
+artworkAlt: 'Kingdom TD cover: a mounted rider, defensive towers, and enemy cards under a stormy sky.'
+order: 1
+trailer: /media/kingdom-td-gameplay.mp4
+tech: [Godot, GDScript]
+features:
+  - title: Draft the horde
+    description: Choose the enemies you will face. Balance a safer wave against a riskier, more rewarding one.
+  - title: Build the answer
+    description: Place and upgrade towers, then shape the routes that bring enemies through your defenses.
+  - title: Ride the line
+    description: Reposition your mounted rider to support nearby towers and gather fallen gold.
+links:
+  - label: View on Steam
+    url: https://store.steampowered.com/app/4990780/Kingdom_TD_Draft_Your_Demise/
+---
+
+## A different kind of tower defense
+
+In Kingdom TD, the next wave starts with a choice. You draft the enemies yourself, trading danger for the resources to build a stronger defense. Planning is untimed, so there is room to consider the route, the towers, and the consequences.
+
+A connected fantasy campaign, persistent tower progression, challenges, and fixed-seed Endless play give those decisions room to grow.
+
+## Development
+
+Built in Godot with GDScript, Kingdom TD separates the rules of a run from the scenes that present it. Authored maps, enemy definitions, tower specifications, and draft choices feed shared gameplay systems.
+
+The mounted rider is a support character: positioning strengthens nearby towers rather than turning the game into direct hero combat. That distinction keeps the focus on the defense you have built.

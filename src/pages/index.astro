@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import hero from '../assets/kingdom-td-hero.png';
+import ProjectCard from '../components/ProjectCard.astro';
+import Icon from '../components/Icon.astro';
+import { projectsIn } from '../lib/projects';
+const projects = (await projectsIn()).filter((p) => p.data.category !== 'mods');
+---
+
+<Layout
+  title="Home"
+  description="Games, apps, and mods by Colton Donkersgoed. Explore Kingdom TD, Lone Survivors, BoulderLog, and Shelf & Score."
+>
+  <header class="page-top">
+    <span class="eyebrow">THE GREAT COLTINI COLLECTION</span>
+    <a href="/about/">
+      Made by Colton Donkersgoed <Icon name="arrow" size={16} />
+    </a>
+  </header>
+  <section class="hero" aria-labelledby="hero-title">
+    <Image
+      class="hero-image"
+      src={hero}
+      alt="A mounted rider and defensive towers face a horde beneath a stormy fantasy sky."
+      widths={[640, 1024, 1600, 2400]}
+      sizes="(min-width: 1024px) calc(100vw - 304px), 100vw"
+      loading="eager"
+      fetchpriority="high"
+      format="webp"
+    />
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <p class="eyebrow">
+        <span class="gold-dash"></span> FEATURED GAME
+      </p>
+      <h1 id="hero-title">
+        Kingdom TD<span>Draft Your Demise</span>
+      </h1>
+      <p>
+        Choose the enemies.
+        <br />
+        Build the defense.
+        <br />
+        Survive your decisions.
+      </p>
+      <a class="button" href="/projects/kingdom-td/">
+        Explore the game <Icon name="arrow" />
+      </a>
+      <span class="hero-genre">
+        TOWER DEFENSE <span aria-hidden="true">/</span> STRATEGY
+      </span>
+    </div>
+    <span class="hero-index" aria-hidden="true">
+      01 <span>/ THE COLLECTION</span>
+    </span>
+  </section>
+  <section class="library" aria-labelledby="library-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">MADE TO PLAY. MADE TO USE.</p>
+        <h2 id="library-title">
+          The project library<span class="count">04</span>
+        </h2>
+      </div>
+      <p>
+        I’m Colton. I build games, useful apps,
+        <br class="desktop-break" /> and mods for the way I like to play.
+      </p>
+    </div>
+    <div class="project-grid">
+      {projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </section>
+  <div class="bottom-panels">
+    <a class="promo-panel mods-promo" href="/mods/">
+      <span class="promo-icon">
+        <Icon name="mods" size={34} />
+      </span>
+      <div>
+        <span class="eyebrow">CUSTOMIZE YOUR NEXT ADVENTURE</span>
+        <h2>Your game. A little more yours.</h2>
+        <p>Mods for Necesse, R.E.P.O., and Valheim.</p>
+        <span class="text-action">
+          Explore the mods <Icon name="arrow" />
+        </span>
+      </div>
+    </a>
+    <a class="promo-panel maker-promo" href="/about/">
+      <div>
+        <span class="eyebrow">THE DEVELOPER BEHIND IT ALL</span>
+        <h2>Player first. Builder always.</h2>
+        <p>A love of games, and a habit of making things.</p>
+        <span class="text-action">
+          Meet Colton <Icon name="arrow" />
+        </span>
+      </div>
+    </a>
+  </div>
+</Layout>

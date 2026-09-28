@@ -1,0 +1,43 @@
+---
+import type { Project } from '../lib/projects';
+import { projectUrl } from '../lib/projects';
+import ProjectArt from './ProjectArt.astro';
+import Icon from './Icon.astro';
+interface Props {
+  project: Project;
+  eager?: boolean;
+  headingLevel?: 'h2' | 'h3';
+}
+const { project, eager, headingLevel: Heading = 'h3' } = Astro.props;
+---
+
+<article class="project-card">
+  <a
+    class="art-link"
+    href={projectUrl(project)}
+    aria-label={`Explore ${project.data.title}`}
+  >
+    <ProjectArt project={project} eager={eager} />
+  </a>
+  <div class="card-caption">
+    <div>
+      <span class="card-category">
+        {project.data.hostGame ||
+          (project.data.category === 'games' ? 'GAME' : 'APP')}
+      </span>
+      <Heading class="card-title">
+        <a href={projectUrl(project)}>
+          {project.data.shortTitle || project.data.title}
+        </a>
+      </Heading>
+      <p>{project.data.summary}</p>
+    </div>
+    <a
+      class="project-link"
+      href={projectUrl(project)}
+      aria-label={`View project: ${project.data.title}`}
+    >
+      View project <Icon name="arrow" size={18} />
+    </a>
+  </div>
+</article>

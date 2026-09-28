@@ -1,0 +1,31 @@
+{
+  "name": "greatcoltini-industries",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro check && astro build && node scripts/check-build.mjs",
+    "preview": "astro preview --host 127.0.0.1",
+    "test": "playwright test",
+    "test:links": "node scripts/check-external-links.mjs"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource/cinzel": "^5.2.4",
+    "@fontsource/source-sans-3": "^5.2.5",
+    "astro": "7.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@axe-core/playwright": "^4.11.1",
+    "@playwright/test": "^1.58.2",
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.0",
+    "sharp": "^0.35.5",
+    "typescript": "^5.9.3"
+  }
+}

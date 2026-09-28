@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../lib/projects';
+import Icon from './Icon.astro';
+interface Props {
+  project: Project;
+  eager?: boolean;
+}
+const { project, eager = false } = Astro.props;
+const { artwork, artworkAlt, icon, artStyle, hostGame, title } = project.data;
+---
+
+<div class:list={['project-art', `art-${artStyle}`]}>
+  {artwork ? (
+    <Image
+      src={artwork}
+      alt={artworkAlt}
+      widths={artStyle === 'shelf' ? [160, 256, 400] : [400, 640, 960, 1232]}
+      sizes={
+        artStyle === 'shelf'
+          ? '(max-width: 600px) 160px, 220px'
+          : '(max-width: 1023px) calc(100vw - 64px), 560px'
+      }
+      format="webp"
+      quality={85}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  ) : (
+    <div class="mod-placeholder">
+      <Icon name="mods" size={52} />
+      <span>{hostGame}</span>
+      <strong>{title}</strong>
+    </div>
+  )}
+  {icon && (
+    <Image
+      class="app-icon"
+      src={icon}
+      alt=""
+      width={104}
+      height={104}
+      format="webp"
+      loading="lazy"
+    />
+  )}
+  {artStyle === 'shelf' && (
+    <div class="shelf-art-label" aria-hidden="true">
+      <span>FOR THE LOVE OF</span>
+      <strong>game night.</strong>
+    </div>
+  )}
+</div>
