@@ -36,4 +36,4 @@ availability:
 
 ## Development
 
-I built the workshop behavior, inventory interface, and optional integration with my Necesse Power mod. The core deconstruction logic runs on the server, with fuel support available independently of the power-network integration.
+I built the workshop behavior, inventory interface, and optional integration with my [Necesse Power](/projects/necesse-power/) mod. The core deconstruction logic runs on the server, with fuel support available independently of the power-network integration.

@@ -1,7 +1,7 @@
 ---
 title: Lone Survivors
 category: games
-summary: Face the horde. Find your build. Survive one more run.
+summary: Face the horde. Find your build. Push a little further.
 artwork: ../../assets/lone-survivors.png
 artworkAlt: Lone Survivors cover featuring a wizard, a hooded swordsman, and an axe-wielding dwarf.
 order: 2

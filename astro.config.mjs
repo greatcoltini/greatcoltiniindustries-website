@@ -6,4 +6,11 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   integrations: [sitemap()],
+  // The portfolio is one scrolling page; earlier section URLs land on their home sections.
+  redirects: {
+    '/games/': '/#games',
+    '/apps/': '/#apps',
+    '/mods/': '/#mods',
+    '/about/': '/#about',
+  },
 });

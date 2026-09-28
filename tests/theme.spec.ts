@@ -1,29 +1,46 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+
+const themeButton = (page: Page) =>
+  page.getByRole('button', { name: /^Color theme:/ });
+
+// The toggle cycles System → Light → Dark; click until the wanted mode shows.
+async function chooseTheme(page: Page, mode: 'system' | 'light' | 'dark') {
+  const button = themeButton(page);
+  for (let i = 0; i < 3; i++) {
+    if ((await button.getAttribute('data-mode')) === mode) return;
+    await button.click();
+  }
+  await expect(button).toHaveAttribute('data-mode', mode);
+}
 
 test('theme follows the browser and remembers explicit overrides', async ({
   page,
 }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/');
-  const theme = page.getByRole('combobox', { name: 'Color theme' });
+  const theme = themeButton(page);
   const scheme = () =>
     page.locator('html').evaluate((root) => getComputedStyle(root).colorScheme);
-  await expect(theme).toHaveValue('system');
+  await expect(theme).toHaveAttribute('data-mode', 'system');
+  await expect(theme).toHaveAccessibleName('Color theme: System');
   expect(await scheme()).toBe('dark');
   await page.emulateMedia({ colorScheme: 'light' });
   expect(await scheme()).toBe('light');
-  await theme.selectOption('dark');
+  await theme.click();
+  await expect(theme).toHaveAccessibleName('Color theme: Light');
+  await theme.click();
+  await expect(theme).toHaveAccessibleName('Color theme: Dark');
   expect(await scheme()).toBe('dark');
   await page.goto('/projects/kingdom-td/');
-  await expect(theme).toHaveValue('dark');
+  await expect(theme).toHaveAttribute('data-mode', 'dark');
   expect(await scheme()).toBe('dark');
-  await theme.selectOption('light');
+  await chooseTheme(page, 'light');
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.reload();
   expect(await scheme()).toBe('light');
-  await expect(theme).toHaveValue('light');
-  await theme.selectOption('system');
+  await expect(theme).toHaveAttribute('data-mode', 'light');
+  await chooseTheme(page, 'system');
   expect(await scheme()).toBe('dark');
   expect(
     await page.evaluate(() => localStorage.getItem('gci-theme')),
@@ -38,10 +55,6 @@ test('dark theme remains accessible across pages and small screens', async ({
     await page.setViewportSize({ width, height: 900 });
     for (const route of [
       '/',
-      '/games/',
-      '/apps/',
-      '/mods/',
-      '/about/',
       '/projects/kingdom-td/',
       '/projects/boulderlog/',
       '/projects/deconstructor/',
@@ -75,9 +88,7 @@ test('system dark mode works without JavaScript or available storage', async ({
       .locator('html')
       .evaluate((root) => getComputedStyle(root).colorScheme),
   ).toBe('dark');
-  await expect(
-    page.getByRole('combobox', { name: 'Color theme' }),
-  ).toBeHidden();
+  await expect(page.locator('#color-theme')).toBeHidden();
   await context.close();
   const blocked = await browser.newContext({ colorScheme: 'light' });
   await blocked.addInitScript(() => {
@@ -89,9 +100,7 @@ test('system dark mode works without JavaScript or available storage', async ({
   });
   const blockedPage = await blocked.newPage();
   await blockedPage.goto('http://127.0.0.1:4321/');
-  await blockedPage
-    .getByRole('combobox', { name: 'Color theme' })
-    .selectOption('dark');
+  await chooseTheme(blockedPage, 'dark');
   expect(
     await blockedPage
       .locator('html')

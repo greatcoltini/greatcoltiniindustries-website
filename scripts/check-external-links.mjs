@@ -1,12 +1,14 @@
 import { readdirSync, readFileSync } from 'node:fs';
 const dir = 'src/content/projects';
+const sources = [
+  ...readdirSync(dir).map((f) => `${dir}/${f}`),
+  'src/lib/profiles.ts',
+];
 const urls = [
   ...new Set(
-    readdirSync(dir).flatMap((f) =>
+    sources.flatMap((file) =>
       [
-        ...readFileSync(`${dir}/${f}`, 'utf8').matchAll(
-          /url: (https:\/\/\S+)/g,
-        ),
+        ...readFileSync(file, 'utf8').matchAll(/url: '?(https:\/\/[^\s']+)/g),
       ].map((m) => m[1]),
     ),
   ),

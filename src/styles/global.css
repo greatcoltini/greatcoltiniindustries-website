@@ -43,6 +43,11 @@ video:focus-visible {
   outline: 3px solid currentColor;
   outline-offset: 6px;
 }
+.button:focus-visible,
+.trailer summary:focus-visible {
+  outline-color: var(--blue);
+  outline-offset: 4px;
+}
 a:hover {
   color: var(--blue);
 }
@@ -192,9 +197,9 @@ main:focus {
 }
 .eyebrow {
   font:
-    600 11px/1.5 'Source Sans 3',
+    600 12px/1.5 'Source Sans 3',
     sans-serif;
-  letter-spacing: 1.8px;
+  letter-spacing: 1.6px;
   color: var(--blue);
   display: inline-flex;
   gap: 8px;
@@ -259,7 +264,7 @@ main:focus {
   z-index: 2;
 }
 .intro-copy > .eyebrow {
-  font-size: 10px;
+  letter-spacing: 1.2px;
   margin-bottom: 25px;
   color: var(--muted);
 }
@@ -355,8 +360,8 @@ main:focus {
   align-items: center;
   justify-content: space-between;
   padding: 8px 8px 3px;
-  font-size: 9px;
-  letter-spacing: 1.4px;
+  font-size: 12px;
+  letter-spacing: 0.6px;
   color: var(--ink);
   font-weight: 600;
 }
@@ -368,8 +373,7 @@ main:focus {
   position: absolute;
   bottom: -17px;
   left: 10px;
-  overflow-wrap: anywhere;
-  max-width: 100%;
+  white-space: nowrap;
   background: #e3f684;
   color: #171817;
   padding: 6px 10px;
@@ -410,8 +414,8 @@ main:focus {
   border-top: 1px solid var(--line);
   padding: 12px 0;
   color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 1.7px;
+  font-size: 12px;
+  letter-spacing: 1.2px;
 }
 .scroll-cue a {
   display: flex;
@@ -509,9 +513,9 @@ main:focus {
   justify-content: space-between;
   background: #171817;
   color: white;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 1.7px;
+  letter-spacing: 1.2px;
   padding: 12px 16px;
 }
 .game-reverse .image-caption {
@@ -565,7 +569,7 @@ main:focus {
 }
 .project-credit {
   margin: 24px 0 0;
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
 }
@@ -588,14 +592,12 @@ main:focus {
   font-size: clamp(48px, 6.3vw, 84px);
 }
 .apps-section .section-opening > p {
-  margin-right: 100px;
+  margin-left: auto;
 }
 .apps-mark {
   font-size: 160px;
   line-height: 1;
-  position: absolute;
-  right: 0;
-  bottom: -16px;
+  margin-bottom: -16px;
   font-weight: 400;
   color: #e3f684;
 }
@@ -657,7 +659,7 @@ main:focus {
   padding: 8px 12px;
   background: var(--paper);
   color: var(--ink);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
   font-weight: 600;
   transform: rotate(-4deg);
@@ -703,13 +705,26 @@ main:focus {
   padding: 36px 0;
   border-top: 1px solid var(--ink);
 }
-.mod-host h3 {
-  font:
-    44px 'Anton',
-    sans-serif;
-  letter-spacing: 0;
-  text-transform: uppercase;
-  margin: 12px 0;
+.game-heading {
+  margin: 14px 0 4px;
+  width: min(100%, 280px);
+}
+.game-heading img {
+  display: block;
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  object-position: left center;
+}
+.steam-link {
+  display: inline-block;
+  padding: 10px 0;
+  margin-bottom: 8px;
+  color: var(--blue);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .mod-host p {
   font-size: 17px;
@@ -729,22 +744,19 @@ main:focus {
   transition: color 0.15s;
 }
 .mod-index-link > img,
-.mod-letter {
+.mod-icon-tile {
   width: 60px;
   height: 60px;
   object-fit: contain;
   flex-shrink: 0;
 }
-.mod-letter {
+.mod-icon-tile {
   display: grid;
   place-items: center;
   background: var(--cobalt);
   color: #fff;
-  font:
-    32px 'Anton',
-    sans-serif;
 }
-.mod-index-link > span:not(.mod-letter) {
+.mod-index-link > span:not(.mod-icon-tile) {
   flex: 1;
   min-width: 0;
 }
@@ -825,14 +837,35 @@ main:focus {
 .contact-link {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
   min-height: 55px;
   color: #e3f684;
   font-size: clamp(18px, 2vw, 26px);
   text-decoration: underline;
   text-underline-offset: 8px;
-  margin: 30px 0 35px;
+  margin: 30px 0 6px;
   overflow-wrap: anywhere;
+}
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 28px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px;
+}
+.profile-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: #fafaf7;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.profile-links a:hover {
+  color: #e3f684;
 }
 .contact-link:hover {
   color: #fff;
@@ -845,7 +878,7 @@ main:focus {
   align-items: start;
 }
 .about-fact-line > span {
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 1px;
   min-width: 80px;
   color: #aeb5a8;
@@ -886,6 +919,17 @@ main:focus {
 .footer-inner > a:last-child svg {
   transform: rotate(-90deg);
 }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+}
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+}
 .footer-inner small {
   font-size: 12px;
 }
@@ -899,17 +943,6 @@ main:focus {
 .page-title p {
   font-size: 21px;
   max-width: 680px;
-}
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 40px;
-}
-.project-card {
-  min-width: 0;
-  border-bottom: 1px solid var(--ink);
-  display: flex;
-  flex-direction: column;
 }
 .project-art {
   aspect-ratio: 1232/706;
@@ -937,7 +970,7 @@ main:focus {
   object-fit: contain;
 }
 .shelf-art-label {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
   color: #171817;
 }
@@ -956,42 +989,6 @@ main:focus {
   left: 16px;
   border-radius: 18%;
 }
-.card-caption {
-  padding: 25px 0;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.card-title {
-  font-size: 32px;
-  margin: 0 0 10px;
-}
-.card-title a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-}
-.card-caption p {
-  font-size: 18px;
-}
-.card-category {
-  display: block;
-  color: var(--blue);
-  font-size: 10px;
-  letter-spacing: 1px;
-  margin-bottom: 9px;
-  font-weight: 600;
-}
-.project-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  min-height: 44px;
-  color: var(--blue);
-  font-weight: 600;
-  margin-top: auto;
-}
 .section-jumps,
 .local-nav {
   display: flex;
@@ -1004,7 +1001,7 @@ main:focus {
   margin-bottom: 35px;
 }
 .section-jumps > span {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 1px;
   margin-right: 20px;
 }
@@ -1015,9 +1012,6 @@ main:focus {
   min-height: 44px;
   padding: 10px 16px;
   background: var(--surface);
-}
-.mod-group {
-  margin-bottom: 40px;
 }
 .section-heading {
   display: flex;
@@ -1032,50 +1026,6 @@ main:focus {
 }
 .section-heading p {
   margin: 0;
-}
-.mod-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-}
-.mod-entry {
-  border: 1px solid var(--line);
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-}
-.mod-entry-top {
-  display: flex;
-  gap: 20px;
-  align-items: start;
-  margin-bottom: 18px;
-}
-.mod-entry-top > img,
-.mod-entry-icon {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-.mod-entry-icon {
-  display: grid;
-  place-items: center;
-  background: var(--cobalt);
-  color: white;
-}
-.mod-entry h3 {
-  font-size: 23px;
-}
-.mod-entry h3 a {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-}
-.mod-entry p {
-  font-size: 17px;
-}
-.muted {
-  font-size: 15px;
 }
 .breadcrumbs {
   display: flex;
@@ -1178,17 +1128,14 @@ main:focus {
   font-size: 19px;
   line-height: 1.7;
 }
+.prose a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 .trailer {
   background: #171817;
   color: #fafaf7;
-}
-.trailer summary {
-  cursor: pointer;
-  padding: 16px 20px;
-  min-height: 50px;
-}
-.trailer summary svg {
-  margin-right: 8px;
 }
 .trailer video {
   display: block;
@@ -1197,6 +1144,62 @@ main:focus {
 }
 .trailer .text-action {
   color: white;
+}
+.onward {
+  margin: 10px 0 30px;
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+}
+.onward h2 {
+  margin-bottom: 8px;
+}
+.onward-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 30px;
+}
+.onward-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 100px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.onward-link > span:not(.onward-thumb) {
+  flex: 1;
+  min-width: 0;
+}
+.onward-link strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+}
+.onward-link > span > span {
+  display: block;
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+.onward-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.onward-thumb-wide {
+  width: 96px;
+  height: 56px;
+  object-fit: cover;
+}
+.onward-link > svg {
+  width: 17px;
+  transition: transform 0.2s;
+}
+.onward-link:hover > svg {
+  transform: translateX(4px);
 }
 .back-link {
   margin-top: 10px;
@@ -1217,68 +1220,6 @@ main:focus {
 }
 .mod-placeholder strong {
   font-size: 24px;
-}
-.about-layout {
-  display: grid;
-  grid-template-columns: 0.8fr 1.4fr;
-  gap: 70px;
-  align-items: start;
-}
-.profile-panel {
-  padding: 30px;
-  background: var(--cobalt);
-  color: #fff;
-}
-.profile-panel p,
-.profile-panel .eyebrow,
-.profile-panel a {
-  color: white;
-}
-.profile-monogram {
-  display: grid;
-  place-items: center;
-  background: #e3f684;
-  color: #171817;
-  font:
-    65px 'Anton',
-    sans-serif;
-  width: 150px;
-  height: 150px;
-  margin-bottom: 35px;
-  transform: rotate(-5deg);
-}
-.profile-panel h2 {
-  font-size: 29px;
-  margin-top: 10px;
-}
-.email-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 44px;
-  overflow-wrap: anywhere;
-  font-size: 17px;
-}
-.about-story > h2 {
-  font-size: 36px;
-}
-.about-facts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  border-top: 1px solid var(--line);
-  padding-top: 30px;
-  margin-top: 30px;
-}
-.about-facts svg {
-  color: var(--blue);
-  margin-bottom: 15px;
-}
-.about-facts p {
-  font-size: 17px;
-}
-.about-facts h3 {
-  font-size: 22px;
 }
 .missing-page {
   padding-top: 12vh;
@@ -1319,11 +1260,12 @@ main:focus {
   .project-collage {
     height: 480px;
   }
+  .small-sticker {
+    left: auto;
+    right: 0;
+  }
   .intro-copy h1 {
     font-size: 11vw;
-  }
-  .intro-copy > .eyebrow {
-    font-size: 9px;
   }
   .intro-copy .intro-note {
     font-size: 18px;
@@ -1345,7 +1287,7 @@ main:focus {
     gap: 6px 22px;
   }
   .mod-index-link > img,
-  .mod-letter {
+  .mod-icon-tile {
     width: 44px;
     height: 44px;
   }
@@ -1368,8 +1310,8 @@ main:focus {
   .detail-body {
     gap: 40px;
   }
-  .about-layout {
-    gap: 40px;
+  .onward-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 800px) {
@@ -1409,9 +1351,8 @@ main:focus {
     font-size: 12.5vw;
   }
   .intro-copy > .eyebrow {
-    font-size: 8px;
     letter-spacing: 1px;
-    max-width: 220px;
+    max-width: 240px;
   }
   .project-collage {
     height: 390px;
@@ -1441,9 +1382,18 @@ main:focus {
     bottom: 0;
   }
   .collage-label {
-    font-size: 7px;
     padding: 5px 3px 1px;
-    letter-spacing: 0.6px;
+  }
+  /* The overlapping Lone Survivors card hides this label's usual spot. */
+  .collage-kingdom .collage-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 4px 8px;
+    background: var(--paper);
+  }
+  .collage-kingdom .collage-label svg {
+    display: none;
   }
   .margin-note {
     font-size: 18px;
@@ -1513,7 +1463,6 @@ main:focus {
   .canvas-label {
     left: 10px;
     bottom: 16px;
-    font-size: 8px;
     padding: 7px;
   }
   .decorative-die {
@@ -1541,20 +1490,37 @@ main:focus {
   }
   .mod-host {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 136px minmax(0, 1fr);
+    grid-template-areas:
+      'eyebrow eyebrow'
+      'logo note'
+      'logo steam';
+    column-gap: 18px;
     align-items: center;
   }
   .mod-host .eyebrow {
-    grid-column: 1/-1;
+    grid-area: eyebrow;
   }
-  .mod-host h3 {
-    font-size: 39px;
+  .mod-host .game-heading {
+    grid-area: logo;
+    width: 136px;
+    margin: 8px 0 0;
+  }
+  .mod-host .game-heading img {
+    height: 60px;
   }
   .mod-host p {
+    grid-area: note;
+    align-self: end;
+    margin: 0;
+  }
+  .mod-host .steam-link {
+    grid-area: steam;
+    align-self: start;
     margin: 0;
   }
   .mod-index-link > img,
-  .mod-letter {
+  .mod-icon-tile {
     width: 56px;
     height: 56px;
   }
@@ -1612,32 +1578,16 @@ main:focus {
   .page-title {
     padding-top: 40px;
   }
-  .category-grid {
-    gap: 26px;
-  }
-  .card-title {
-    font-size: 27px;
-  }
   .shelf-art-label strong {
     font-size: 25px;
-  }
-  .mod-grid {
-    grid-template-columns: 1fr;
-  }
-  .about-layout {
-    grid-template-columns: 1fr;
-  }
-  .profile-panel {
-    max-width: 450px;
-  }
-  .about-story {
-    max-width: none;
   }
   .section-heading p {
     font-size: 16px;
   }
-  .mod-entry h3 {
-    font-size: 22px;
+}
+@media (max-width: 700px) {
+  .onward-links {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (max-width: 550px) {
@@ -1654,7 +1604,6 @@ main:focus {
     margin-bottom: 22px;
   }
   .intro-copy > .eyebrow {
-    font-size: 9px;
     margin-bottom: 20px;
     max-width: none;
   }
@@ -1709,8 +1658,6 @@ main:focus {
     bottom: 2%;
   }
   .small-sticker {
-    font-size: 9px;
-    left: 0;
     padding: 5px 7px;
   }
   .collage-piece {
@@ -1718,10 +1665,6 @@ main:focus {
   }
   .collage-shelf {
     border: 0;
-  }
-  .collage-label {
-    font-size: 8px;
-    letter-spacing: 0.6px;
   }
   .section-opening {
     flex-direction: column;
@@ -1740,7 +1683,6 @@ main:focus {
   }
   .section-index {
     margin-bottom: 20px;
-    font-size: 11px;
   }
   .games-section {
     padding-top: 48px;
@@ -1767,9 +1709,8 @@ main:focus {
     font-size: 18px;
   }
   .image-caption {
-    font-size: 8px;
     padding: 10px 12px;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
   }
   .game-subtitle {
     font-size: 25px !important;
@@ -1785,7 +1726,6 @@ main:focus {
     font-size: clamp(44px, 11vw, 60px);
   }
   .canvas-label {
-    font-size: 9px;
     bottom: 20px;
     left: 20px;
   }
@@ -1804,13 +1744,6 @@ main:focus {
   .mods-section .section-opening h2 {
     font-size: 49px;
   }
-  .mod-host {
-    display: block;
-  }
-  .mod-host h3 {
-    font-size: 40px;
-    margin-top: 9px;
-  }
   .mod-host p {
     font-size: 17px;
   }
@@ -1818,10 +1751,10 @@ main:focus {
     grid-template-columns: 1fr;
   }
   .mod-index-link {
-    min-height: 104px;
+    min-height: 88px;
   }
   .mod-index-link > img,
-  .mod-letter {
+  .mod-icon-tile {
     width: 62px;
     height: 62px;
   }
@@ -1870,10 +1803,6 @@ main:focus {
   .about-fact-line > strong {
     font-size: 15px;
   }
-  .category-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
   .page-title h1 {
     font-size: 49px;
   }
@@ -1903,20 +1832,6 @@ main:focus {
   .prose h2 {
     font-size: 29px;
   }
-  .mod-entry {
-    padding: 20px;
-  }
-  .mod-entry-top {
-    gap: 15px;
-  }
-  .mod-entry-top > img,
-  .mod-entry-icon {
-    width: 65px;
-    height: 65px;
-  }
-  .about-facts {
-    grid-template-columns: 1fr;
-  }
   .shelf-art-label strong {
     font-size: 30px;
   }
@@ -1936,9 +1851,6 @@ main:focus {
   .project-collage {
     height: 300px;
   }
-  .intro-copy > .eyebrow {
-    font-size: 8px;
-  }
   .app-canvas {
     height: 250px;
   }
@@ -1949,7 +1861,7 @@ main:focus {
     font-size: 18px;
   }
   .mod-index-link > img,
-  .mod-letter {
+  .mod-icon-tile {
     width: 48px;
     height: 48px;
   }
@@ -1960,8 +1872,12 @@ main:focus {
     flex-direction: column;
     gap: 5px;
   }
-  .mod-entry-top {
-    flex-direction: column;
+  .mod-host {
+    grid-template-columns: 112px minmax(0, 1fr);
+    column-gap: 14px;
+  }
+  .mod-host .game-heading {
+    width: 112px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2012,28 +1928,6 @@ main:focus {
 .header-inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
-}
-.theme-control {
-  min-width: 0;
-}
-.theme-control[hidden] {
-  display: none;
-}
-.theme-control select {
-  font: inherit;
-  font-size: 16px;
-  min-height: 44px;
-  max-width: 100%;
-  padding: 8px 6px;
-  border: 1px solid var(--line);
-  border-radius: 0;
-  background: var(--paper);
-  color: var(--ink);
-  cursor: pointer;
-}
-.theme-control select:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 4px;
 }
 @media (max-width: 1100px) {
   .header-inner {

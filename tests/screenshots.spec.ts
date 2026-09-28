@@ -20,9 +20,9 @@ test('authentic galleries load without cropping or broken full-size links', asyn
   for (const [slug, count] of galleries) {
     await page.goto(`/projects/${slug}/`);
     const gallery = page.locator('#screenshots');
-    await expect(gallery.locator('figure')).toHaveCount(count);
-    await expect(gallery.locator('figure:visible')).toHaveCount(2);
-    if (count > 2) await gallery.locator('summary').click();
+    // Galleries of six or fewer show every screenshot without a disclosure.
+    await expect(gallery.locator('figure:visible')).toHaveCount(count);
+    await expect(gallery.locator('summary')).toHaveCount(0);
     for (const image of await gallery.locator('figure img').all()) {
       await image.scrollIntoViewIfNeeded();
       await expect
@@ -60,7 +60,6 @@ test('screenshot navigation and browser Back work without JavaScript', async ({
   await page.goto('http://127.0.0.1:4321/projects/shelf-and-score/');
   await page.getByRole('link', { name: 'Screenshots', exact: true }).click();
   await expect(page).toHaveURL(/#screenshots$/);
-  await page.locator('#screenshots summary').click();
   await expect(page.locator('#screenshots figure:visible')).toHaveCount(3);
   const imageLink = page.locator('#screenshots a').last();
   const imageUrl = await imageLink.getAttribute('href');

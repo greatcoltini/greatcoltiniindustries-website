@@ -5,8 +5,10 @@ import Icon from './Icon.astro';
 interface Props {
   project: Project;
   eager?: boolean;
+  /** Hide the artwork from assistive tech when a parent control already names it. */
+  decorative?: boolean;
 }
-const { project, eager = false } = Astro.props;
+const { project, eager = false, decorative = false } = Astro.props;
 const { artwork, artworkAlt, icon, artStyle, hostGame, title } = project.data;
 ---
 
@@ -14,7 +16,7 @@ const { artwork, artworkAlt, icon, artStyle, hostGame, title } = project.data;
   {artwork ? (
     <Image
       src={artwork}
-      alt={artworkAlt}
+      alt={decorative ? '' : artworkAlt}
       widths={artStyle === 'shelf' ? [160, 256, 400] : [400, 640, 960, 1232]}
       sizes={
         artStyle === 'shelf'

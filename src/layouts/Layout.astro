@@ -5,6 +5,7 @@ import '@fontsource/source-sans-3/latin-400.css';
 import '@fontsource/source-sans-3/latin-600.css';
 import Icon from '../components/Icon.astro';
 import ThemeControl from '../components/ThemeControl.astro';
+import { profiles } from '../lib/profiles';
 interface Props {
   title: string;
   description: string;
@@ -112,7 +113,12 @@ const nav = [
           GREAT COLTINI INDUSTRIES
         </a>
         <small>© {new Date().getFullYear()} Colton Donkersgoed</small>
-        <a href="#top">
+        <nav class="footer-links" aria-label="Profiles">
+          {profiles.map((profile) => (
+            <a href={profile.url}>{profile.label}</a>
+          ))}
+        </nav>
+        <a class="back-to-top" href="#top">
           Back to top <Icon name="arrow" size={18} />
         </a>
       </div>

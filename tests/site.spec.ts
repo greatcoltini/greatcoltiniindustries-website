@@ -2,10 +2,6 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 const routes = [
   '/',
-  '/games/',
-  '/apps/',
-  '/mods/',
-  '/about/',
   '/projects/kingdom-td/',
   '/projects/boulderlog/',
   '/projects/shelf-and-score/',
@@ -116,7 +112,9 @@ test('works without JavaScript and with reduced motion', async ({
   await page
     .getByRole('link', { name: 'Explore Kingdom TD', exact: true })
     .click();
-  await expect(page.getByRole('link', { name: 'View on Steam' })).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Wishlist on Steam' }),
+  ).toBeVisible();
   await page.getByRole('link', { name: 'Development', exact: true }).click();
   await expect(page).toHaveURL(/#development$/);
   await page.getByText('Watch gameplay trailer', { exact: true }).click();
@@ -124,6 +122,7 @@ test('works without JavaScript and with reduced motion', async ({
     page.getByRole('link', { name: 'Open the gameplay trailer' }),
   ).toHaveAttribute('href', '/media/kingdom-td-gameplay.mp4');
   await page.goto('http://127.0.0.1:4321/about/');
+  await expect(page).toHaveURL(/\/#about$/);
   await expect(
     page.getByRole('link', { name: 'coltonmdonk@gmail.com' }),
   ).toHaveAttribute('href', 'mailto:coltonmdonk@gmail.com');
@@ -171,17 +170,81 @@ test('trailer loads only on request', async ({ page }) => {
   await expect(page.locator('video')).not.toHaveAttribute('autoplay');
 });
 
-test('mod groups use the requested popularity order on both pages', async ({
+test('mod groups use the requested popularity order', async ({ page }) => {
+  await page.goto('/');
+  const order = ['Meccha Chameleon', 'R.E.P.O.', 'Valheim', 'Necesse'];
+  expect(await page.locator('.game-heading').allTextContents()).toEqual(
+    order.map((name) => expect.stringContaining(name)),
+  );
+  expect(
+    await page
+      .getByRole('navigation', { name: 'Browse mods by game' })
+      .getByRole('link')
+      .allTextContents(),
+  ).toEqual(order);
+  // Logos are headings only; each game's store page is a separate text link.
+  await expect(page.locator('.game-heading a')).toHaveCount(0);
+  await expect(page.locator('.steam-link')).toContainText(
+    order.map((name) => `${name} on Steam`),
+  );
+});
+
+test('former section pages redirect to the home page sections', async ({
+  browser,
+}) => {
+  // Meta-refresh redirects also work without JavaScript.
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  for (const section of ['games', 'apps', 'mods', 'about']) {
+    await page.goto(`http://127.0.0.1:4321/${section}/`);
+    await expect(page).toHaveURL(new RegExp(`/#${section}$`));
+    await expect(page.locator(`#${section}`)).toBeVisible();
+  }
+  await context.close();
+});
+
+test('project pages link onward and back to their home section', async ({
   page,
 }) => {
-  for (const route of ['/', '/mods/']) {
-    await page.goto(route);
-    expect(
-      await page
-        .locator('.game-heading')
-        .evaluateAll((elements) =>
-          elements.map((element) => element.getAttribute('aria-label')),
-        ),
-    ).toEqual(['Meccha Chameleon', 'R.E.P.O.', 'Valheim', 'Necesse']);
-  }
+  await page.goto('/projects/necesse-power/');
+  const breadcrumb = page.getByRole('navigation', { name: 'Breadcrumb' });
+  await expect(breadcrumb.getByRole('link', { name: 'Home' })).toHaveAttribute(
+    'href',
+    '/',
+  );
+  await expect(breadcrumb.getByRole('link', { name: 'Mods' })).toHaveAttribute(
+    'href',
+    '/#mods',
+  );
+  const onward = page.getByRole('region', { name: 'More Necesse mods' });
+  await expect(onward.getByRole('link')).toHaveCount(3);
+  await expect(
+    page.locator('.development-notes a[href="/projects/deconstructor/"]'),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Back to mods' }),
+  ).toHaveAttribute('href', '/#mods');
+  await page.goto('/projects/minecraft-enderman/');
+  await expect(
+    page.getByRole('region', { name: 'More mods' }).getByRole('link'),
+  ).toHaveCount(3);
+});
+
+test('buttons show a visible focus outline', async ({ page, browserName }) => {
+  test.skip(
+    browserName === 'webkit' && process.platform === 'win32',
+    'Windows headless WebKit does not dispatch keyboard focus; covered on Linux CI.',
+  );
+  await page.goto('/');
+  const button = page.getByRole('link', { name: 'Explore my projects' });
+  await button.focus();
+  await page.keyboard.press('Shift+Tab');
+  await page.keyboard.press('Tab');
+  await expect(button).toBeFocused();
+  const [outline, background] = await button.evaluate((el) => [
+    getComputedStyle(el).outlineColor,
+    getComputedStyle(document.body).backgroundColor,
+  ]);
+  expect(outline).not.toBe(background);
+  expect(outline).not.toBe('rgb(255, 255, 255)');
 });

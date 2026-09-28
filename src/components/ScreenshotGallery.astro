@@ -18,6 +18,8 @@ const images = await Promise.all(
   })),
 );
 const portrait = images.every((shot) => shot.image.height > shot.image.width);
+// Show every screenshot up to this many; longer galleries keep the rest behind a disclosure.
+const visibleCount = 6;
 ---
 
 <section
@@ -30,19 +32,23 @@ const portrait = images.every((shot) => shot.image.height > shot.image.width);
     <p>Select an image to explore the details.</p>
   </div>
   <div class:list={['screenshot-grid', { 'portrait-grid': portrait }]}>
-    {images.slice(0, 2).map((shot, index) => (
-      <ScreenshotFigure shot={shot} index={index} />
+    {images.slice(0, visibleCount).map((shot, index) => (
+      <ScreenshotFigure shot={shot} index={index} portrait={portrait} />
     ))}
   </div>
-  {images.length > 2 && (
+  {images.length > visibleCount && (
     <details class="more-screenshots">
       <summary>
         <span class="when-closed">View all {images.length} screenshots</span>
         <span class="when-open">Show fewer screenshots</span>
       </summary>
       <div class:list={['screenshot-grid', { 'portrait-grid': portrait }]}>
-        {images.slice(2).map((shot, index) => (
-          <ScreenshotFigure shot={shot} index={index + 2} />
+        {images.slice(visibleCount).map((shot, index) => (
+          <ScreenshotFigure
+            shot={shot}
+            index={index + visibleCount}
+            portrait={portrait}
+          />
         ))}
       </div>
     </details>
@@ -179,7 +185,8 @@ const portrait = images.every((shot) => shot.image.height > shot.image.width);
     gap: 28px;
   }
   .portrait-grid {
-    max-width: 720px;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 20px;
   }
   .more-screenshots {
     margin-top: 24px;
@@ -266,8 +273,8 @@ const portrait = images.every((shot) => shot.image.height > shot.image.width);
       gap: 22px;
     }
     .portrait-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
     }
     .screenshot-viewer {
       padding: 14px;

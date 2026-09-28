@@ -1,30 +1,52 @@
 ---
 import { render } from 'astro:content';
-import { getImage } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import ProjectArt from '../../components/ProjectArt.astro';
 import Trailer from '../../components/Trailer.astro';
 import ProjectAvailability from '../../components/ProjectAvailability.astro';
 import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
 import Icon from '../../components/Icon.astro';
-import { projectsIn, chapterNames, type Project } from '../../lib/projects';
+import {
+  projectsIn,
+  projectUrl,
+  chapterNames,
+  type Project,
+} from '../../lib/projects';
 export async function getStaticPaths() {
-  return (await projectsIn()).map((project) => ({
+  const projects = await projectsIn();
+  return projects.map((project) => ({
     params: { slug: project.id },
-    props: { project },
+    props: { project, projects },
   }));
 }
 interface Props {
   project: Project;
+  projects: Project[];
 }
-const { project } = Astro.props;
+const { project, projects } = Astro.props;
 const { data } = project;
 const { Content } = await render(project);
 const category = chapterNames[data.category];
+const sectionUrl = `/#${data.category}`;
 const poster =
   data.trailer && data.artwork
     ? await getImage({ src: data.artwork, width: 960, format: 'webp' })
     : undefined;
+// Prefer other mods for the same game, then the rest of the category.
+const others = projects.filter(
+  (p) => p.id !== project.id && p.data.category === data.category,
+);
+const sameHost = data.hostGame
+  ? others.filter((p) => p.data.hostGame === data.hostGame)
+  : [];
+const related = (sameHost.length ? sameHost : others).slice(0, 3);
+const relatedTitle = sameHost.length
+  ? `More ${data.hostGame} mods`
+  : `More ${category.toLowerCase()}`;
+// Landscape artwork gets a wider thumbnail; square mod and app art stays square.
+const isWide = (p: Project) =>
+  ['cover', 'boulderlog'].includes(p.data.artStyle);
 ---
 
 <Layout
@@ -35,9 +57,9 @@ const poster =
   socialImageAlt={`${data.title} — Great Coltini Industries`}
 >
   <nav class="breadcrumbs" aria-label="Breadcrumb">
-    <a href="/">Discover</a>
+    <a href="/">Home</a>
     <span aria-hidden="true">/</span>
-    <a href={`/${data.category}/`}>{category}</a>
+    <a href={sectionUrl}>{category}</a>
     <span aria-hidden="true">/</span>
     <span aria-current="page">{data.shortTitle || data.title}</span>
   </nav>
@@ -78,13 +100,16 @@ const poster =
         </div>
       </section>
       <div class="detail-media">
-        <ProjectArt project={project} eager />
-        {data.trailer && (
+        {data.trailer ? (
           <Trailer
             src={data.trailer}
             poster={poster?.src}
             title={data.shortTitle || data.title}
-          />
+          >
+            <ProjectArt project={project} eager decorative />
+          </Trailer>
+        ) : (
+          <ProjectArt project={project} eager />
         )}
       </div>
     </div>
@@ -131,7 +156,40 @@ const poster =
     <section class="prose development-notes" aria-label="Development notes">
       <Content />
     </section>
-    <a class="text-action back-link" href={`/${data.category}/`}>
+    {related.length > 0 && (
+      <section class="onward" aria-labelledby="onward-title">
+        <h2 id="onward-title">{relatedTitle}</h2>
+        <div class="onward-links">
+          {related.map((next) => (
+            <a class="onward-link" href={projectUrl(next)}>
+              {next.data.artwork ? (
+                <Image
+                  class:list={[
+                    'onward-thumb',
+                    { 'onward-thumb-wide': isWide(next) },
+                  ]}
+                  src={next.data.artwork}
+                  alt=""
+                  width={isWide(next) ? 192 : 128}
+                  format="webp"
+                  loading="lazy"
+                />
+              ) : (
+                <span class="onward-thumb mod-icon-tile" aria-hidden="true">
+                  <Icon name={next.data.category} size={30} />
+                </span>
+              )}
+              <span>
+                <strong>{next.data.shortTitle || next.data.title}</strong>
+                <span>{next.data.summary}</span>
+              </span>
+              <Icon name="arrow" />
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+    <a class="text-action back-link" href={sectionUrl}>
       <Icon name="back" /> Back to {category.toLowerCase()}
     </a>
   </article>

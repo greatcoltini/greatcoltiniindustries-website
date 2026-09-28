@@ -1,45 +1,121 @@
-<label class="theme-control" hidden>
-  <span class="sr-only">Color theme</span>
-  <select id="color-theme" aria-label="Color theme">
-    <option value="system">System</option>
-    <option value="light">Light</option>
-    <option value="dark">Dark</option>
-  </select>
-</label>
+<button
+  type="button"
+  class="theme-control"
+  id="color-theme"
+  data-mode="system"
+  hidden
+>
+  <svg
+    class="theme-icon"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <g data-icon="system">
+      <circle cx="12" cy="12" r="8"></circle>
+      <path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"></path>
+    </g>
+    <g data-icon="light">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+    </g>
+    <g data-icon="dark">
+      <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path>
+    </g>
+  </svg>
+  <span class="sr-only">Color theme:</span>
+  <span class="theme-label">System</span>
+</button>
 <script>
-  const control = document.querySelector<HTMLSelectElement>('#color-theme');
+  const control = document.querySelector<HTMLButtonElement>('#color-theme');
   if (control) {
-    control.value = document.documentElement.dataset.theme || 'system';
-    control.closest<HTMLElement>('.theme-control')!.hidden = false;
+    const modes = ['system', 'light', 'dark'] as const;
+    type Mode = (typeof modes)[number];
+    const names: Record<Mode, string> = {
+      system: 'System',
+      light: 'Light',
+      dark: 'Dark',
+    };
+    const label = control.querySelector<HTMLElement>('.theme-label')!;
     const system = matchMedia('(prefers-color-scheme: dark)');
-    const update = () => {
-      const mode = control.value;
-      if (mode === 'system') delete document.documentElement.dataset.theme;
-      else document.documentElement.dataset.theme = mode;
+    const current = (): Mode =>
+      (document.documentElement.dataset.theme as Mode) || 'system';
+    const render = (mode: Mode) => {
+      const next = modes[(modes.indexOf(mode) + 1) % modes.length];
+      control.dataset.mode = mode;
+      label.textContent = names[mode];
+      control.title = `Switch to ${names[next].toLowerCase()} theme`;
       const dark = mode === 'dark' || (mode === 'system' && system.matches);
       document
         .querySelector('meta[name="theme-color"]')
         ?.setAttribute('content', dark ? '#13151b' : '#fafaf7');
     };
-    control.addEventListener('change', () => {
+    const apply = (mode: Mode) => {
+      if (mode === 'system') delete document.documentElement.dataset.theme;
+      else document.documentElement.dataset.theme = mode;
+      render(mode);
+    };
+    control.hidden = false;
+    render(current());
+    control.addEventListener('click', () => {
+      const mode = modes[(modes.indexOf(current()) + 1) % modes.length];
       try {
-        if (control.value === 'system') localStorage.removeItem('gci-theme');
-        else localStorage.setItem('gci-theme', control.value);
+        if (mode === 'system') localStorage.removeItem('gci-theme');
+        else localStorage.setItem('gci-theme', mode);
       } catch {
         /* Theme selection still works when storage is unavailable. */
       }
-      update();
+      apply(mode);
     });
-    system.addEventListener('change', update);
+    system.addEventListener('change', () => render(current()));
     addEventListener('storage', (event) => {
-      if (event.key === 'gci-theme' || event.key === null) {
-        control.value =
+      if (event.key === 'gci-theme' || event.key === null)
+        apply(
           event.newValue === 'light' || event.newValue === 'dark'
             ? event.newValue
-            : 'system';
-        update();
-      }
+            : 'system',
+        );
     });
-    update();
   }
 </script>
+<style>
+  .theme-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 8px 4px;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font:
+      600 15px/1 'Source Sans 3',
+      sans-serif;
+    cursor: pointer;
+  }
+  .theme-control[hidden] {
+    display: none;
+  }
+  .theme-control:hover {
+    color: var(--blue);
+  }
+  .theme-control:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 2px;
+  }
+  .theme-icon g {
+    display: none;
+  }
+  .theme-control[data-mode='system'] [data-icon='system'],
+  .theme-control[data-mode='light'] [data-icon='light'],
+  .theme-control[data-mode='dark'] [data-icon='dark'] {
+    display: inline;
+  }
+</style>

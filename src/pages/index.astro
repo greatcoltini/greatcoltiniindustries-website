@@ -7,12 +7,14 @@ import Icon from '../components/Icon.astro';
 import AppPreview from '../components/AppPreview.astro';
 import ProjectAvailability from '../components/ProjectAvailability.astro';
 import kingdomCover from '../assets/kingdom-td.jpg';
+import kingdomDraft from '../assets/screenshots/kingdom-td-2.jpg';
 import loneCover from '../assets/lone-survivors.png';
 import boulderWall from '../assets/boulderlog-wall.png';
 import shelfIcon from '../assets/shelf-and-score.png';
 
 import loneTeam from '../assets/lone-team.png';
 import { projectsIn, projectUrl } from '../lib/projects';
+import { profiles } from '../lib/profiles';
 const projects = await projectsIn();
 const games = projects.filter((p) => p.data.category === 'games');
 const apps = projects.filter((p) => p.data.category === 'apps');
@@ -51,8 +53,8 @@ const apps = projects.filter((p) => p.data.category === 'apps');
         aria-label="Explore Kingdom TD"
       >
         <Image
-          src={kingdomCover}
-          alt="Kingdom TD: Draft Your Demise"
+          src={kingdomDraft}
+          alt="Kingdom TD enemy draft screen"
           widths={[400, 640, 960]}
           sizes="(max-width: 700px) 70vw, 42vw"
           format="webp"
@@ -108,8 +110,8 @@ const apps = projects.filter((p) => p.data.category === 'apps');
         />
       </a>
       <span class="margin-note" aria-hidden="true">
-        One more
-        <br /> run.
+        Start
+        <br /> anywhere.
         <svg viewBox="0 0 100 55" fill="none">
           <path
             d="M6 5c54-5 66 21 65 39m-15-9 15 12 12-15"
@@ -304,10 +306,17 @@ const apps = projects.filter((p) => p.data.category === 'apps');
         <br /> to play them a little more my way.
       </p>
     </header>
+    <nav class="section-jumps" aria-label="Browse mods by game">
+      <span>JUMP TO</span>
+      {groups.map((group) => (
+        <a href={`#mods-${group.id}`}>{group.name}</a>
+      ))}
+    </nav>
     <div class="mod-index">
       {groups.map((group, index) => (
         <section
           class="mod-index-group scroll-reveal"
+          id={`mods-${group.id}`}
           aria-label={`${group.name} mods`}
         >
           <div class="mod-host">
@@ -332,8 +341,8 @@ const apps = projects.filter((p) => p.data.category === 'apps');
                       loading="lazy"
                     />
                   ) : (
-                    <span class="mod-letter" aria-hidden="true">
-                      M
+                    <span class="mod-icon-tile" aria-hidden="true">
+                      <Icon name="mods" size={30} />
                     </span>
                   )}
                   <span>
@@ -386,8 +395,17 @@ const apps = projects.filter((p) => p.data.category === 'apps');
         </p>
         <p>Great Coltini Industries is where my personal projects live.</p>
         <a class="contact-link" href="mailto:coltonmdonk@gmail.com">
-          coltonmdonk@gmail.com <Icon name="external" size={22} />
+          <Icon name="mail" size={24} /> coltonmdonk@gmail.com
         </a>
+        <ul class="profile-links" aria-label="Profiles">
+          {profiles.map((profile) => (
+            <li>
+              <a href={profile.url}>
+                {profile.label} <Icon name="external" size={18} />
+              </a>
+            </li>
+          ))}
+        </ul>
         <div class="about-fact-line">
           <span>AT WORK</span>
           <strong>AI software development · Kinaxis</strong>

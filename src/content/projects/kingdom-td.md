@@ -16,7 +16,7 @@ features:
   - title: Ride the line
     description: Reposition your mounted rider to support nearby towers and gather fallen gold.
 links:
-  - label: View on Steam
+  - label: Wishlist on Steam
     url: https://store.steampowered.com/app/4990780/Kingdom_TD_Draft_Your_Demise/
 screenshots:
   - image: ../../assets/screenshots/kingdom-td-1.jpg

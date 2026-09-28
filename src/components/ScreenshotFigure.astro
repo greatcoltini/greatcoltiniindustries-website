@@ -4,11 +4,12 @@ import type { Project } from '../lib/projects';
 interface Props {
   shot: Project['data']['screenshots'][number] & { full: { src: string } };
   index: number;
+  portrait?: boolean;
 }
-const { shot, index } = Astro.props;
+const { shot, index, portrait = false } = Astro.props;
 ---
 
-<figure>
+<figure class:list={{ portrait }}>
   <a
     href={shot.full.src}
     data-screenshot-index={index}
@@ -21,7 +22,11 @@ const { shot, index } = Astro.props;
       alt={shot.alt}
       width={Math.min(960, shot.image.width)}
       widths={[320, 640, 960].filter((width) => width <= shot.image.width)}
-      sizes="(max-width: 700px) 85vw, 600px"
+      sizes={
+        portrait
+          ? '(max-width: 700px) 30vw, 220px'
+          : '(max-width: 700px) 85vw, 600px'
+      }
       format="webp"
       loading="lazy"
       decoding="async"
@@ -39,8 +44,12 @@ const { shot, index } = Astro.props;
     align-items: center;
     justify-content: center;
     min-height: 44px;
+    aspect-ratio: 16 / 9;
     background: var(--surface);
     border: 1px solid var(--line);
+  }
+  .portrait a {
+    aspect-ratio: auto;
   }
   a:hover {
     border-color: var(--blue);
@@ -48,9 +57,11 @@ const { shot, index } = Astro.props;
   img {
     display: block;
     width: 100%;
-    height: auto;
-    max-height: 350px;
+    height: 100%;
     object-fit: contain;
+  }
+  .portrait img {
+    height: auto;
   }
   figcaption {
     font-size: 16px;
@@ -58,5 +69,11 @@ const { shot, index } = Astro.props;
     color: var(--muted);
     padding-top: 12px;
     overflow-wrap: anywhere;
+  }
+  @media (max-width: 700px) {
+    .portrait figcaption {
+      font-size: 14px;
+      padding-top: 8px;
+    }
   }
 </style>

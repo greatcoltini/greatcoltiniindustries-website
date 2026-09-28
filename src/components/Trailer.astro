@@ -10,7 +10,17 @@ const { src, poster, title } = Astro.props;
 
 <details class="trailer" id="trailer" data-trailer>
   <summary>
-    <Icon name="play" /> Watch gameplay trailer
+    <span class="trailer-poster">
+      <slot />
+      <span class="play-badge" aria-hidden="true">
+        <Icon name="play" size={34} />
+      </span>
+    </span>
+    <span class="trailer-bar">
+      <Icon name="play" size={18} />
+      <span class="when-closed">Watch gameplay trailer</span>
+      <span class="when-open">Close trailer</span>
+    </span>
   </summary>
   <video
     hidden
@@ -37,21 +47,86 @@ const { src, poster, title } = Astro.props;
       details.addEventListener('toggle', () => {
         const video = details.querySelector('video');
         if (!video) return;
-        if (details.open && !video.getAttribute('src')) {
-          video.src = video.dataset.src!;
+        // The poster stays visible without JavaScript, above the fallback link.
+        details.classList.toggle('is-playing', details.open);
+        if (details.open) {
+          if (!video.getAttribute('src')) {
+            video.src = video.dataset.src!;
+            video.load();
+          }
           video.hidden = false;
-          video.load();
-        } else if (!details.open) {
+          // Opening the trailer is the request to watch it.
+          video.play().catch(() => {});
+        } else {
           video.pause();
         }
       });
     });
 </script>
 <style>
+  .trailer summary {
+    display: block;
+    cursor: pointer;
+    list-style: none;
+  }
+  .trailer summary::-webkit-details-marker {
+    display: none;
+  }
+  .trailer-poster {
+    position: relative;
+    display: block;
+  }
+  .is-playing .trailer-poster {
+    display: none;
+  }
+  .play-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 84px;
+    height: 84px;
+    margin: -42px 0 0 -42px;
+    border-radius: 50%;
+    background: var(--cobalt);
+    color: #fff;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 35%);
+    transition: transform 0.2s;
+  }
+  .play-badge :global(svg) {
+    margin-left: 4px;
+    fill: currentColor;
+  }
+  summary:hover .play-badge {
+    transform: scale(1.08);
+  }
+  .trailer-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 14px 20px;
+    font-weight: 600;
+  }
+  .when-open,
+  .is-playing .when-closed {
+    display: none;
+  }
+  .is-playing .when-open {
+    display: inline;
+  }
   video[hidden] {
     display: none;
   }
   .trailer-fallback {
     padding: 0 20px;
+  }
+  @media (max-width: 550px) {
+    .play-badge {
+      width: 64px;
+      height: 64px;
+      margin: -32px 0 0 -32px;
+    }
   }
 </style>

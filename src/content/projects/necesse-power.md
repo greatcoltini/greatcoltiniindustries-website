@@ -39,4 +39,4 @@ availability:
 
 ## Development
 
-I built the power-network systems and the integration with supported fueled machines. It also provides an optional power source for my Deconstructor mod, connecting two otherwise independent workshop additions.
+I built the power-network systems and the integration with supported fueled machines. It also provides an optional power source for my [Deconstructor](/projects/deconstructor/) mod, connecting two otherwise independent workshop additions.

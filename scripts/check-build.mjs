@@ -7,9 +7,18 @@ function walk(dir) {
   );
 }
 const html = walk(root).filter((f) => f.endsWith('.html'));
+// Former section URLs (see astro.config.mjs) are meta-refresh redirects to the home page.
+const redirects = ['games', 'apps', 'mods', 'about'];
 const failures = [];
+for (const section of redirects) {
+  const file = join(root, section, 'index.html');
+  const text = existsSync(file) ? readFileSync(file, 'utf8') : '';
+  if (!text.includes(`url=/#${section}`))
+    failures.push(`${file}: missing redirect to /#${section}`);
+}
 for (const file of html) {
   const text = readFileSync(file, 'utf8');
+  if (text.includes('http-equiv="refresh"')) continue;
   for (const match of text.matchAll(/(?:href|src)="([^"\s]+)"/g)) {
     const url = match[1];
     if (/^(https?:|mailto:|data:)/.test(url)) continue;
@@ -31,9 +40,11 @@ for (const file of html) {
   if (!text.includes('rel="canonical"') || !text.includes('name="description"'))
     failures.push(`${file}: missing metadata`);
 }
+// Projects, plus Home, 404, and the redirect pages.
 const expectedPages =
   walk('src/content/projects').filter((file) => file.endsWith('.md')).length +
-  6;
+  2 +
+  redirects.length;
 if (html.length !== expectedPages)
   failures.push(`Expected ${expectedPages} HTML pages, found ${html.length}`);
 if (failures.length) {
