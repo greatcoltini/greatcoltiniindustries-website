@@ -230,6 +230,23 @@ test('project pages link onward and back to their home section', async ({
   ).toHaveCount(3);
 });
 
+test('back to top returns to the top at every width', async ({ page }) => {
+  // The header is sticky on wide screens, so this catches a target that is always in view.
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of ['/', '/projects/kingdom-td/']) {
+      await page.goto(route);
+      await page.evaluate(() =>
+        scrollTo(0, document.documentElement.scrollHeight),
+      );
+      await page.getByRole('link', { name: 'Back to top' }).click();
+      await expect
+        .poll(() => page.evaluate(() => scrollY), `${route} at ${width}`)
+        .toBe(0);
+    }
+  }
+});
+
 test('buttons show a visible focus outline', async ({ page, browserName }) => {
   test.skip(
     browserName === 'webkit' && process.platform === 'win32',
