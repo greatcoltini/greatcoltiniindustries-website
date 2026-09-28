@@ -16,6 +16,13 @@ features:
 links:
   - label: View on Steam Workshop
     url: https://steamcommunity.com/sharedfiles/filedetails/?id=3730263197
+screenshots:
+  - image: ../../assets/screenshots/mine-it-all-1.jpg
+    alt: 'Vein mining inside a cave.'
+    caption: 'Vein mining inside a cave.'
+  - image: ../../assets/screenshots/mine-it-all-2.jpg
+    alt: 'The vein-mining toggle in mod settings.'
+    caption: 'The vein-mining toggle in mod settings.'
 ---
 
 ## Less repetition underground

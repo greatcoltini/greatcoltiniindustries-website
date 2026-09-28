@@ -16,6 +16,16 @@ features:
 links:
   - label: View on Steam Workshop
     url: https://steamcommunity.com/sharedfiles/filedetails/?id=3731042527
+screenshots:
+  - image: ../../assets/screenshots/forge-upgrades-1.jpg
+    alt: 'The different forge upgrade tiers.'
+    caption: 'The different forge upgrade tiers.'
+  - image: ../../assets/screenshots/forge-upgrades-2.jpg
+    alt: 'The forge upgrade option and material cost.'
+    caption: 'The forge upgrade option and material cost.'
+  - image: ../../assets/screenshots/forge-upgrades-3.jpg
+    alt: 'The Tungsten Forge crafting interface.'
+    caption: 'The Tungsten Forge crafting interface.'
 ---
 
 ## A better workshop, one upgrade at a time

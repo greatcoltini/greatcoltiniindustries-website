@@ -17,6 +17,19 @@ features:
 links:
   - label: View on Steam Workshop
     url: https://steamcommunity.com/sharedfiles/filedetails/?id=3755237299
+screenshots:
+  - image: ../../assets/screenshots/meccha-swiftbroom-1.jpg
+    alt: 'A fireplace and room props in Swiftbroom Academy.'
+    caption: 'A fireplace and room props in Swiftbroom Academy.'
+  - image: ../../assets/screenshots/meccha-swiftbroom-2.jpg
+    alt: 'Tables and props in a stone-walled room.'
+    caption: 'Tables and props in a stone-walled room.'
+  - image: ../../assets/screenshots/meccha-swiftbroom-3.jpg
+    alt: 'A view through the academy interior.'
+    caption: 'A view through the academy interior.'
+  - image: ../../assets/screenshots/meccha-swiftbroom-4.jpg
+    alt: 'A bedroom and bookshelves in Swiftbroom Academy.'
+    caption: 'A bedroom and bookshelves in Swiftbroom Academy.'
 ---
 
 ## A new hiding place in Swiftbroom

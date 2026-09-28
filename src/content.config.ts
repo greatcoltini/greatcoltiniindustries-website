@@ -24,6 +24,11 @@ const projects = defineCollection({
         .default([]),
       links: z.array(z.object({ label: z.string(), url: z.url() })).default([]),
       trailer: z.string().optional(),
+      screenshots: z
+        .array(
+          z.object({ image: image(), alt: z.string(), caption: z.string() }),
+        )
+        .default([]),
     }),
 });
 

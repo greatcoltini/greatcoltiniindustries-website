@@ -21,8 +21,17 @@ Anton and Source Sans 3 are self-hosted Fontsource packages, distributed under t
 
 The collection contains thirteen projects. Nine external destinations were verified: two Steam games, six Steam Workshop entries, and MinecraftAdditions on Thunderstore. Apps and Valheim mods have no external actions until a public destination is verified. Private or unavailable GitHub repositories are not linked as public source.
 
-The scrolling homepage additionally uses `kingdom-gameplay.png` from `godot-defenders/marketing/screenshots/grasslands-1.png` and `lone-team.png` from `lone-survivors-ordered/lone-survivors-ordered/library-team.png`. These are original project assets, not generated substitutes. The small arrows and board-game die are decorative SVG shapes.
+The Kingdom TD homepage feature uses its original `kingdom-td.jpg` cover. The scrolling homepage additionally uses `lone-team.png` from `lone-survivors-ordered/lone-survivors-ordered/library-team.png`. These are original project assets, not generated substitutes. The small arrows and board-game die are decorative SVG shapes.
 
 The Meccha Chameleon map previews come from `meccha-chameleon-repo-snow/build/preview.png` and `meccha-chameleon-repo-wizard/build/preview.png`. Their original R.E.P.O. setting/assets are credited on the detail pages. Steam's GetPublishedFileDetails API verified creator 76561198038365196, public visibility, and non-banned status for Workshop items 3759385002 and 3755237299 on 2026-09-28.
 
 Game-inspired headings use self-hosted Bungee (Meccha Chameleon), Black Ops One (R.E.P.O.), Cinzel (Valheim), and Silkscreen (Necesse), all under the SIL Open Font License. These are styled display fonts, not the games' official wordmarks or proprietary fonts. Body text remains Source Sans 3.
+
+## Screenshot galleries (2026-09-28)
+
+- 27 original gameplay/UI images from the two Steam game listings and six Steam Workshop galleries. Exact public sources are recorded in `screenshot-sources.json`.
+- Six BoulderLog phone screenshots from its English (United Kingdom) Google Play Console listing, retrieved with the owner signed in. The app is in closed testing; no public Play Store action is implied.
+- Three Shelf & Score captures rendered from the actual `board-game-stats` Flutter repository using an isolated copy, an in-memory database, and synthetic game/player records. Fonts and icons are loaded from the app/Flutter assets. Captions explicitly identify sample data; no personal database was used. Shelf & Score is a local app with no store action.
+- No genuine gameplay screenshots were found for Minecraft Enderman or the two Valheim projects; their detail pages omit the gallery.
+
+Portrait galleries preserve the full screen, with no crop, and link to a larger image. Screenshots are lazy-loaded and carry descriptive alt text.

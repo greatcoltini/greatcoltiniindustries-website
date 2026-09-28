@@ -17,6 +17,16 @@ features:
 links:
   - label: View on Steam Workshop
     url: https://steamcommunity.com/sharedfiles/filedetails/?id=3759385002
+screenshots:
+  - image: ../../assets/screenshots/meccha-mcjannek-station-1.jpg
+    alt: 'The station entrance and corridor.'
+    caption: 'The station entrance and corridor.'
+  - image: ../../assets/screenshots/meccha-mcjannek-station-2.jpg
+    alt: 'A television and shelves in the station.'
+    caption: 'A television and shelves in the station.'
+  - image: ../../assets/screenshots/meccha-mcjannek-station-3.jpg
+    alt: 'The station meeting room.'
+    caption: 'The station meeting room.'
 ---
 
 ## McJannek Station, a different way to play

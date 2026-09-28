@@ -7,6 +7,16 @@ artworkAlt: Shelf & Score icon showing an orange meeple with a pencil and a gree
 artStyle: shelf
 order: 4
 tech: [Flutter, Dart, SQLite]
+screenshots:
+  - image: ../../assets/screenshots/shelf-plays.png
+    alt: 'Shelf & Score play log listing sample Catan, Chess, Wingspan, and Azul sessions.'
+    caption: 'Recent game nights in the play log (sample data).'
+  - image: ../../assets/screenshots/shelf-games.png
+    alt: 'Shelf & Score Games screen with four sample board games and collection filters.'
+    caption: 'The board-game collection and filters (sample data).'
+  - image: ../../assets/screenshots/shelf-stats.png
+    alt: 'Shelf & Score statistics with total plays, win rate, an activity chart, and most-played games.'
+    caption: 'Play activity and statistics (sample data).'
 features:
   - title: Know your shelf
     description: Keep a board-game collection and bring in game information from BoardGameGeek.
@@ -18,7 +28,7 @@ features:
 
 ## More time playing. Less time logging.
 
-Shelf & Score is a personal board-game collection and play tracker. It is designed for the phone at the table: pick the game, add the players and scores, and get back to game night.
+Shelf & Score is a personal board-game collection and play tracker, currently available as a local app. It is designed for the phone at the table: pick the game, add the players and scores, and get back to game night.
 
 A play calendar and statistics help you revisit past sessions. BoardGameGeek integration supports building a collection without entering every detail by hand.
 

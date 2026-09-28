@@ -9,7 +9,7 @@ import kingdomCover from '../assets/kingdom-td.jpg';
 import loneCover from '../assets/lone-survivors.png';
 import boulderWall from '../assets/boulderlog-wall.png';
 import shelfIcon from '../assets/shelf-and-score.png';
-import gameplay from '../assets/kingdom-gameplay.png';
+
 import loneTeam from '../assets/lone-team.png';
 import { projectsIn, projectUrl } from '../lib/projects';
 const projects = await projectsIn();
@@ -156,10 +156,10 @@ const apps = projects.filter((p) => p.data.category === 'apps');
           aria-label={`Explore ${project.data.title}`}
         >
           <Image
-            src={index === 0 ? gameplay : loneTeam}
+            src={index === 0 ? kingdomCover : loneTeam}
             alt={
               index === 0
-                ? 'Kingdom TD gameplay: towers defend a winding route across the grasslands.'
+                ? 'Kingdom TD: Draft Your Demise cover art.'
                 : 'Lone Survivors warrior, mage, and barbarian artwork.'
             }
             widths={[480, 800, 1200, 1600]}
@@ -169,7 +169,7 @@ const apps = projects.filter((p) => p.data.category === 'apps');
           />
           <span class="image-caption">
             {index === 0
-              ? 'IN-GAME / KINGDOM TD'
+              ? 'KINGDOM TD / DRAFT YOUR DEMISE'
               : 'MEET THE HORDE / LONE SURVIVORS'}
             <Icon name="arrow" size={18} />
           </span>

@@ -16,6 +16,16 @@ features:
 links:
   - label: View on Steam Workshop
     url: https://steamcommunity.com/sharedfiles/filedetails/?id=3730900523
+screenshots:
+  - image: ../../assets/screenshots/deconstructor-1.jpg
+    alt: 'The Deconstructor interface and recovered materials.'
+    caption: 'The Deconstructor interface and recovered materials.'
+  - image: ../../assets/screenshots/deconstructor-2.jpg
+    alt: 'The Deconstructor in the workstation menu.'
+    caption: 'The Deconstructor in the workstation menu.'
+  - image: ../../assets/screenshots/deconstructor-3.jpg
+    alt: 'Breaking down equipment while the machine runs.'
+    caption: 'Breaking down equipment while the machine runs.'
 ---
 
 ## Make the most of what you have

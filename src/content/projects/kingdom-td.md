@@ -18,6 +18,19 @@ features:
 links:
   - label: View on Steam
     url: https://store.steampowered.com/app/4990780/Kingdom_TD_Draft_Your_Demise/
+screenshots:
+  - image: ../../assets/screenshots/kingdom-td-1.jpg
+    alt: 'Towers and combat effects along the route.'
+    caption: 'Towers and combat effects along the route.'
+  - image: ../../assets/screenshots/kingdom-td-2.jpg
+    alt: 'Choose the enemies for an upcoming wave.'
+    caption: 'Choose the enemies for an upcoming wave.'
+  - image: ../../assets/screenshots/kingdom-td-3.jpg
+    alt: 'Plan the route with the path-building tools.'
+    caption: 'Plan the route with the path-building tools.'
+  - image: ../../assets/screenshots/kingdom-td-4.jpg
+    alt: 'Boss-wave draft choices and enemy details.'
+    caption: 'Boss-wave draft choices and enemy details.'
 ---
 
 ## A different kind of tower defense

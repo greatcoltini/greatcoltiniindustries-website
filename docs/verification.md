@@ -19,3 +19,8 @@ The axe scan found no WCAG A/AA violations in the tested pages. Manual inspectio
 ## Launch checks still dependent on DNS
 
 After the registrar records are updated, verify domain ownership in GitHub, HTTPS certificate issuance/enforcement, www redirect, live nested routes, and the custom 404. See deployment.md for the exact DNS changes.
+
+## Screenshot gallery update (2026-09-28)
+
+Thirty-six authentic screenshots across ten projects were visually reviewed. The production build and all nine external action checks pass. Local Chromium, WebKit, and Edge checks pass for gallery image loading, larger-image links, browser Back, mobile layouts, text enlargement, light/dark accessibility, and no-JavaScript/reduced-motion navigation. The existing Windows WebKit keyboard limitation remains the only skipped check. Shelf & Score captures were rendered successfully from its Flutter source with synthetic data and complete font/icon assets.
+

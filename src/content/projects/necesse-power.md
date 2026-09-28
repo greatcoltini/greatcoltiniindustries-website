@@ -16,6 +16,19 @@ features:
 links:
   - label: View on Steam Workshop
     url: https://steamcommunity.com/sharedfiles/filedetails/?id=3732508344
+screenshots:
+  - image: ../../assets/screenshots/necesse-power-1.jpg
+    alt: 'Power infrastructure around a settlement.'
+    caption: 'Power infrastructure around a settlement.'
+  - image: ../../assets/screenshots/necesse-power-2.jpg
+    alt: 'The Powered Miner interface.'
+    caption: 'The Powered Miner interface.'
+  - image: ../../assets/screenshots/necesse-power-3.jpg
+    alt: 'Power towers and connected machines.'
+    caption: 'Power towers and connected machines.'
+  - image: ../../assets/screenshots/necesse-power-4.jpg
+    alt: 'Copper Power Tower crafting details.'
+    caption: 'Copper Power Tower crafting details.'
 ---
 
 ## A settlement that works together

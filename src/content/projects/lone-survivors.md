@@ -16,6 +16,19 @@ features:
 links:
   - label: View on Steam
     url: https://store.steampowered.com/app/3629280/Lone_Survivors/
+screenshots:
+  - image: ../../assets/screenshots/lone-survivors-1.jpg
+    alt: 'Surviving an enemy swarm.'
+    caption: 'Surviving an enemy swarm.'
+  - image: ../../assets/screenshots/lone-survivors-2.jpg
+    alt: 'Choose an upgrade during a run.'
+    caption: 'Choose an upgrade during a run.'
+  - image: ../../assets/screenshots/lone-survivors-3.jpg
+    alt: 'Combat and weapon effects in a dungeon.'
+    caption: 'Combat and weapon effects in a dungeon.'
+  - image: ../../assets/screenshots/lone-survivors-4.jpg
+    alt: 'Permanent upgrades in the skill tree.'
+    caption: 'Permanent upgrades in the skill tree.'
 ---
 
 ## Small beginnings. Overwhelming odds.

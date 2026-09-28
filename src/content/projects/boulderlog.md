@@ -8,6 +8,25 @@ icon: ../../assets/boulderlog-icon.png
 artStyle: boulderlog
 order: 3
 tech: [Expo, React Native, TypeScript]
+screenshots:
+  - image: ../../assets/screenshots/boulderlog-2.jpg
+    alt: 'BoulderLog home screen showing a climber profile, experience level, and session summary.'
+    caption: 'Your climbing profile and progress.'
+  - image: ../../assets/screenshots/boulderlog-1.jpg
+    alt: 'BoulderLog session screen with a Start Session button and climbing tip.'
+    caption: 'Start a session at the wall.'
+  - image: ../../assets/screenshots/boulderlog-3.jpg
+    alt: 'BoulderLog statistics showing climbing grades, attempts, send rate, and time.'
+    caption: 'Grades, sends, and session statistics.'
+  - image: ../../assets/screenshots/boulderlog-5.jpg
+    alt: 'BoulderLog history calendar with a session summary and grade breakdown.'
+    caption: 'A calendar of past sessions.'
+  - image: ../../assets/screenshots/boulderlog-6.jpg
+    alt: 'BoulderLog climb details showing route photos with numbered climbing holds.'
+    caption: 'Route photos with marked holds.'
+  - image: ../../assets/screenshots/boulderlog-7.jpg
+    alt: 'BoulderLog achievement grid with unlocked milestones and progress.'
+    caption: 'Achievements for climbing milestones.'
 features:
   - title: Log a session
     description: Keep track of climbs, grades, attempts, and notes while your session is still fresh.

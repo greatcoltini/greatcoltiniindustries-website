@@ -1,0 +1,113 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { Project } from '../lib/projects';
+interface Props {
+  screenshots: Project['data']['screenshots'];
+}
+const { screenshots } = Astro.props;
+const images = await Promise.all(
+  screenshots.map(async (shot) => ({
+    ...shot,
+    full: await getImage({
+      src: shot.image,
+      width: Math.min(1920, shot.image.width),
+      format: 'webp',
+      quality: 90,
+    }),
+  })),
+);
+---
+
+<section
+  class="screenshot-gallery"
+  id="screenshots"
+  aria-labelledby="screenshots-title"
+>
+  <div class="section-heading">
+    <h2 id="screenshots-title">Screenshots</h2>
+    <p>Select an image to view it larger.</p>
+  </div>
+  <div
+    class:list={[
+      'screenshot-grid',
+      {
+        'portrait-grid': images.every(
+          (shot) => shot.image.height > shot.image.width,
+        ),
+      },
+    ]}
+  >
+    {images.map((shot) => (
+      <figure>
+        <a href={shot.full.src} aria-label={`Open screenshot: ${shot.caption}`}>
+          <Image
+            src={shot.image}
+            alt={shot.alt}
+            width={Math.min(960, shot.image.width)}
+            widths={[320, 640, 960].filter(
+              (width) => width <= shot.image.width,
+            )}
+            sizes="(max-width: 700px) calc(100vw - 40px), 600px"
+            format="webp"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <figcaption>{shot.caption}</figcaption>
+      </figure>
+    ))}
+  </div>
+</section>
+<style>
+  .screenshot-gallery {
+    margin: 45px 0 65px;
+    scroll-margin-top: 20px;
+  }
+  .screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .portrait-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .portrait-grid figure img {
+    max-height: 600px;
+  }
+  figure {
+    margin: 0;
+    min-width: 0;
+  }
+  figure a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  figure a:hover {
+    border-color: var(--blue);
+  }
+  figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
+  }
+  figcaption {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--muted);
+    padding-top: 12px;
+    overflow-wrap: anywhere;
+  }
+  @media (max-width: 700px) {
+    .screenshot-grid,
+    .portrait-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 25px;
+    }
+  }
+</style>

@@ -8,6 +8,7 @@ const routes = [
   '/about/',
   '/projects/kingdom-td/',
   '/projects/boulderlog/',
+  '/projects/shelf-and-score/',
   '/projects/deconstructor/',
   '/projects/meccha-swiftbroom/',
 ];

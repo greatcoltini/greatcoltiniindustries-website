@@ -4,6 +4,7 @@ import { getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import ProjectArt from '../../components/ProjectArt.astro';
 import Trailer from '../../components/Trailer.astro';
+import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
 import Icon from '../../components/Icon.astro';
 import { projectsIn, chapterNames, type Project } from '../../lib/projects';
 export async function getStaticPaths() {
@@ -79,9 +80,13 @@ const poster =
     <nav class="local-nav" aria-label="On this project page">
       <a href="#overview">Overview</a>
       <a href="#features">Features</a>
+      {data.screenshots.length > 0 && <a href="#screenshots">Screenshots</a>}
       <a href="#development">Development</a>
       {data.trailer && <a href="#trailer">Trailer</a>}
     </nav>
+    {data.screenshots.length > 0 && (
+      <ScreenshotGallery screenshots={data.screenshots} />
+    )}
     <div class="detail-body">
       <section id="features" class="features-panel">
         <span class="eyebrow">THE EXPERIENCE</span>

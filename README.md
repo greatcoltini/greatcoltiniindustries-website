@@ -39,3 +39,5 @@ See [deployment](docs/deployment.md), [asset sources](docs/assets.md), and [veri
 The header theme selector defaults to System, following the browser's light/dark preference. Explicit Light or Dark choices are saved locally; selecting System clears that override. System styling also works without JavaScript.
 
 The mod group display order follows Colton's requested popularity order: Meccha Chameleon, R.E.P.O., Valheim, Necesse. It is curated in `src/lib/mod-groups.ts`; no live or inferred download totals are displayed.
+
+Project galleries use optional `screenshots` frontmatter entries, each with an `image` path, descriptive `alt`, and a `caption`. Store originals in `src/assets/screenshots/`. Astro creates responsive WebP thumbnails and larger linked images; galleries and browser Back work without JavaScript. Preserve authentic screenshots and record their provenance in `docs/assets.md`.
