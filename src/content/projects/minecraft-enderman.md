@@ -14,13 +14,15 @@ features:
 links:
   - label: View on Thunderstore
     url: https://thunderstore.io/c/repo/p/GreatColtini/MinecraftAdditions/
+overviewTitle: "Something familiar in an unfamiliar place"
+overview:
+  - "This R.E.P.O. mod brings an Enderman-inspired enemy and throwable TNT into the game. It is published as MinecraftAdditions on Thunderstore."
+  - "The enemy roams by teleporting, responds to being watched, and attacks once it notices a player. TNT builds on the game's grenade and explosion systems."
+availability:
+  label: "Archived release"
+  platform: "R.E.P.O. · Thunderstore"
+  detail: "The Thunderstore listing is marked deprecated."
 ---
-
-## Something familiar in an unfamiliar place
-
-This R.E.P.O. mod brings an Enderman-inspired enemy and throwable TNT into the game. It is published as **MinecraftAdditions** on Thunderstore.
-
-The enemy roams by teleporting, responds to being watched, and attacks once it notices a player. TNT builds on the game's grenade and explosion systems.
 
 ## Development
 

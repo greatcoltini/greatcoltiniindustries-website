@@ -1,6 +1,7 @@
 ---
-import { Image, getImage } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import type { Project } from '../lib/projects';
+import ScreenshotFigure from './ScreenshotFigure.astro';
 interface Props {
   screenshots: Project['data']['screenshots'];
 }
@@ -16,6 +17,7 @@ const images = await Promise.all(
     }),
   })),
 );
+const portrait = images.every((shot) => shot.image.height > shot.image.width);
 ---
 
 <section
@@ -25,89 +27,253 @@ const images = await Promise.all(
 >
   <div class="section-heading">
     <h2 id="screenshots-title">Screenshots</h2>
-    <p>Select an image to view it larger.</p>
+    <p>Select an image to explore the details.</p>
   </div>
-  <div
-    class:list={[
-      'screenshot-grid',
-      {
-        'portrait-grid': images.every(
-          (shot) => shot.image.height > shot.image.width,
-        ),
-      },
-    ]}
-  >
-    {images.map((shot) => (
-      <figure>
-        <a href={shot.full.src} aria-label={`Open screenshot: ${shot.caption}`}>
-          <Image
-            src={shot.image}
-            alt={shot.alt}
-            width={Math.min(960, shot.image.width)}
-            widths={[320, 640, 960].filter(
-              (width) => width <= shot.image.width,
-            )}
-            sizes="(max-width: 700px) calc(100vw - 40px), 600px"
-            format="webp"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
-        <figcaption>{shot.caption}</figcaption>
-      </figure>
+  <div class:list={['screenshot-grid', { 'portrait-grid': portrait }]}>
+    {images.slice(0, 2).map((shot, index) => (
+      <ScreenshotFigure shot={shot} index={index} />
     ))}
   </div>
+  {images.length > 2 && (
+    <details class="more-screenshots">
+      <summary>
+        <span class="when-closed">View all {images.length} screenshots</span>
+        <span class="when-open">Show fewer screenshots</span>
+      </summary>
+      <div class:list={['screenshot-grid', { 'portrait-grid': portrait }]}>
+        {images.slice(2).map((shot, index) => (
+          <ScreenshotFigure shot={shot} index={index + 2} />
+        ))}
+      </div>
+    </details>
+  )}
+  <dialog
+    class="screenshot-viewer"
+    aria-labelledby="viewer-title"
+    aria-describedby="viewer-caption"
+  >
+    <div class="viewer-toolbar">
+      <h2 id="viewer-title">Screenshot viewer</h2>
+      <button type="button" data-close autofocus>
+        Close <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="viewer-image-wrap"></div>
+    <p id="viewer-caption"></p>
+    <div class="viewer-controls">
+      <button type="button" data-previous aria-label="Previous screenshot">
+        ← Previous
+      </button>
+      <p data-counter role="status" aria-live="polite" aria-atomic="true"></p>
+      <button type="button" data-next aria-label="Next screenshot">
+        Next →
+      </button>
+    </div>
+  </dialog>
 </section>
+<script>
+  document
+    .querySelectorAll<HTMLElement>('.screenshot-gallery')
+    .forEach((gallery) => {
+      const dialog = gallery.querySelector<HTMLDialogElement>('dialog');
+      if (!dialog || typeof dialog.showModal !== 'function') return;
+      const links = [
+        ...gallery.querySelectorAll<HTMLAnchorElement>(
+          'a[data-screenshot-index]',
+        ),
+      ];
+      const image = new Image();
+      const imageWrap =
+        dialog.querySelector<HTMLElement>('.viewer-image-wrap')!;
+      const caption = dialog.querySelector<HTMLElement>('#viewer-caption')!;
+      const counter = dialog.querySelector<HTMLElement>('[data-counter]')!;
+      const close = dialog.querySelector<HTMLButtonElement>('[data-close]')!;
+      let current = 0;
+      let opener: HTMLAnchorElement | null = null;
+      let previousOverflow = '';
+      const show = (index: number) => {
+        current = (index + links.length) % links.length;
+        const link = links[current];
+        image.src = link.href;
+        image.alt = link.dataset.alt || '';
+        imageWrap.replaceChildren(image);
+        caption.textContent = link.dataset.caption || '';
+        counter.textContent = `${current + 1} of ${links.length}`;
+      };
+      links.forEach((link, index) =>
+        link.addEventListener('click', (event) => {
+          if (
+            event.button !== 0 ||
+            event.ctrlKey ||
+            event.metaKey ||
+            event.shiftKey ||
+            event.altKey
+          )
+            return;
+          event.preventDefault();
+          opener = link;
+          show(index);
+          previousOverflow = document.body.style.overflow;
+          dialog.showModal();
+          document.body.style.overflow = 'hidden';
+          close.focus();
+        }),
+      );
+      close.addEventListener('click', () => dialog.close());
+      dialog
+        .querySelector('[data-previous]')!
+        .addEventListener('click', () => show(current - 1));
+      dialog
+        .querySelector('[data-next]')!
+        .addEventListener('click', () => show(current + 1));
+      dialog.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab') {
+          const buttons = [
+            ...dialog.querySelectorAll<HTMLButtonElement>('button'),
+          ];
+          const first = buttons[0],
+            last = buttons.at(-1)!;
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          show(current + 1);
+        }
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          show(current - 1);
+        }
+      });
+      dialog.addEventListener('close', () => {
+        document.body.style.overflow = previousOverflow;
+        image.remove();
+        opener?.focus({ preventScroll: true });
+      });
+      dialog.addEventListener('click', (event) => {
+        const box = dialog.getBoundingClientRect();
+        if (
+          event.target === dialog &&
+          (event.clientX < box.left ||
+            event.clientX > box.right ||
+            event.clientY < box.top ||
+            event.clientY > box.bottom)
+        )
+          dialog.close();
+      });
+    });
+</script>
 <style>
   .screenshot-gallery {
-    margin: 45px 0 65px;
+    margin: 40px 0 60px;
     scroll-margin-top: 20px;
   }
   .screenshot-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
+    gap: 28px;
   }
   .portrait-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 720px;
   }
-  .portrait-grid figure img {
-    max-height: 600px;
+  .more-screenshots {
+    margin-top: 24px;
   }
-  figure {
-    margin: 0;
-    min-width: 0;
+  summary {
+    width: fit-content;
+    min-height: 44px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    border: 1px solid var(--line);
+    color: var(--blue);
+    font-weight: 600;
+    cursor: pointer;
   }
-  figure a {
+  .when-open,
+  details[open] .when-closed {
+    display: none;
+  }
+  details[open] .when-open {
+    display: inline;
+  }
+  .screenshot-viewer {
+    width: min(1100px, calc(100% - 24px));
+    max-width: none;
+    max-height: calc(100dvh - 24px);
+    padding: 20px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    overflow: auto;
+  }
+  .screenshot-viewer::backdrop {
+    background: rgb(0 0 0 / 85%);
+  }
+  .viewer-toolbar,
+  .viewer-controls {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .viewer-toolbar {
+    margin-bottom: 12px;
+  }
+  .viewer-toolbar h2 {
+    font-size: 22px;
+    margin: 0;
+  }
+  .screenshot-viewer button {
     min-height: 44px;
-    background: var(--surface);
+    padding: 10px 16px;
     border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
   }
-  figure a:hover {
-    border-color: var(--blue);
+  .screenshot-viewer button:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 3px;
   }
-  figure img {
-    display: block;
-    width: 100%;
+  .viewer-image-wrap {
+    display: flex;
+    justify-content: center;
+  }
+  .viewer-image-wrap :global(img) {
+    width: auto;
     height: auto;
-    max-height: 420px;
+    max-width: 100%;
+    max-height: 60dvh;
     object-fit: contain;
   }
-  figcaption {
+  #viewer-caption {
+    margin: 12px 0;
     font-size: 16px;
-    line-height: 1.5;
-    color: var(--muted);
-    padding-top: 12px;
-    overflow-wrap: anywhere;
+  }
+  [data-counter] {
+    margin: 0;
+    color: var(--ink);
   }
   @media (max-width: 700px) {
-    .screenshot-grid,
-    .portrait-grid {
+    .screenshot-grid {
       grid-template-columns: minmax(0, 1fr);
-      gap: 25px;
+      gap: 22px;
+    }
+    .portrait-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .screenshot-viewer {
+      padding: 14px;
+    }
+    .viewer-controls button {
+      padding-inline: 10px;
     }
   }
 </style>

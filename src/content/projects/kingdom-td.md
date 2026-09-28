@@ -31,16 +31,17 @@ screenshots:
   - image: ../../assets/screenshots/kingdom-td-4.jpg
     alt: 'Boss-wave draft choices and enemy details.'
     caption: 'Boss-wave draft choices and enemy details.'
+overviewTitle: "A different kind of tower defense"
+overview:
+  - "In Kingdom TD, the next wave starts with a choice. You draft the enemies yourself, trading danger for the resources to build a stronger defense. Planning is untimed, so there is room to consider the route, the towers, and the consequences."
+  - "A connected fantasy campaign, persistent tower progression, challenges, and fixed-seed Endless play give those decisions room to grow."
+availability:
+  label: "Coming soon · Q1 2027"
+  platform: "Windows · Steam"
 ---
-
-## A different kind of tower defense
-
-In Kingdom TD, the next wave starts with a choice. You draft the enemies yourself, trading danger for the resources to build a stronger defense. Planning is untimed, so there is room to consider the route, the towers, and the consequences.
-
-A connected fantasy campaign, persistent tower progression, challenges, and fixed-seed Endless play give those decisions room to grow.
 
 ## Development
 
-Built in Godot with GDScript, Kingdom TD separates the rules of a run from the scenes that present it. Authored maps, enemy definitions, tower specifications, and draft choices feed shared gameplay systems.
+I built Kingdom TD in Godot with GDScript, keeping the rules of a run separate from the scenes that present them. Authored maps, enemy definitions, tower specifications, and draft choices feed shared gameplay systems.
 
-The mounted rider is a support character: positioning strengthens nearby towers rather than turning the game into direct hero combat. That distinction keeps the focus on the defense you have built.
+I designed the mounted rider as a support character: positioning strengthens nearby towers rather than turning the game into direct hero combat. That distinction keeps the focus on the defense you have built.

@@ -1,6 +1,5 @@
 ---
-title: R.E.P.O - Swiftbroom
-shortTitle: Swiftbroom Academy (Wizard)
+title: Swiftbroom Academy (Wizard)
 category: mods
 hostGame: Meccha Chameleon
 summary: The Wizard map — a small Meccha Chameleon adaptation of R.E.P.O.'s Swiftbroom Academy.
@@ -30,11 +29,14 @@ screenshots:
   - image: ../../assets/screenshots/meccha-swiftbroom-4.jpg
     alt: 'A bedroom and bookshelves in Swiftbroom Academy.'
     caption: 'A bedroom and bookshelves in Swiftbroom Academy.'
+overviewTitle: "A new hiding place in Swiftbroom"
+overview:
+  - "This is my Wizard map for Meccha Chameleon, based on Swiftbroom Academy from R.E.P.O. It is published as R.E.P.O - Swiftbroom on Steam Workshop."
+availability:
+  label: "Workshop release"
+  platform: "Meccha Chameleon · Steam Workshop"
+listingName: R.E.P.O - Swiftbroom
 ---
-
-## A new hiding place in Swiftbroom
-
-This is my Wizard map for **Meccha Chameleon**, based on Swiftbroom Academy from R.E.P.O. It is published as **R.E.P.O - Swiftbroom** on Steam Workshop.
 
 ## Development
 

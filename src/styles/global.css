@@ -2057,3 +2057,45 @@ main:focus {
     display: none;
   }
 }
+
+/* Clearer project context and a shorter phone introduction. */
+.intro-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+}
+.development-notes {
+  margin: 50px 0;
+}
+.listing-name {
+  font-size: 16px;
+  color: var(--muted);
+}
+@media (max-width: 550px) {
+  .intro-copy h1 {
+    font-size: clamp(64px, 19vw, 96px);
+    margin-bottom: 18px;
+  }
+  .intro-copy > .eyebrow {
+    margin-bottom: 16px;
+  }
+  .project-collage {
+    height: 260px;
+    margin-top: 20px;
+  }
+  .intro-actions {
+    gap: 8px 12px;
+  }
+}
+
+@media (max-width: 550px) {
+  .intro-actions .button {
+    padding: 12px 14px;
+    font-size: 16px;
+    gap: 12px;
+  }
+  .intro-actions .text-action {
+    gap: 10px;
+  }
+}

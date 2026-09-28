@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../lib/projects';
+interface Props {
+  shot: Project['data']['screenshots'][number] & { full: { src: string } };
+  index: number;
+}
+const { shot, index } = Astro.props;
+---
+
+<figure>
+  <a
+    href={shot.full.src}
+    data-screenshot-index={index}
+    data-caption={shot.caption}
+    data-alt={shot.alt}
+    aria-label={`Open screenshot: ${shot.caption}`}
+  >
+    <Image
+      src={shot.image}
+      alt={shot.alt}
+      width={Math.min(960, shot.image.width)}
+      widths={[320, 640, 960].filter((width) => width <= shot.image.width)}
+      sizes="(max-width: 700px) 85vw, 600px"
+      format="webp"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+  <figcaption>{shot.caption}</figcaption>
+</figure>
+<style>
+  figure {
+    margin: 0;
+    min-width: 0;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  a:hover {
+    border-color: var(--blue);
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: contain;
+  }
+  figcaption {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--muted);
+    padding-top: 12px;
+    overflow-wrap: anywhere;
+  }
+</style>

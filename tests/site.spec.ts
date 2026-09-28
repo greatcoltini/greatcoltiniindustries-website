@@ -79,7 +79,7 @@ test('keyboard navigation and browser history', async ({
     .getByRole('link', { name: 'Apps', exact: true })
     .click();
   await expect(page).toHaveURL(/\/#apps$/);
-  await expect(page.locator('[aria-current="location"]')).toHaveText('Apps↗');
+  await expect(page.locator('[aria-current="location"]')).toHaveText('Apps');
   await page.goBack();
   await expect(page).toHaveURL(/\/#main$/);
 });
@@ -176,11 +176,12 @@ test('mod groups use the requested popularity order on both pages', async ({
 }) => {
   for (const route of ['/', '/mods/']) {
     await page.goto(route);
-    await expect(page.locator('.game-heading')).toHaveText([
-      'Meccha Chameleon',
-      'R.E.P.O.',
-      'Valheim',
-      'Necesse',
-    ]);
+    expect(
+      await page
+        .locator('.game-heading')
+        .evaluateAll((elements) =>
+          elements.map((element) => element.getAttribute('aria-label')),
+        ),
+    ).toEqual(['Meccha Chameleon', 'R.E.P.O.', 'Valheim', 'Necesse']);
   }
 });

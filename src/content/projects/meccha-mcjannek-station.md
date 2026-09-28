@@ -1,6 +1,5 @@
 ---
-title: R.E.P.O - McJannek Station
-shortTitle: McJannek Station
+title: McJannek Station
 category: mods
 hostGame: Meccha Chameleon
 summary: A small Meccha Chameleon map based on R.E.P.O.'s McJannek Station.
@@ -27,11 +26,14 @@ screenshots:
   - image: ../../assets/screenshots/meccha-mcjannek-station-3.jpg
     alt: 'The station meeting room.'
     caption: 'The station meeting room.'
+overviewTitle: "McJannek Station, a different way to play"
+overview:
+  - "I made this small map for Meccha Chameleon, based on McJannek Station from R.E.P.O. The map brings that setting into another game's hide-and-seek format."
+availability:
+  label: "Workshop release"
+  platform: "Meccha Chameleon · Steam Workshop"
+listingName: R.E.P.O - McJannek Station
 ---
-
-## McJannek Station, a different way to play
-
-I made this small map for **Meccha Chameleon**, based on McJannek Station from R.E.P.O. The map brings that setting into another game's hide-and-seek format.
 
 ## Development
 

@@ -29,16 +29,17 @@ screenshots:
   - image: ../../assets/screenshots/lone-survivors-4.jpg
     alt: 'Permanent upgrades in the skill tree.'
     caption: 'Permanent upgrades in the skill tree.'
+overviewTitle: "Small beginnings. Overwhelming odds."
+overview:
+  - "Lone Survivors is a top-down, objective-driven survival game. Each run begins with a character and a few choices; weapons, upgrades, and class abilities gradually turn that starting point into a very different build."
+  - "The campaign combines surviving enemies with completing objectives. New biomes, events, and bosses ask you to adapt as you go."
+availability:
+  label: "Available now"
+  platform: "Windows · Steam"
 ---
-
-## Small beginnings. Overwhelming odds.
-
-Lone Survivors is a top-down, objective-driven survival game. Each run begins with a character and a few choices; weapons, upgrades, and class abilities gradually turn that starting point into a very different build.
-
-The campaign combines surviving enemies with completing objectives. New biomes, events, and bosses ask you to adapt as you go.
 
 ## Development
 
-Built with Godot and GDScript, the game uses a data-driven approach to classes, weapons, upgrades, and progression. Individual abilities share a common structure while retaining their own behaviors.
+I built the class, weapon, upgrade, and progression systems in Godot with GDScript. A shared structure lets me add abilities with their own behaviors.
 
-Pixel-art environments and characters are supported by systems for weather, events, progression, and run statistics. Steam integration is kept separate from the core game so the project can also run outside Steam.
+Pixel-art environments and characters are supported by systems for weather, events, progression, and run statistics. I keep Steam integration separate from the core game so the project can also run outside Steam.

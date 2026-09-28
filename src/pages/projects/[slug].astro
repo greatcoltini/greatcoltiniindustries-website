@@ -4,6 +4,7 @@ import { getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import ProjectArt from '../../components/ProjectArt.astro';
 import Trailer from '../../components/Trailer.astro';
+import ProjectAvailability from '../../components/ProjectAvailability.astro';
 import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
 import Icon from '../../components/Icon.astro';
 import { projectsIn, chapterNames, type Project } from '../../lib/projects';
@@ -26,7 +27,13 @@ const poster =
     : undefined;
 ---
 
-<Layout title={data.title} description={data.summary} active={data.category}>
+<Layout
+  title={data.title}
+  description={data.summary}
+  active={data.category}
+  socialImage={`/social/${project.id}.jpg`}
+  socialImageAlt={`${data.title} — Great Coltini Industries`}
+>
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Discover</a>
     <span aria-hidden="true">/</span>
@@ -46,6 +53,7 @@ const poster =
               : 'PERSONAL APP'}
         </p>
         <h1 id="project-title">{data.title}</h1>
+        <ProjectAvailability project={project} detailed />
         <p class="project-summary">{data.summary}</p>
         {data.links.length > 0 && (
           <div class="project-actions">
@@ -59,6 +67,9 @@ const poster =
               </a>
             ))}
           </div>
+        )}
+        {data.listingName && (
+          <p class="listing-name">Steam Workshop listing: {data.listingName}</p>
         )}
         <div class="tech-tags">
           {data.tech.map((tech) => (
@@ -82,37 +93,44 @@ const poster =
       <a href="#features">Features</a>
       {data.screenshots.length > 0 && <a href="#screenshots">Screenshots</a>}
       <a href="#development">Development</a>
-      {data.trailer && <a href="#trailer">Trailer</a>}
     </nav>
-    {data.screenshots.length > 0 && (
-      <ScreenshotGallery screenshots={data.screenshots} />
-    )}
     <div class="detail-body">
-      <section id="features" class="features-panel">
+      <section class="prose" id="overview" aria-labelledby="overview-title">
+        <h2 id="overview-title">{data.overviewTitle}</h2>
+        {data.overview.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </section>
+      <section
+        id="features"
+        class="features-panel"
+        aria-labelledby="features-title"
+      >
         <span class="eyebrow">THE EXPERIENCE</span>
-        <h2>{data.category === 'games' ? 'How it plays' : 'What it does'}</h2>
+        <h2 id="features-title">
+          {data.category === 'games' ? 'How it plays' : 'What it does'}
+        </h2>
         <ul class="app-features">
-          {data.features.map((f, i) => (
+          {data.features.map((feature, index) => (
             <li>
               <span class="feature-number" aria-hidden="true">
-                0{i + 1}
+                0{index + 1}
               </span>
               <div>
-                <h3>{f.title}</h3>
-                <p>{f.description}</p>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
               </div>
             </li>
           ))}
         </ul>
       </section>
-      <section
-        class="prose"
-        id="overview"
-        aria-label="Project overview and development"
-      >
-        <Content />
-      </section>
     </div>
+    {data.screenshots.length > 0 && (
+      <ScreenshotGallery screenshots={data.screenshots} />
+    )}
+    <section class="prose development-notes" aria-label="Development notes">
+      <Content />
+    </section>
     <a class="text-action back-link" href={`/${data.category}/`}>
       <Icon name="back" /> Back to {category.toLowerCase()}
     </a>

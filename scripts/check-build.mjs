@@ -25,6 +25,9 @@ for (const file of html) {
     )
       failures.push(`${file}: missing anchor ${url}`);
   }
+  const socialImage = text.match(/property="og:image" content="([^"]+)"/)?.[1];
+  if (!socialImage || !existsSync(join(root, new URL(socialImage).pathname)))
+    failures.push(`${file}: missing social preview image`);
   if (!text.includes('rel="canonical"') || !text.includes('name="description"'))
     failures.push(`${file}: missing metadata`);
 }

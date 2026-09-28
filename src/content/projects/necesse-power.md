@@ -29,11 +29,13 @@ screenshots:
   - image: ../../assets/screenshots/necesse-power-4.jpg
     alt: 'Copper Power Tower crafting details.'
     caption: 'Copper Power Tower crafting details.'
+overviewTitle: "A settlement that works together"
+overview:
+  - "Necesse Power adds a copper-based power system to Necesse. Generation, storage, and distribution give players a way to connect machines into a shared network."
+availability:
+  label: "Workshop release"
+  platform: "Necesse · Steam Workshop"
 ---
-
-## A settlement that works together
-
-Necesse Power adds a copper-based power system to Necesse. Generation, storage, and distribution give players a way to connect machines into a shared network.
 
 ## Development
 

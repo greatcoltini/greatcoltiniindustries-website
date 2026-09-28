@@ -1,0 +1,34 @@
+---
+import type { Project } from '../lib/projects';
+interface Props {
+  project: Project;
+  detailed?: boolean;
+}
+const { project, detailed = false } = Astro.props;
+const { availability } = project.data;
+---
+
+<div class="project-availability">
+  <p class="availability-label">{availability.label}</p>
+  <p class="availability-platform">{availability.platform}</p>
+  {detailed && availability.detail && (
+    <p class="availability-detail">{availability.detail}</p>
+  )}
+</div>
+<style>
+  .project-availability {
+    margin: 14px 0 20px;
+  }
+  .project-availability p {
+    color: inherit;
+    margin: 0;
+    line-height: 1.5;
+    font-size: 15px;
+  }
+  .availability-label {
+    font-weight: 600;
+  }
+  .project-availability .availability-detail {
+    margin-top: 6px;
+  }
+</style>

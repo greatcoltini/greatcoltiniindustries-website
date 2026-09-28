@@ -26,11 +26,13 @@ screenshots:
   - image: ../../assets/screenshots/forge-upgrades-3.jpg
     alt: 'The Tungsten Forge crafting interface.'
     caption: 'The Tungsten Forge crafting interface.'
+overviewTitle: "A better workshop, one upgrade at a time"
+overview:
+  - "Forge Upgrades extends Necesse's vanilla forge with three upgrade tiers. Each improves processing capacity and speed, giving a familiar crafting station a longer progression path."
+availability:
+  label: "Workshop release"
+  platform: "Necesse · Steam Workshop"
 ---
-
-## A better workshop, one upgrade at a time
-
-Forge Upgrades extends Necesse's vanilla forge with three upgrade tiers. Each improves processing capacity and speed, giving a familiar crafting station a longer progression path.
 
 ## Development
 

@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../lib/projects';
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const shots = project.data.screenshots;
+const previews = [shots[0], shots.at(-1)].filter(Boolean);
+---
+
+<div class="app-preview" aria-hidden="true">
+  {previews.map((shot) => (
+    <Image
+      src={shot!.image}
+      alt=""
+      width={320}
+      format="webp"
+      loading="lazy"
+      decoding="async"
+    />
+  ))}
+</div>
+<style>
+  .app-preview {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
+    height: 100%;
+    padding: 25px 24px 60px;
+  }
+  .app-preview img {
+    height: 100%;
+    width: auto;
+    max-width: calc(50% - 10px);
+    object-fit: contain;
+    filter: drop-shadow(0 9px 10px rgb(0 0 0 / 30%));
+    border-radius: 6px;
+  }
+  .app-preview img:first-child {
+    transform: rotate(-5deg);
+  }
+  .app-preview img:last-child {
+    transform: translateY(10px) rotate(5deg);
+  }
+</style>

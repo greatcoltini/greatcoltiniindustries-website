@@ -1,6 +1,7 @@
 ---
 import type { Project } from '../lib/projects';
 import { projectUrl } from '../lib/projects';
+import ProjectAvailability from './ProjectAvailability.astro';
 import ProjectArt from './ProjectArt.astro';
 import Icon from './Icon.astro';
 interface Props {
@@ -30,6 +31,7 @@ const { project, eager, headingLevel: Heading = 'h3' } = Astro.props;
           {project.data.shortTitle || project.data.title}
         </a>
       </Heading>
+      <ProjectAvailability project={project} />
       <p>{project.data.summary}</p>
     </div>
     <a

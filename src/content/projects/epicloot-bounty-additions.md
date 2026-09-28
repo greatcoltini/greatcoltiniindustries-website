@@ -14,11 +14,14 @@ features:
     description: Expand the bounty pool with regular enemies and boss variants.
   - title: A rotating challenge
     description: Add a dedicated boss slot that follows world progression.
+overviewTitle: "Another reason to head out"
+overview:
+  - "Unofficial EpicLoot BountyAdditions is a companion mod and data pack for Valheim's Epic Loot mod. It expands bounty variety, adds a dedicated rotating boss slot, and adjusts rewards for bounty bosses."
+availability:
+  label: "Showcase only"
+  platform: "Valheim · Epic Loot"
+  detail: "No public download is currently linked here."
 ---
-
-## Another reason to head out
-
-Unofficial EpicLoot BountyAdditions is a companion mod and data pack for Valheim's Epic Loot mod. It expands bounty variety, adds a dedicated rotating boss slot, and adjusts rewards for bounty bosses.
 
 ## Development
 

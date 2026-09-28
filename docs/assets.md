@@ -21,7 +21,7 @@ Anton and Source Sans 3 are self-hosted Fontsource packages, distributed under t
 
 The collection contains thirteen projects. Nine external destinations were verified: two Steam games, six Steam Workshop entries, and MinecraftAdditions on Thunderstore. Apps and Valheim mods have no external actions until a public destination is verified. Private or unavailable GitHub repositories are not linked as public source.
 
-The Kingdom TD homepage feature uses its original `kingdom-td.jpg` cover. The scrolling homepage additionally uses `lone-team.png` from `lone-survivors-ordered/lone-survivors-ordered/library-team.png`. These are original project assets, not generated substitutes. The small arrows and board-game die are decorative SVG shapes.
+The Kingdom TD homepage feature uses its original `kingdom-td.jpg` cover. The scrolling homepage additionally uses `lone-team.png` from `lone-survivors-ordered/lone-survivors-ordered/library-team.png`. These are original project assets, not generated substitutes. The small arrows are decorative SVG shapes; app homepage previews now use the authentic screenshots described below.
 
 The Meccha Chameleon map previews come from `meccha-chameleon-repo-snow/build/preview.png` and `meccha-chameleon-repo-wizard/build/preview.png`. Their original R.E.P.O. setting/assets are credited on the detail pages. Steam's GetPublishedFileDetails API verified creator 76561198038365196, public visibility, and non-banned status for Workshop items 3759385002 and 3755237299 on 2026-09-28.
 
@@ -41,3 +41,9 @@ Official asset sources (retrieved 2026-09-28):
 - No genuine gameplay screenshots were found for Minecraft Enderman or the two Valheim projects; their detail pages omit the gallery.
 
 Portrait galleries preserve the full screen, with no crop, and link to a larger image. Screenshots are lazy-loaded and carry descriptive alt text.
+
+## Availability and sharing previews (2026-09-28)
+
+Steam app details confirmed Kingdom TD (4990780) as coming soon in Q1 2027 and Lone Survivors (3629280) as released, both with Windows support. BoulderLog's authenticated Play Console state is closed testing; Shelf & Score is a local build as confirmed by Colton. Public Workshop actions are labeled Workshop release without implying current compatibility. MinecraftAdditions is marked deprecated on Thunderstore; Valheim projects remain showcase-only without verified download destinations.
+
+Social preview cards are generated at build time from these existing project titles and original cover/icon assets, with selectable page text remaining separate from those images. Homepage app previews use the first and last genuine gallery captures.

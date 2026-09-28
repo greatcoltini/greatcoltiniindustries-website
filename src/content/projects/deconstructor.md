@@ -26,11 +26,13 @@ screenshots:
   - image: ../../assets/screenshots/deconstructor-3.jpg
     alt: 'Breaking down equipment while the machine runs.'
     caption: 'Breaking down equipment while the machine runs.'
+overviewTitle: "Make the most of what you have"
+overview:
+  - "Deconstructor adds a workshop to Necesse that passively recovers crafting ingredients from items. It gives old or unwanted equipment another use within a settlement's crafting loop."
+availability:
+  label: "Workshop release"
+  platform: "Necesse · Steam Workshop"
 ---
-
-## Make the most of what you have
-
-Deconstructor adds a workshop to Necesse that passively recovers crafting ingredients from items. It gives old or unwanted equipment another use within a settlement's crafting loop.
 
 ## Development
 

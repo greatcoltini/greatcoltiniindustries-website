@@ -4,7 +4,8 @@ import ModGameHeading from '../components/ModGameHeading.astro';
 import { modGroups as groups } from '../lib/mod-groups';
 import { Image } from 'astro:assets';
 import Icon from '../components/Icon.astro';
-import ProjectArt from '../components/ProjectArt.astro';
+import AppPreview from '../components/AppPreview.astro';
+import ProjectAvailability from '../components/ProjectAvailability.astro';
 import kingdomCover from '../assets/kingdom-td.jpg';
 import loneCover from '../assets/lone-survivors.png';
 import boulderWall from '../assets/boulderlog-wall.png';
@@ -33,9 +34,14 @@ const apps = projects.filter((p) => p.data.category === 'apps');
         Hi, I’m <strong>Colton.</strong> I make games, apps, and mods—usually
         starting with something I want to play or use myself.
       </p>
-      <a class="text-action" href="#about">
-        A little about me <Icon name="arrow" />
-      </a>
+      <div class="intro-actions">
+        <a class="button" href="#games">
+          Explore my projects <Icon name="arrow" />
+        </a>
+        <a class="text-action" href="#about">
+          About me <Icon name="arrow" />
+        </a>
+      </div>
     </div>
     <div class="project-collage" aria-label="Explore my projects">
       <div class="collage-grid" aria-hidden="true"></div>
@@ -86,7 +92,7 @@ const apps = projects.filter((p) => p.data.category === 'apps');
           format="webp"
           loading="eager"
         />
-        <span class="small-sticker">BoulderLog ↗</span>
+        <span class="small-sticker">BoulderLog →</span>
       </a>
       <a
         class="collage-piece collage-shelf"
@@ -187,6 +193,7 @@ const apps = projects.filter((p) => p.data.category === 'apps');
             {project.data.shortTitle || project.data.title}
           </h3>
           {index === 0 && <p class="game-subtitle">Draft Your Demise</p>}
+          <ProjectAvailability project={project} />
           <p class="feature-summary">{project.data.summary}</p>
           <p>
             {index === 0
@@ -234,7 +241,7 @@ const apps = projects.filter((p) => p.data.category === 'apps');
           <br /> to the board game table.
         </p>
         <span class="apps-mark" aria-hidden="true">
-          ↗
+          →
         </span>
       </header>
       <div class="app-stories">
@@ -248,43 +255,17 @@ const apps = projects.filter((p) => p.data.category === 'apps');
               href={projectUrl(project)}
               aria-label={`Explore ${project.data.title}`}
             >
-              <ProjectArt project={project} />
-              {index === 1 && (
-                <svg
-                  class="decorative-die"
-                  viewBox="0 0 110 110"
-                  aria-hidden="true"
-                >
-                  <rect
-                    x="10"
-                    y="10"
-                    width="90"
-                    height="90"
-                    rx="10"
-                    fill="#fafaf7"
-                    stroke="#141414"
-                    stroke-width="3"
-                  />
-                  {[
-                    [32, 32],
-                    [78, 32],
-                    [55, 55],
-                    [32, 78],
-                    [78, 78],
-                  ].map(([cx, cy]) => (
-                    <circle cx={cx} cy={cy} r="7" fill="#141414" />
-                  ))}
-                </svg>
-              )}
+              <AppPreview project={project} />
               <span class="canvas-label">
                 {index === 0 ? 'FOR THE NEXT CLIMB' : 'FOR THE NEXT GAME NIGHT'}
               </span>
               <span class="canvas-arrow" aria-hidden="true">
-                ↗
+                →
               </span>
             </a>
             <div class="app-description">
               <h3>{project.data.title}</h3>
+              <ProjectAvailability project={project} />
               <p>
                 {index === 0
                   ? 'Track climbs, log sessions, and see your progress. A place for the details worth remembering between trips to the wall.'
@@ -388,7 +369,7 @@ const apps = projects.filter((p) => p.data.category === 'apps');
         </h2>
         <span class="about-signoff" aria-hidden="true">
           Still playing.
-          <br /> Still building.<span>↗</span>
+          <br /> Still building.<span>→</span>
         </span>
       </div>
       <div class="about-home-copy">

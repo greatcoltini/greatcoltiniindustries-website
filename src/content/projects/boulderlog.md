@@ -34,16 +34,18 @@ features:
     description: Look back through session history and climbing statistics to see how things are changing.
   - title: Keep showing up
     description: Progress tracking and achievements add a little encouragement to the next session.
+overviewTitle: "Made for the climbing wall"
+overview:
+  - "BoulderLog is a mobile bouldering tracker for recording sessions and the climbs within them. Alongside grades and attempts, you can capture style tags, notes, and wall photos to keep the details that a number alone misses."
+  - "Session history and statistics bring those individual climbs together into a picture of your progress."
+availability:
+  label: "Closed testing"
+  platform: "Android"
+  detail: "Not publicly released yet."
 ---
-
-## Made for the climbing wall
-
-BoulderLog is a mobile bouldering tracker for recording sessions and the climbs within them. Alongside grades and attempts, you can capture style tags, notes, and wall photos to keep the details that a number alone misses.
-
-Session history and statistics bring those individual climbs together into a picture of your progress.
 
 ## Development
 
-The app is built with Expo, React Native, and TypeScript. Expo Router connects the session, history, statistics, and tips screens; local storage keeps climbing records on the device.
+I built BoulderLog with Expo, React Native, and TypeScript. Expo Router connects the session, history, statistics, and tips screens; local storage keeps climbing records on the device.
 
-The interface uses charcoal surfaces and orange accents, with clear controls suited to quick entries between climbs.
+I use charcoal surfaces and orange accents to keep the logging controls easy to find between climbs.

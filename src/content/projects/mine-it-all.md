@@ -23,11 +23,13 @@ screenshots:
   - image: ../../assets/screenshots/mine-it-all-2.jpg
     alt: 'The vein-mining toggle in mod settings.'
     caption: 'The vein-mining toggle in mod settings.'
+overviewTitle: "Less repetition underground"
+overview:
+  - "Mine It All is a vein-mining mod for Necesse. It makes clearing a connected ore deposit a single action, while retaining a toggle for moments when you want more control."
+availability:
+  label: "Workshop release"
+  platform: "Necesse · Steam Workshop"
 ---
-
-## Less repetition underground
-
-Mine It All is a vein-mining mod for Necesse. It makes clearing a connected ore deposit a single action, while retaining a toggle for moments when you want more control.
 
 ## Development
 

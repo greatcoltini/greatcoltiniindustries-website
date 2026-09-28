@@ -24,3 +24,10 @@ After the registrar records are updated, verify domain ownership in GitHub, HTTP
 
 Thirty-six authentic screenshots across ten projects were visually reviewed. The production build and all nine external action checks pass. Local Chromium, WebKit, and Edge checks pass for gallery image loading, larger-image links, browser Back, mobile layouts, text enlargement, light/dark accessibility, and no-JavaScript/reduced-motion navigation. The existing Windows WebKit keyboard limitation remains the only skipped check. Shelf & Score captures were rendered successfully from its Flutter source with synthetic data and complete font/icon assets.
 
+
+## UI/UX improvements (2026-09-28)
+
+- The production build passes for all 19 pages. Local Chromium, Edge, and WebKit: 49 passed, 2 Windows-only keyboard skips; both skipped checks run on Linux CI.
+- Coverage includes five viewport widths, landscape, doubled text, no JavaScript, reduced motion, light/dark axe checks, all 36 gallery images, native disclosure, raw-image fallback, and viewer arrow keys/Escape/focus cycling and return.
+- Manual review covered the compact phone introduction, actual app screen previews, desktop overview/features layout, compact portrait galleries, and the image viewer. At 390px the hero is about 747px tall (previously 921px); BoulderLog's collapsed gallery is about 593px (previously 4042px).
+- The generated social cards use 1200×630 JPEGs. Build verification requires each page's Open Graph image to exist locally.
