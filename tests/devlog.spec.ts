@@ -20,12 +20,24 @@ test('dev log opens as a sidebar from any page and remembers it was read', async
   await expect(panel).toBeVisible();
   await expect(panel.getByRole('button', { name: 'Close' })).toBeFocused();
   await expect(panel.locator('.devlog-entry').first()).toBeVisible();
+  await panel.evaluate((dialog) =>
+    Promise.all(dialog.getAnimations().map((animation) => animation.finished)),
+  );
+  // axe spots a modal dialog by probing 10px above its top-left corner, which is
+  // off-screen for this full-height panel. Its fallback differs between engines,
+  // and on Linux WebKit it can scan the inert page behind the backdrop, so check
+  // the panel itself. The route tests check every page with the panel closed.
   for (const colorScheme of ['light', 'dark'] as const) {
     await page.emulateMedia({ colorScheme });
     const result = await new AxeBuilder({ page })
+      .include('#devlog-panel')
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
       .analyze();
-    expect(result.violations, colorScheme).toEqual([]);
+    const found = result.violations.map(
+      (violation) =>
+        `${violation.id}: ${violation.nodes.map((node) => node.target.join(' ')).join(', ')}`,
+    );
+    expect(found, colorScheme).toEqual([]);
   }
   await panel.getByRole('button', { name: 'Mods' }).click();
   await expect(panel.getByRole('button', { name: 'Mods' })).toHaveAttribute(
