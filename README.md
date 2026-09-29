@@ -1,4 +1,4 @@
-# Great Coltini Industries
+# GreatColtini Industries
 
 Colton Donkersgoed’s personal portfolio, built around a single scrolling page with bold cobalt typography, original artwork, alternating game features, and an illustrated project collage. Built with Astro, TypeScript, typed Markdown collections, and CSS. All navigation and project content work without JavaScript.
 

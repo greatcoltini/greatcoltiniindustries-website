@@ -33,7 +33,7 @@ async function create(slug, title, category, artwork) {
   const svg =
     Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
     <rect width="1200" height="630" fill="#fafaf7"/><rect x="650" width="550" height="630" fill="#1748ee"/>
-    <text x="58" y="70" font-family="Arial,sans-serif" font-weight="bold" font-size="21" fill="#1748ee">GREAT COLTINI INDUSTRIES</text>
+    <text x="58" y="70" font-family="Arial,sans-serif" font-weight="bold" font-size="21" fill="#1748ee">GREATCOLTINI INDUSTRIES</text>
     <text x="58" y="169" font-family="Arial,sans-serif" font-size="19" fill="#545654">${escape(category.toUpperCase())}</text>
     ${lines.map((line, index) => `<text x="58" y="${242 + index * 62}" font-family="Arial,sans-serif" font-weight="bold" font-size="${fontSize}" fill="#171817">${escape(line)}</text>`).join('')}
     <text x="58" y="554" font-family="Arial,sans-serif" font-size="20" fill="#545654">BY COLTON DONKERSGOED</text>
