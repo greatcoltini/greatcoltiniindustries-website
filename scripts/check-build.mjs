@@ -40,10 +40,10 @@ for (const file of html) {
   if (!text.includes('rel="canonical"') || !text.includes('name="description"'))
     failures.push(`${file}: missing metadata`);
 }
-// Projects, plus Home, 404, and the redirect pages.
+// Projects, plus Home, Dev log, 404, and the redirect pages.
 const expectedPages =
   walk('src/content/projects').filter((file) => file.endsWith('.md')).length +
-  2 +
+  3 +
   redirects.length;
 if (html.length !== expectedPages)
   failures.push(`Expected ${expectedPages} HTML pages, found ${html.length}`);

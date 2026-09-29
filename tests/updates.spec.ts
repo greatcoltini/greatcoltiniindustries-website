@@ -14,14 +14,24 @@ for (const width of [390, 1200, 1440]) {
       name: 'Version updates',
     });
     await expect(updates).toBeVisible();
-    await expect(updates.locator('details')).toHaveCount(4);
     await expect(updates.locator('details[open]')).toHaveCount(1);
-    await expect(updates.locator('time')).toHaveText([
+    await expect(updates.locator('details').first()).toHaveAttribute('open');
+    // The curated history stays last and in order; polled releases newer than
+    // it may appear above it, so this must not assume a fixed total.
+    const dates = await updates.locator('time').allTextContents();
+    expect(dates.slice(-4)).toEqual([
       '10 Aug 2026',
       '12 Jul 2026',
       '29 Jun 2026',
       '27 Jun 2026',
     ]);
+    // A release that is both curated and polled is listed once.
+    const sources = await updates
+      .locator('.update-source')
+      .evaluateAll((links) =>
+        links.map((link) => link.getAttribute('href')!.match(/\d{10,}/)?.[0]),
+      );
+    expect(new Set(sources).size).toBe(sources.length);
     const main = await page.locator('.project-main-content').boundingBox();
     const side = await updates.boundingBox();
     if (width >= 1200) expect(side!.x).toBeGreaterThan(main!.x + main!.width);

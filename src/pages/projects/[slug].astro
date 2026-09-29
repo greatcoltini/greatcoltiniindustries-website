@@ -14,6 +14,7 @@ import {
   chapterNames,
   type Project,
 } from '../../lib/projects';
+import { projectUpdates } from '../../lib/updates';
 export async function getStaticPaths() {
   const projects = await projectsIn();
   return projects.map((project) => ({
@@ -28,6 +29,7 @@ interface Props {
 const { project, projects } = Astro.props;
 const { data } = project;
 const { Content } = await render(project);
+const updates = projectUpdates(project);
 const category = chapterNames[data.category];
 const sectionUrl = `/#${data.category}`;
 const poster =
@@ -119,12 +121,12 @@ const isWide = (p: Project) =>
       <a href="#features">Features</a>
       {data.screenshots.length > 0 && <a href="#screenshots">Screenshots</a>}
       <a href="#development">Development</a>
-      {data.updates.length > 0 && <a href="#updates">Updates</a>}
+      {updates.length > 0 && <a href="#updates">Updates</a>}
     </nav>
     <div
       class:list={[
         'project-details-layout',
-        { 'has-updates': data.updates.length > 0 },
+        { 'has-updates': updates.length > 0 },
       ]}
     >
       <div class="project-main-content">
@@ -166,7 +168,7 @@ const isWide = (p: Project) =>
           <Content />
         </section>
       </div>
-      {data.updates.length > 0 && <ProjectUpdates updates={data.updates} />}
+      {updates.length > 0 && <ProjectUpdates updates={updates} />}
     </div>
     {related.length > 0 && (
       <section class="onward" aria-labelledby="onward-title">

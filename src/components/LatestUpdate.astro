@@ -1,0 +1,31 @@
+---
+import { projectsIn } from '../lib/projects';
+import { devlogFeed, formatDate } from '../lib/updates';
+interface Props {
+  /** The phone layout, shown inside the hero instead of under it. */
+  stacked?: boolean;
+}
+const { stacked = false } = Astro.props;
+const [latest] = devlogFeed(await projectsIn());
+const name =
+  latest && (latest.project.data.shortTitle || latest.project.data.title);
+---
+
+{latest && (
+  <div class:list={['latest-update', { 'latest-stacked': stacked }]}>
+    <span class="latest-label">LATEST</span>
+    <time datetime={latest.date}>
+      {formatDate(latest.date, { year: false })}
+    </time>
+    <p>
+      <strong>
+        {name}
+        {latest.version && ` ${latest.version}`}:
+      </strong>{' '}
+      {latest.title}
+    </p>
+    <a class="latest-open" href="/devlog/" data-devlog-open>
+      Open dev log <span aria-hidden="true">→</span>
+    </a>
+  </div>
+)}

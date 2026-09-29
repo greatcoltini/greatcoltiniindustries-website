@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { projectUrl } from '../lib/projects';
+import {
+  formatDate,
+  sourceLabel,
+  updateLabel,
+  type FeedItem,
+} from '../lib/updates';
+interface Props {
+  item: FeedItem;
+}
+const { item } = Astro.props;
+const { project } = item;
+const name = project.data.shortTitle || project.data.title;
+// News posts are not changelog entries, so they link to the project itself.
+const href =
+  item.kind === 'news'
+    ? projectUrl(project)
+    : `${projectUrl(project)}#update-${item.id}`;
+const showYear = !item.date.startsWith(String(new Date().getUTCFullYear()));
+const icon = project.data.artStyle === 'shelf';
+---
+
+<li class="devlog-entry" data-category={project.data.category}>
+  {project.data.artwork ? (
+    <Image
+      class:list={['devlog-thumb', { 'devlog-thumb-icon': icon }]}
+      src={project.data.artwork}
+      alt=""
+      width={96}
+      height={96}
+      format="webp"
+      loading="lazy"
+    />
+  ) : (
+    <span class="devlog-thumb mod-icon-tile" aria-hidden="true">
+      <Icon name={project.data.category} size={24} />
+    </span>
+  )}
+  <div class="devlog-body">
+    <p class="devlog-meta">
+      <time datetime={item.date}>
+        {formatDate(item.date, { year: showYear })}
+      </time>
+      <span aria-hidden="true">·</span>
+      <span>{name}</span>
+      <span class={`devlog-tag devlog-tag-${item.kind}`}>
+        {updateLabel(item)}
+      </span>
+    </p>
+    <h3 class="devlog-title">
+      <a href={href}>{item.title}</a>
+    </h3>
+    {item.changes[0] && <p class="devlog-summary">{item.changes[0]}</p>}
+    {(item.more > 0 || item.url) && (
+      <p class="devlog-links">
+        {item.more > 0 && (
+          <span>
+            +{item.more} more {item.more === 1 ? 'update' : 'updates'} that day
+          </span>
+        )}
+        {item.url && (
+          <a href={item.url}>
+            {sourceLabel(item)} <span aria-hidden="true">↗</span>
+            <span class="sr-only">: {item.title}</span>
+          </a>
+        )}
+      </p>
+    )}
+  </div>
+</li>

@@ -1,0 +1,371 @@
+{
+  "projects": {
+    "deconstructor": {
+      "source": "workshop",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523",
+      "entries": [
+        {
+          "id": "workshop-1782754423",
+          "date": "2026-06-29T17:33:43.000Z",
+          "title": "Mod version 1.2.0 for game version 1.2.0",
+          "version": "1.2.0",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523#1782754423"
+        },
+        {
+          "id": "workshop-1779688625",
+          "date": "2026-05-25T05:57:05.000Z",
+          "title": "Mod version 1.1.2 for game version 1.2.0",
+          "version": "1.1.2",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523#1779688625"
+        },
+        {
+          "id": "workshop-1779675593",
+          "date": "2026-05-25T02:19:53.000Z",
+          "title": "Mod version 1.1.1 for game version 1.2.0",
+          "version": "1.1.1",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523#1779675593"
+        },
+        {
+          "id": "workshop-1779580257",
+          "date": "2026-05-23T23:50:57.000Z",
+          "title": "Mod version 1.1.0 for game version 1.2.0",
+          "version": "1.1.0",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523#1779580257"
+        },
+        {
+          "id": "workshop-1779478874",
+          "date": "2026-05-22T19:41:14.000Z",
+          "title": "Mod version 1.0.0 for game version 1.2.0",
+          "version": "1.0.0",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523#1779478874"
+        }
+      ]
+    },
+    "forge-upgrades": {
+      "source": "workshop",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3731042527",
+      "entries": [
+        {
+          "id": "workshop-1782752393",
+          "date": "2026-06-29T16:59:53.000Z",
+          "title": "Mod version 1.2.0 for game version 1.2.0",
+          "version": "1.2.0",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3731042527#1782752393"
+        },
+        {
+          "id": "workshop-1779606360",
+          "date": "2026-05-24T07:06:00.000Z",
+          "title": "Mod version 1.1.1 for game version 1.2.0",
+          "version": "1.1.1",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3731042527#1779606360"
+        },
+        {
+          "id": "workshop-1779579341",
+          "date": "2026-05-23T23:35:41.000Z",
+          "title": "Mod version 1.1.0 for game version 1.2.0",
+          "version": "1.1.0",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3731042527#1779579341"
+        },
+        {
+          "id": "workshop-1779497639",
+          "date": "2026-05-23T00:53:59.000Z",
+          "title": "Mod version 1.0.0 for game version 1.2.0",
+          "version": "1.0.0",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3731042527#1779497639"
+        }
+      ]
+    },
+    "kingdom-td": {
+      "source": "steam-news",
+      "sourceUrl": "https://store.steampowered.com/news/app/4990780",
+      "entries": []
+    },
+    "lone-survivors": {
+      "source": "steam-news",
+      "sourceUrl": "https://store.steampowered.com/news/app/3629280",
+      "entries": [
+        {
+          "id": "steam-1844751498232541",
+          "date": "2026-09-28T21:15:43.000Z",
+          "title": "New Skins & Cheaper Upgrades",
+          "summary": "Hey Survivors! Patch 1.2.11 adds nine new skins and makes two class upgrade trees much more affordable, with total costs reduced by around 90%.",
+          "version": "1.2.11",
+          "kind": "patch",
+          "url": "https://store.steampowered.com/news/app/3629280/view/1844751498232541"
+        },
+        {
+          "id": "steam-1840310314352466",
+          "date": "2026-08-10T20:08:57.000Z",
+          "title": "Queen Bee",
+          "summary": "Hello everyone, I'm here to welcome a new boss, new weapon, and a minor fix to the alchemy table (long-awaited...)",
+          "version": "1.2.10",
+          "kind": "patch",
+          "url": "https://store.steampowered.com/news/app/3629280/view/1840310314352466"
+        },
+        {
+          "id": "steam-1839676055887096",
+          "date": "2026-07-31T04:34:12.000Z",
+          "title": "Announcing Kingdom TD: Draft Your Demise — My New Tower Defense Game",
+          "summary": "Hi everyone! I'm excited to finally share the new project I've been working on: Kingdom TD: Draft Your Demise, a fantasy tower defense game where you choose the enemies you'll have to survive against in battle.",
+          "kind": "news",
+          "url": "https://store.steampowered.com/news/app/3629280/view/1839676055887096"
+        },
+        {
+          "id": "steam-1837955055361712",
+          "date": "2026-07-12T19:25:41.000Z",
+          "title": "Patch notes",
+          "summary": "Alchemy table placement should be stricter, no more OOB Endless level cap is now visible in pause menu (under Pause)",
+          "version": "1.2.9",
+          "kind": "patch",
+          "url": "https://store.steampowered.com/news/app/3629280/view/1837955055361712"
+        },
+        {
+          "id": "steam-1836506165559377",
+          "date": "2026-06-29T06:31:05.000Z",
+          "title": "Patch notes",
+          "summary": "Fixed music issue with Beach Endless map Fixed issue with boss spawning in Village Endless",
+          "version": "1.2.8",
+          "kind": "patch",
+          "url": "https://store.steampowered.com/news/app/3629280/view/1836506165559377"
+        },
+        {
+          "id": "steam-1836506165555968",
+          "date": "2026-06-27T07:21:10.000Z",
+          "title": "Damage Summary + Weapons Menu Update!",
+          "summary": "This update is all about knowing your numbers. The Damage Summary has been rebuilt to track everything your run is doing independently — not just raw weapon hits — and the Weapons menu shows off the abilities and upgrades you've collected…",
+          "version": "1.2.7",
+          "kind": "patch",
+          "url": "https://store.steampowered.com/news/app/3629280/view/1836506165555968"
+        }
+      ]
+    },
+    "meccha-mcjannek-station": {
+      "source": "workshop",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3759385002",
+      "entries": [
+        {
+          "id": "workshop-1783394427",
+          "date": "2026-07-07T03:20:27.000Z",
+          "title": "Reworked lighting to be a bit better",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3759385002#1783394427"
+        },
+        {
+          "id": "workshop-1783384146",
+          "date": "2026-07-07T00:29:06.000Z",
+          "title": "Another adjustment to floor outside of starting area.",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3759385002#1783384146"
+        },
+        {
+          "id": "workshop-1783383635",
+          "date": "2026-07-07T00:20:35.000Z",
+          "title": "Fixed some collision issues and added camera blocking to the walls",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3759385002#1783383635"
+        },
+        {
+          "id": "workshop-1783380103",
+          "date": "2026-07-06T23:21:43.000Z",
+          "title": "Changed the lighting to be a deeper blue colour.",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3759385002#1783380103"
+        },
+        {
+          "id": "workshop-1783379291",
+          "date": "2026-07-06T23:08:11.000Z",
+          "title": "Init",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3759385002#1783379291"
+        }
+      ]
+    },
+    "meccha-swiftbroom": {
+      "source": "workshop",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3755237299",
+      "entries": [
+        {
+          "id": "workshop-1783446767",
+          "date": "2026-07-07T17:52:47.000Z",
+          "title": "Added more props to hide with, adjusted lights",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3755237299#1783446767"
+        },
+        {
+          "id": "workshop-1783399897",
+          "date": "2026-07-07T04:51:37.000Z",
+          "title": "Refactoring of lighting",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3755237299#1783399897"
+        },
+        {
+          "id": "workshop-1783370850",
+          "date": "2026-07-06T20:47:30.000Z",
+          "title": "Minor fixes for lighting and reducing cheesiness of one location",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3755237299#1783370850"
+        },
+        {
+          "id": "workshop-1783368916",
+          "date": "2026-07-06T20:15:16.000Z",
+          "title": "Added some additional lighting; fixed some cheese spots; opened a door",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3755237299#1783368916"
+        },
+        {
+          "id": "workshop-1783320019",
+          "date": "2026-07-06T06:40:19.000Z",
+          "title": "Fixed some access to unfinished areas",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3755237299#1783320019"
+        },
+        {
+          "id": "workshop-1783293576",
+          "date": "2026-07-05T23:19:36.000Z",
+          "title": "Init",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3755237299#1783293576"
+        }
+      ]
+    },
+    "mine-it-all": {
+      "source": "workshop",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197",
+      "entries": [
+        {
+          "id": "workshop-1779814547",
+          "date": "2026-05-26T16:55:47.000Z",
+          "title": "Mod version 1.0.9 for game version 1.2.0",
+          "version": "1.0.9",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779814547"
+        },
+        {
+          "id": "workshop-1779813781",
+          "date": "2026-05-26T16:43:01.000Z",
+          "title": "Mod version 1.0.8 for game version 1.2.0",
+          "version": "1.0.8",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779813781"
+        },
+        {
+          "id": "workshop-1779578553",
+          "date": "2026-05-23T23:22:33.000Z",
+          "title": "Mod version 1.0.7 for game version 1.2.0",
+          "version": "1.0.7",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779578553"
+        },
+        {
+          "id": "workshop-1779508698",
+          "date": "2026-05-23T03:58:18.000Z",
+          "title": "Mod version 1.0.6 for game version 1.2.0",
+          "version": "1.0.6",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779508698"
+        },
+        {
+          "id": "workshop-1779486610",
+          "date": "2026-05-22T21:50:10.000Z",
+          "title": "Mod version 1.0.5 for game version 1.2.0",
+          "version": "1.0.5",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779486610"
+        },
+        {
+          "id": "workshop-1779479630",
+          "date": "2026-05-22T19:53:50.000Z",
+          "title": "Mod version 1.0.4 for game version 1.2.0",
+          "version": "1.0.4",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779479630"
+        }
+      ]
+    },
+    "minecraft-enderman": {
+      "source": "thunderstore",
+      "sourceUrl": "https://thunderstore.io/c/repo/p/GreatColtini/MinecraftAdditions/",
+      "entries": [
+        {
+          "id": "thunderstore-1.0.7",
+          "date": "2025-04-22T06:54:17.066945Z",
+          "title": "Fixed reference bug with TNT",
+          "version": "1.0.7",
+          "kind": "release",
+          "url": "https://thunderstore.io/c/repo/p/GreatColtini/MinecraftAdditions/"
+        },
+        {
+          "id": "thunderstore-1.0.6",
+          "date": "2025-04-22T06:45:51.622211Z",
+          "title": "Fixed bug wiht Enderman not spawning in spawn state; added Minecraft TNT",
+          "version": "1.0.6",
+          "kind": "release",
+          "url": "https://thunderstore.io/c/repo/p/GreatColtini/MinecraftAdditions/"
+        },
+        {
+          "id": "thunderstore-1.0.5",
+          "date": "2025-04-21T16:29:12.963053Z",
+          "title": "Fixed bug where Enderman was invincible -- thank you @Zero for raising the bug!",
+          "version": "1.0.5",
+          "kind": "release",
+          "url": "https://thunderstore.io/c/repo/p/GreatColtini/MinecraftAdditions/"
+        },
+        {
+          "id": "thunderstore-1.0.4",
+          "date": "2025-04-20T06:46:14.339778Z",
+          "title": "Changed Minecraft Enderman asset used - switched to rigged model; fixed bug with unity error",
+          "version": "1.0.4",
+          "kind": "release",
+          "url": "https://thunderstore.io/c/repo/p/GreatColtini/MinecraftAdditions/"
+        },
+        {
+          "id": "thunderstore-1.0.3",
+          "date": "2025-04-14T05:33:43.772689Z",
+          "title": "Added custom logic to the Enderman, he now acts more similarly to the Minecraft iteration",
+          "version": "1.0.3",
+          "kind": "release",
+          "url": "https://thunderstore.io/c/repo/p/GreatColtini/MinecraftAdditions/"
+        },
+        {
+          "id": "thunderstore-1.0.2",
+          "date": "2025-04-14T03:01:22.019186Z",
+          "title": "Fixed some issues with using Thin Man script; fixed issue with Minecraft Diamond spawning",
+          "version": "1.0.2",
+          "kind": "release",
+          "url": "https://thunderstore.io/c/repo/p/GreatColtini/MinecraftAdditions/"
+        }
+      ]
+    },
+    "necesse-power": {
+      "source": "workshop",
+      "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3732508344",
+      "entries": [
+        {
+          "id": "workshop-1779933891",
+          "date": "2026-05-28T02:04:51.000Z",
+          "title": "Mod version 1.0.1 for game version 1.2.0",
+          "version": "1.0.1",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3732508344#1779933891"
+        },
+        {
+          "id": "workshop-1779687788",
+          "date": "2026-05-25T05:43:08.000Z",
+          "title": "Mod version 1.0.0 for game version 1.2.0",
+          "version": "1.0.0",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3732508344#1779687788"
+        }
+      ]
+    }
+  }
+}

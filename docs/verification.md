@@ -43,3 +43,10 @@ Thirty-six authentic screenshots across ten projects were visually reviewed. The
 ## Version-history sidebar (2026-09-28)
 
 The optional project changelog uses typed Markdown frontmatter and native details/summary controls; no new client JavaScript is required. Twenty sourced entries populate Lone Survivors and six Workshop mods. Local checks passed: the 60 existing applicable browser tests plus all nine new no-JavaScript changelog tests; three existing Windows WebKit keyboard checks remain covered by Linux CI. The sidebar was manually reviewed at 1440px and 390px in light/dark themes. The production build, internal links/anchors, and source URLs passed. Steam briefly rate-limited repeated anchor requests; the checker now deduplicates by document URL and the affected pages returned 200 on recheck.
+
+## Dev log and automatic changelogs (2026-09-28)
+
+- `npm run poll` read 9 public sources with no failures: Lone Survivors (Steam news), six Workshop change-notes pages, and Minecraft Enderman (Thunderstore). Kingdom TD's own Steam news feed is empty. The saved file contains no spoiler-tagged text.
+- Production build and `astro check` pass with zero errors, warnings, or hints; the build check covers 20 HTML files, including `/devlog/` and every dev log link to a changelog entry anchor.
+- Local Edge: 27 of 27 Playwright tests passed. New checks cover opening the sidebar from a project page, focus on Close, Escape and focus return, the unread dot, filters, axe in both themes, the home Latest link, and the `/devlog/` fallback without JavaScript. The Lone Survivors changelog test now checks that the curated history stays last and in order, and that no release is listed twice.
+- Manual review at 1366px (light and dark) and 390px covered the header button, the Latest strip, the sidebar, `/devlog/`, and the Lone Survivors Updated line and changelog.

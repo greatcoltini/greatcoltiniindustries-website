@@ -1,0 +1,142 @@
+---
+import DevlogEntry from './DevlogEntry.astro';
+import Icon from './Icon.astro';
+import { projectsIn } from '../lib/projects';
+import { devlogFeed } from '../lib/updates';
+const feed = devlogFeed(await projectsIn());
+const shown = feed.slice(0, 12);
+const filters = (['games', 'mods', 'apps'] as const).filter((category) =>
+  shown.some((item) => item.project.data.category === category),
+);
+const filterNames = { games: 'Games', mods: 'Mods', apps: 'Apps' };
+---
+
+{/* Opened by any [data-devlog-open] link; without JavaScript those links go to /devlog/. */}
+{shown.length > 0 && (
+  <dialog
+    class="devlog-panel"
+    id="devlog-panel"
+    aria-labelledby="devlog-panel-title"
+    data-latest={shown[0].date}
+  >
+    <div class="devlog-panel-inner">
+      <div class="devlog-panel-top">
+        <p class="eyebrow">DEV LOG</p>
+        <button type="button" class="devlog-close" data-devlog-close autofocus>
+          Close <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <h2 id="devlog-panel-title">What I’m working on</h2>
+      <p class="devlog-intro">
+        Patch notes and Workshop updates appear here automatically, alongside
+        notes I add myself.
+      </p>
+      {filters.length > 1 && (
+        <div class="devlog-filters" role="group" aria-label="Show updates for">
+          <button type="button" aria-pressed="true" data-filter="all">
+            All
+          </button>
+          {filters.map((category) => (
+            <button type="button" aria-pressed="false" data-filter={category}>
+              {filterNames[category]}
+            </button>
+          ))}
+        </div>
+      )}
+      <ol class="devlog-list">
+        {shown.map((item) => (
+          <DevlogEntry item={item} />
+        ))}
+      </ol>
+      <p class="devlog-empty" hidden>
+        Nothing recent here yet.
+      </p>
+      <div class="devlog-panel-foot">
+        <a class="text-action" href="/devlog/">
+          Full dev log <Icon name="arrow" />
+        </a>
+      </div>
+    </div>
+  </dialog>
+)}
+<script>
+  const panel = document.querySelector<HTMLDialogElement>('#devlog-panel');
+  if (panel && typeof panel.showModal === 'function') {
+    const seenKey = 'gci-devlog-seen';
+    const latest = panel.dataset.latest ?? '';
+    const markers = document.querySelectorAll<HTMLElement>('[data-devlog-new]');
+    const showUnread = (unread: boolean) =>
+      markers.forEach((marker) => (marker.hidden = !unread));
+    try {
+      showUnread(latest > (localStorage.getItem(seenKey) ?? ''));
+    } catch {
+      /* Without storage the dot stays hidden. */
+    }
+    let opener: HTMLElement | null = null;
+    let previousOverflow = '';
+    document
+      .querySelectorAll<HTMLAnchorElement>('[data-devlog-open]')
+      .forEach((link) => {
+        // The full dev log page is already showing everything.
+        if (link.getAttribute('aria-current') === 'page') return;
+        link.setAttribute('aria-haspopup', 'dialog');
+        link.addEventListener('click', (event) => {
+          if (
+            event.button !== 0 ||
+            event.ctrlKey ||
+            event.metaKey ||
+            event.shiftKey ||
+            event.altKey
+          )
+            return;
+          event.preventDefault();
+          opener = link;
+          previousOverflow = document.body.style.overflow;
+          panel.showModal();
+          document.body.style.overflow = 'hidden';
+          try {
+            localStorage.setItem(seenKey, latest);
+          } catch {
+            /* The dot simply returns on the next visit. */
+          }
+          showUnread(false);
+        });
+      });
+    panel
+      .querySelector('[data-devlog-close]')!
+      .addEventListener('click', () => panel.close());
+    panel.addEventListener('close', () => {
+      document.body.style.overflow = previousOverflow;
+      opener?.focus({ preventScroll: true });
+    });
+    // Backdrop clicks land on the dialog itself; its content fills the panel.
+    panel.addEventListener('click', (event) => {
+      if (event.target === panel) panel.close();
+    });
+    // Links may point at this same page, so close first to reveal the target.
+    panel
+      .querySelectorAll('a')
+      .forEach((link) => link.addEventListener('click', () => panel.close()));
+    const filterGroup = panel.querySelector<HTMLElement>('.devlog-filters');
+    const entries = [...panel.querySelectorAll<HTMLElement>('.devlog-entry')];
+    const empty = panel.querySelector<HTMLElement>('.devlog-empty')!;
+    filterGroup?.addEventListener('click', (event) => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>(
+        'button[data-filter]',
+      );
+      if (!button) return;
+      filterGroup
+        .querySelectorAll('button')
+        .forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      let visible = 0;
+      entries.forEach((entry) => {
+        const match =
+          button.dataset.filter === 'all' ||
+          entry.dataset.category === button.dataset.filter;
+        entry.hidden = !match;
+        if (match) visible++;
+      });
+      empty.hidden = visible > 0;
+    });
+  }
+</script>

@@ -5,6 +5,7 @@ import '@fontsource/source-sans-3/latin-400.css';
 import '@fontsource/source-sans-3/latin-600.css';
 import Icon from '../components/Icon.astro';
 import ThemeControl from '../components/ThemeControl.astro';
+import DevlogPanel from '../components/DevlogPanel.astro';
 import { profiles } from '../lib/profiles';
 interface Props {
   title: string;
@@ -97,6 +98,23 @@ const nav = [
               {item.label}
             </a>
           ))}
+          <a
+            class="devlog-toggle"
+            href="/devlog/"
+            data-devlog-open
+            aria-current={active === 'devlog' ? 'page' : undefined}
+          >
+            Dev log
+            <span
+              class="devlog-dot"
+              data-devlog-new
+              hidden
+              aria-hidden="true"
+            ></span>
+            <span class="sr-only" data-devlog-new hidden>
+              (new updates)
+            </span>
+          </a>
         </nav>
         <ThemeControl />
       </div>
@@ -124,5 +142,6 @@ const nav = [
         </a>
       </div>
     </footer>
+    <DevlogPanel />
   </body>
 </html>

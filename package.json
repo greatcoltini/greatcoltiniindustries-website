@@ -8,7 +8,8 @@
     "build": "node scripts/generate-social-images.mjs && astro check && astro build && node scripts/check-build.mjs",
     "preview": "astro preview --host 127.0.0.1",
     "test": "playwright test",
-    "test:links": "node scripts/check-external-links.mjs"
+    "test:links": "node scripts/check-external-links.mjs",
+    "poll": "node scripts/poll-updates.mjs"
   },
   "engines": {
     "node": ">=24.0.0"

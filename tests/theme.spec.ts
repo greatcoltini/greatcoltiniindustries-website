@@ -55,6 +55,7 @@ test('dark theme remains accessible across pages and small screens', async ({
     await page.setViewportSize({ width, height: 900 });
     for (const route of [
       '/',
+      '/devlog/',
       '/projects/kingdom-td/',
       '/projects/boulderlog/',
       '/projects/deconstructor/',

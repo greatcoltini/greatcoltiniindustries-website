@@ -1,11 +1,16 @@
 ---
 import type { Project } from '../lib/projects';
+import { formatDate, latestRelease } from '../lib/updates';
 interface Props {
   project: Project;
   detailed?: boolean;
 }
 const { project, detailed = false } = Astro.props;
 const { availability } = project.data;
+const latest = latestRelease(project);
+const updated =
+  latest &&
+  `Updated ${formatDate(latest.date)}${latest.version ? ` · v${latest.version}` : ''}`;
 ---
 
 <div class="project-availability">
@@ -14,6 +19,15 @@ const { availability } = project.data;
   {detailed && availability.detail && (
     <p class="availability-detail">{availability.detail}</p>
   )}
+  {updated &&
+    (detailed ? (
+      <a class="availability-updated" href="#updates">
+        <span aria-hidden="true"></span>
+        {updated}
+      </a>
+    ) : (
+      <p class="availability-updated">{updated}</p>
+    ))}
 </div>
 <style>
   .project-availability {
@@ -30,5 +44,31 @@ const { availability } = project.data;
   }
   .project-availability .availability-detail {
     margin-top: 6px;
+  }
+  p.availability-updated {
+    margin-top: 6px;
+    opacity: 0.85;
+  }
+  a.availability-updated {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    margin-top: 12px;
+    padding: 0 14px;
+    background: #e3f684;
+    color: #171817;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  a.availability-updated:hover {
+    color: #171817;
+    text-decoration: underline;
+  }
+  a.availability-updated span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
   }
 </style>

@@ -50,7 +50,7 @@ Social cards are generated from project titles and original artwork by `scripts/
 
 ## Project changelogs
 
-Add an optional `updates` list to a project's Markdown frontmatter. The sidebar appears only when this list contains entries. It sits beside the project body at widths of 1200px and above, and follows Development on smaller screens. The Updates section link takes visitors directly to it. The newest entry starts expanded; older entries use native disclosures that work without JavaScript.
+Add an optional `updates` list to a project's Markdown frontmatter. The sidebar appears when this list, or the polled feed below, has entries for the project. It sits beside the project body at widths of 1200px and above, and follows Development on smaller screens. The Updates section link takes visitors directly to it. The newest entry starts expanded; older entries use native disclosures that work without JavaScript.
 
 Each entry needs a unique stable `id`, ISO date (quoted `YYYY-MM-DD`), title, and one or more change notes. Version and public source URL are optional, so this also supports unversioned development updates for local apps. Dates sort newest first; write same-day entries newest first. An entry can be shared as `/projects/lone-survivors/#update-v1-2-10`.
 
@@ -67,4 +67,16 @@ updates:
       - Defeating her unlocks the Royal Apiary weapon.
 ```
 
-Commit and push to `main` to publish through the existing deployment workflow. This is a curated history, not an automatic feed: new Steam/Workshop releases do not appear until added here. Never derive public release dates or versions from local files.
+Commit and push to `main` to publish through the existing deployment workflow. Never derive public release dates or versions from local files.
+
+### Automatic updates
+
+`scripts/poll-updates.mjs` (`npm run poll`) reads each project's public changelog and saves it to `src/data/updates.json`. The source comes from the project's action link: Steam store pages use Steam news, Workshop items use their Change Notes page, and Thunderstore packages use their changelog. Spoiler-tagged text in Steam posts is dropped. The `Poll project updates` workflow runs it every six hours, commits the file only when something changed, and then starts the deploy workflow. A source that fails keeps its last saved entries.
+
+Curated `updates` entries stay the history. Polled releases dated on or after the newest curated entry, and not already covered by it, are added automatically until you curate them. An entry counts as covered when its `url` points at the same Steam post or Workshop note. Steam news posts that are not patch notes stay out of changelogs and appear only in the dev log.
+
+Scheduled workflows in public repositories pause after 60 days without repository activity. Re-enable it from the Actions tab if that happens.
+
+### Dev log
+
+The header's Dev log button opens a sidebar with the newest entries from every project. Without JavaScript it links to `/devlog/`, which lists everything by month. The home page shows the newest entry under the hero. Everything comes from the changelogs above, so there is nothing separate to maintain. To post work in progress, add an `updates` entry without a `url` to that project; it shows as a dev note. A Steam news post that names another project, such as the Kingdom TD announcement on the Lone Survivors page, is credited to that project.

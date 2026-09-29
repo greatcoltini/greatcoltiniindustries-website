@@ -6,6 +6,7 @@ import { Image } from 'astro:assets';
 import Icon from '../components/Icon.astro';
 import AppPreview from '../components/AppPreview.astro';
 import ProjectAvailability from '../components/ProjectAvailability.astro';
+import LatestUpdate from '../components/LatestUpdate.astro';
 import kingdomCover from '../assets/kingdom-td.jpg';
 import kingdomDraft from '../assets/screenshots/kingdom-td-2.jpg';
 import loneCover from '../assets/lone-survivors.png';
@@ -44,6 +45,7 @@ const apps = projects.filter((p) => p.data.category === 'apps');
           About me <Icon name="arrow" />
         </a>
       </div>
+      <LatestUpdate stacked />
     </div>
     <div class="project-collage" aria-label="Explore my projects">
       <div class="collage-grid" aria-hidden="true"></div>
@@ -129,7 +131,7 @@ const apps = projects.filter((p) => p.data.category === 'apps');
     <a href="#games">
       SCROLL TO EXPLORE <span aria-hidden="true">↓</span>
     </a>
-    <span>GAMES / APPS / MODS / THE PERSON BEHIND THEM</span>
+    <LatestUpdate />
   </div>
   <section
     class="games-section content-width scroll-section"

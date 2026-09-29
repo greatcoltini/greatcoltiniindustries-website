@@ -4,6 +4,7 @@ const routes = [
   '/',
   '/projects/kingdom-td/',
   '/projects/lone-survivors/',
+  '/devlog/',
   '/projects/boulderlog/',
   '/projects/shelf-and-score/',
   '/projects/deconstructor/',
@@ -90,8 +91,9 @@ test('works without JavaScript and with reduced motion', async ({
   });
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4321/');
+  // Page content only; the closed dev log panel also links to changelog entries.
   const projectLinks = await page
-    .locator('a[href^="/projects/"]')
+    .locator('main a[href^="/projects/"]')
     .evaluateAll((links) => [
       ...new Set(links.map((link) => link.getAttribute('href'))),
     ]);

@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DevlogEntry from '../components/DevlogEntry.astro';
+import { projectsIn } from '../lib/projects';
+import { devlogFeed, type FeedItem } from '../lib/updates';
+const feed = devlogFeed(await projectsIn());
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+const months = new Map<string, FeedItem[]>();
+for (const item of feed) {
+  const key = item.date.slice(0, 7);
+  months.set(key, [...(months.get(key) ?? []), item]);
+}
+const monthLabel = (key: string) =>
+  `${monthNames[Number(key.slice(5)) - 1]} ${key.slice(0, 4)}`;
+---
+
+<Layout
+  title="Dev log"
+  description="What I'm working on: patch notes, Workshop updates, and notes from my games, apps, and mods."
+  active="devlog"
+>
+  <header class="page-title">
+    <span class="eyebrow">DEV LOG</span>
+    <h1>What I’m working on</h1>
+    <p>
+      Patch notes and Workshop updates are added automatically every six hours,
+      alongside notes I add myself.
+    </p>
+  </header>
+  <div class="devlog-page">
+    {[...months].map(([key, items]) => (
+      <section class="devlog-month" aria-labelledby={`month-${key}`}>
+        <h2 id={`month-${key}`}>{monthLabel(key)}</h2>
+        <ol class="devlog-list">
+          {items.map((item) => (
+            <DevlogEntry item={item} />
+          ))}
+        </ol>
+      </section>
+    ))}
+  </div>
+</Layout>
