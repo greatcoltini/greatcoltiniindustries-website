@@ -13,18 +13,22 @@ interface Props {
 }
 const { item } = Astro.props;
 const { project } = item;
-const name = project.data.shortTitle || project.data.title;
-// News posts are not changelog entries, so they link to the project itself.
-const href =
-  item.kind === 'news'
+const name = project ? project.data.shortTitle || project.data.title : 'Studio';
+// Changelog entries link to themselves on the project page; posts to the project,
+// or straight to Bluesky when they name none.
+const href = !project
+  ? item.url
+  : item.kind === 'news' || item.kind === 'post'
     ? projectUrl(project)
     : `${projectUrl(project)}#update-${item.id}`;
+// A separate source link, unless the title already goes there.
+const source = item.url && item.url !== href;
 const showYear = !item.date.startsWith(String(new Date().getUTCFullYear()));
-const icon = project.data.artStyle === 'shelf';
+const icon = project?.data.artStyle === 'shelf';
 ---
 
-<li class="devlog-entry" data-category={project.data.category}>
-  {project.data.artwork ? (
+<li class="devlog-entry" data-category={project?.data.category ?? 'studio'}>
+  {project?.data.artwork ? (
     <Image
       class:list={['devlog-thumb', { 'devlog-thumb-icon': icon }]}
       src={project.data.artwork}
@@ -36,7 +40,7 @@ const icon = project.data.artStyle === 'shelf';
     />
   ) : (
     <span class="devlog-thumb mod-icon-tile" aria-hidden="true">
-      <Icon name={project.data.category} size={24} />
+      <Icon name={project?.data.category ?? 'quill'} size={24} />
     </span>
   )}
   <div class="devlog-body">
@@ -54,14 +58,14 @@ const icon = project.data.artStyle === 'shelf';
       <a href={href}>{item.title}</a>
     </h3>
     {item.changes[0] && <p class="devlog-summary">{item.changes[0]}</p>}
-    {(item.more > 0 || item.url) && (
+    {(item.more > 0 || source) && (
       <p class="devlog-links">
         {item.more > 0 && (
           <span>
             +{item.more} more {item.more === 1 ? 'update' : 'updates'} that day
           </span>
         )}
-        {item.url && (
+        {source && (
           <a href={item.url}>
             {sourceLabel(item)} <span aria-hidden="true">↗</span>
             <span class="sr-only">: {item.title}</span>

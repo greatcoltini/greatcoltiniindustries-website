@@ -6,7 +6,7 @@ import { devlogFeed } from '../lib/updates';
 const feed = devlogFeed(await projectsIn());
 const shown = feed.slice(0, 12);
 const filters = (['games', 'mods', 'apps'] as const).filter((category) =>
-  shown.some((item) => item.project.data.category === category),
+  shown.some((item) => item.project?.data.category === category),
 );
 const filterNames = { games: 'Games', mods: 'Mods', apps: 'Apps' };
 ---
@@ -28,8 +28,8 @@ const filterNames = { games: 'Games', mods: 'Mods', apps: 'Apps' };
       </div>
       <h2 id="devlog-panel-title">What I’m working on</h2>
       <p class="devlog-intro">
-        Patch notes and Workshop updates appear here automatically, alongside
-        notes I add myself.
+        Patch notes, Workshop updates, and my Bluesky posts appear here
+        automatically, alongside notes I add myself.
       </p>
       {filters.length > 1 && (
         <div class="devlog-filters" role="group" aria-label="Show updates for">

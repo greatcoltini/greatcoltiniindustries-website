@@ -1,5 +1,8 @@
+import { readFileSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+
+const saved = JSON.parse(readFileSync('src/data/updates.json', 'utf8'));
 
 test('dev log opens as a sidebar from any page and remembers it was read', async ({
   page,
@@ -92,4 +95,17 @@ test('dev log works without JavaScript', async ({ browser }) => {
   await expect(page.locator('.devlog-month').first()).toBeVisible();
   expect(await page.locator('.devlog-entry').count()).toBeGreaterThan(0);
   await context.close();
+});
+
+test('saved Bluesky posts appear in the full dev log', async ({ page }) => {
+  const posts: { url: string }[] = saved.bluesky?.posts ?? [];
+  test.skip(posts.length === 0, 'No Bluesky posts have been saved yet.');
+  await page.goto('/devlog/');
+  const hrefs = await page
+    .locator('.devlog-entry a[href^="https://bsky.app/"]')
+    .evaluateAll((links) => links.map((link) => link.getAttribute('href')));
+  expect(hrefs.length).toBeGreaterThan(0);
+  // Only posts the poller kept (never reposts or replies) are linked.
+  for (const href of hrefs)
+    expect(posts.map((post) => post.url)).toContain(href);
 });

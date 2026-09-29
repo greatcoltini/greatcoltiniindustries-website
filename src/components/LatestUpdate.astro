@@ -8,7 +8,8 @@ interface Props {
 const { stacked = false } = Astro.props;
 const [latest] = devlogFeed(await projectsIn());
 const name =
-  latest && (latest.project.data.shortTitle || latest.project.data.title);
+  latest?.project &&
+  (latest.project.data.shortTitle || latest.project.data.title);
 ---
 
 {latest && (
@@ -18,10 +19,14 @@ const name =
       {formatDate(latest.date, { year: false })}
     </time>
     <p>
-      <strong>
-        {name}
-        {latest.version && ` ${latest.version}`}:
-      </strong>{' '}
+      {name && (
+        <>
+          <strong>
+            {name}
+            {latest.version && ` ${latest.version}`}:
+          </strong>{' '}
+        </>
+      )}
       {latest.title}
     </p>
     <a class="latest-open" href="/devlog/" data-devlog-open>

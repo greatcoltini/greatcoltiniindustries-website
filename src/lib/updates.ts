@@ -1,7 +1,8 @@
 import polledData from '../data/updates.json';
 import type { Project } from './projects';
 
-// Written by scripts/poll-updates.mjs from each project's public changelog.
+// Written by scripts/poll-updates.mjs from each project's public changelog
+// and the Bluesky account in src/lib/profiles.ts.
 type PolledKind = 'patch' | 'news' | 'workshop' | 'release';
 interface PolledEntry {
   id: string;
@@ -17,10 +18,22 @@ interface PolledProject {
   sourceUrl: string;
   entries: PolledEntry[];
 }
-const polled = (polledData as { projects: Record<string, PolledProject> })
-  .projects;
+interface BlueskyPost {
+  id: string;
+  date: string;
+  title: string;
+  summary?: string;
+  /** The whole post, used to credit it to the project it names. */
+  text: string;
+  url: string;
+}
+const data = polledData as {
+  projects: Record<string, PolledProject>;
+  bluesky?: { handle: string; posts: BlueskyPost[] };
+};
+const polled = data.projects;
 
-export type UpdateKind = PolledKind | 'update' | 'note';
+export type UpdateKind = PolledKind | 'update' | 'note' | 'post';
 export interface ProjectUpdate {
   id: string;
   date: string;
@@ -32,8 +45,9 @@ export interface ProjectUpdate {
   automatic: boolean;
 }
 export interface FeedItem extends ProjectUpdate {
-  project: Project;
-  /** Further updates to the same project on the same day, folded into this one. */
+  /** Missing for Bluesky posts that don't name a project. */
+  project?: Project;
+  /** Further updates of the same sort to the same project that day, folded in. */
   more: number;
 }
 
@@ -121,21 +135,44 @@ export const updateLabel = (update: ProjectUpdate) => {
     news: 'News',
     update: 'Update',
     note: 'Dev note',
+    post: 'Bluesky',
   }[update.kind];
 };
 
 export const sourceLabel = (update: ProjectUpdate) =>
-  update.url?.includes('thunderstore.io') ? 'Thunderstore' : 'Steam';
+  update.url?.includes('bsky.app')
+    ? 'Bluesky'
+    : update.url?.includes('thunderstore.io')
+      ? 'Thunderstore'
+      : 'Steam';
 
 /**
- * Every project's changelog plus news posts, newest first. A post that names
- * another project (Kingdom TD announced on the Lone Survivors page) is credited
- * to that project. Same-day updates to one project fold into a single item.
+ * Every project's changelog plus news and Bluesky posts, newest first. A Steam
+ * news post that names another project (Kingdom TD announced on the Lone
+ * Survivors page) is credited to that project; a Bluesky post goes to the first
+ * project it names, or to none. Same-day items of one sort fold together.
  */
 export function devlogFeed(projects: Project[]): FeedItem[] {
   const names = (p: Project) =>
     [p.data.shortTitle, p.data.title].filter(Boolean) as string[];
-  const items = projects.flatMap((project) =>
+  // Ignores spacing and punctuation, so "KingdomTD" and #LoneSurvivors still count.
+  const squash = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const firstNamed = (text: string) => {
+    const squashed = squash(text);
+    const mentions = projects
+      .map((project) => ({
+        project,
+        at: Math.min(
+          ...names(project)
+            .map((name) => squashed.indexOf(squash(name)))
+            .filter((at) => at >= 0),
+        ),
+      }))
+      .filter((mention) => Number.isFinite(mention.at))
+      .sort((a, b) => a.at - b.at);
+    return mentions[0]?.project;
+  };
+  const items: FeedItem[] = projects.flatMap((project) =>
     projectUpdates(project).map((update) => ({ ...update, project, more: 0 })),
   );
   for (const [slug, source] of Object.entries(polled)) {
@@ -148,11 +185,27 @@ export function devlogFeed(projects: Project[]): FeedItem[] {
       items.push({ ...fromPolled(entry), project: named ?? home, more: 0 });
     }
   }
+  for (const post of data.bluesky?.posts ?? []) {
+    items.push({
+      id: post.id,
+      date: post.date.slice(0, 10),
+      title: post.title,
+      changes: post.summary ? [post.summary] : [],
+      url: post.url,
+      kind: 'post',
+      automatic: true,
+      project: firstNamed(post.text),
+      more: 0,
+    });
+  }
   items.sort((a, b) => b.date.localeCompare(a.date));
   const feed: FeedItem[] = [];
   for (const item of items) {
     const same = feed.find(
-      (f) => f.project === item.project && f.date === item.date,
+      (f) =>
+        f.project === item.project &&
+        f.date === item.date &&
+        (f.kind === 'post') === (item.kind === 'post'),
     );
     if (same) same.more++;
     else feed.push(item);

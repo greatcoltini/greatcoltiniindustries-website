@@ -100,7 +100,7 @@
           "summary": "Hey Survivors! Patch 1.2.11 adds nine new skins and makes two class upgrade trees much more affordable, with total costs reduced by around 90%.",
           "version": "1.2.11",
           "kind": "patch",
-          "url": "https://store.steampowered.com/news/app/3629280/view/1844751498232541"
+          "url": "https://steamcommunity.com/games/3629280/announcements/detail/701028593652729992"
         },
         {
           "id": "steam-1840310314352466",
@@ -109,7 +109,7 @@
           "summary": "Hello everyone, I'm here to welcome a new boss, new weapon, and a minor fix to the alchemy table (long-awaited...)",
           "version": "1.2.10",
           "kind": "patch",
-          "url": "https://store.steampowered.com/news/app/3629280/view/1840310314352466"
+          "url": "https://steamcommunity.com/games/3629280/announcements/detail/684135653863065118"
         },
         {
           "id": "steam-1839676055887096",
@@ -117,7 +117,7 @@
           "title": "Announcing Kingdom TD: Draft Your Demise — My New Tower Defense Game",
           "summary": "Hi everyone! I'm excited to finally share the new project I've been working on: Kingdom TD: Draft Your Demise, a fantasy tower defense game where you choose the enemies you'll have to survive against in battle.",
           "kind": "news",
-          "url": "https://store.steampowered.com/news/app/3629280/view/1839676055887096"
+          "url": "https://steamcommunity.com/games/3629280/announcements/detail/715660216997250635"
         },
         {
           "id": "steam-1837955055361712",
@@ -126,7 +126,7 @@
           "summary": "Alchemy table placement should be stricter, no more OOB Endless level cap is now visible in pause menu (under Pause)",
           "version": "1.2.9",
           "kind": "patch",
-          "url": "https://store.steampowered.com/news/app/3629280/view/1837955055361712"
+          "url": "https://steamcommunity.com/games/3629280/announcements/detail/669496599819322880"
         },
         {
           "id": "steam-1836506165559377",
@@ -135,7 +135,7 @@
           "summary": "Fixed music issue with Beach Endless map Fixed issue with boss spawning in Village Endless",
           "version": "1.2.8",
           "kind": "patch",
-          "url": "https://store.steampowered.com/news/app/3629280/view/1836506165559377"
+          "url": "https://steamcommunity.com/games/3629280/announcements/detail/694264948876903812"
         },
         {
           "id": "steam-1836506165555968",
@@ -144,7 +144,7 @@
           "summary": "This update is all about knowing your numbers. The Damage Summary has been rebuilt to track everything your run is doing independently — not just raw weapon hits — and the Weapons menu shows off the abilities and upgrades you've collected…",
           "version": "1.2.7",
           "kind": "patch",
-          "url": "https://store.steampowered.com/news/app/3629280/view/1836506165555968"
+          "url": "https://steamcommunity.com/games/3629280/announcements/detail/694264948876903648"
         }
       ]
     },
@@ -367,5 +367,106 @@
         }
       ]
     }
+  },
+  "bluesky": {
+    "handle": "greatcoltiniinc.bsky.social",
+    "posts": [
+      {
+        "id": "bsky-3mut64zfty22a",
+        "date": "2026-09-06T04:34:55.193Z",
+        "title": "I've always loved main menus where you can see stuff going on - and I've gotta say I'm pretty happy…",
+        "summary": "Take a look below, and tell me what you think!",
+        "text": "I've always loved main menus where you can see stuff going on - and I've gotta say I'm pretty happy with how KingdomTD: Draft Your Demise's main menu turned out! Take a look below, and tell me what you think! #gamedev #indiedev #towerdefense",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mut64zfty22a"
+      },
+      {
+        "id": "bsky-3msbsb773ok2a",
+        "date": "2026-08-04T19:56:51.770Z",
+        "title": "Curious to see what Kingdom TD look like in action?",
+        "summary": "I was lucky to have Sandro at Big Bro Studios take a crack at playing - watch him strategize on building a path for the enemies and attempt to beat the levels in the demo:",
+        "text": "Curious to see what Kingdom TD look like in action? I was lucky to have Sandro at Big Bro Studios take a crack at playing - watch him strategize on building a path for the enemies and attempt to beat the levels in the demo: www.youtube.com/watch?v=4O5h... #indiedev #towerdefense",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3msbsb773ok2a"
+      },
+      {
+        "id": "bsky-3ms4eqx2cgk2l",
+        "date": "2026-08-02T16:11:49.018Z",
+        "title": "I'm happy to announce I've opened my steam page for my second game, Kingdom TD: Draft Your Demise!",
+        "summary": "Pick more challenging enemies and combinations to increase your gold, but don't be too greedy - or you'll pay the price!",
+        "text": "I'm happy to announce I've opened my steam page for my second game, Kingdom TD: Draft Your Demise! Pick more challenging enemies and combinations to increase your gold, but don't be too greedy - or you'll pay the price! store.steampowered.com/app/4990780/... #indiedev #gamedev #towerdefense",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3ms4eqx2cgk2l"
+      },
+      {
+        "id": "bsky-3mlz7k6fth22h",
+        "date": "2026-05-17T01:29:24.165Z",
+        "title": "Coming June 8th, you'll be able to FLEX on your enemies as the Pirate in Lone Survivors - Patch 1.2!",
+        "summary": "Take a look below!",
+        "text": "Coming June 8th, you'll be able to FLEX on your enemies as the Pirate in Lone Survivors - Patch 1.2! Take a look below! #indiedev #gamedev #screenshotsaturday",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mlz7k6fth22h"
+      },
+      {
+        "id": "bsky-3mi37n6pypk2e",
+        "date": "2026-03-27T22:55:38.126Z",
+        "title": "Love Lone Survivors?",
+        "summary": "Want more Lone Survivors action? You can enjoy new content with Patch 1.1! Take a look at the trailer below, and play RIGHT NOW!",
+        "text": "Love Lone Survivors? Want more Lone Survivors action? You can enjoy new content with Patch 1.1! Take a look at the trailer below, and play RIGHT NOW! You can also compete in the Endless Volcano leaderboard competition! Rank 1 gets $10 CAD! #gamedev #steam #godot www.youtube.com/watch?v=JfrL...",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mi37n6pypk2e"
+      },
+      {
+        "id": "bsky-3mhtqlwfxfk2h",
+        "date": "2026-03-24T23:37:51.559Z",
+        "title": "Another Competition?",
+        "summary": "Patch 1.1? FREE CONTENT? All of the above and more is coming this Friday with Patch 1.1 for Lone Survivors!",
+        "text": "Another Competition? Patch 1.1? FREE CONTENT? All of the above and more is coming this Friday with Patch 1.1 for Lone Survivors! Want more details? Check out the Steam announcement here: store.steampowered.com/news/app/362... #gamedev #indiegames #godot",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mhtqlwfxfk2h"
+      },
+      {
+        "id": "bsky-3mhmjvepodc2s",
+        "date": "2026-03-22T02:49:14.185Z",
+        "title": "Lone Survivors is still getting updates!",
+        "summary": "Coming March 27th is 1.1 with new bosses, achievements, upgrades, and more! Check out the Upgrade History - a new feature showing upgrades you took in a run - coming in 1.1!",
+        "text": "Lone Survivors is still getting updates! Coming March 27th is 1.1 with new bosses, achievements, upgrades, and more! Check out the Upgrade History - a new feature showing upgrades you took in a run - coming in 1.1! #gamedev #indiedev #godot",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mhmjvepodc2s"
+      },
+      {
+        "id": "bsky-3mhefbjab622d",
+        "date": "2026-03-18T21:05:14.954Z",
+        "title": "Never did I imagine that my game would have it's own fanart, but my friend made a BEAUTIFUL…",
+        "summary": "Check it out below!!!",
+        "text": "Never did I imagine that my game would have it's own fanart, but my friend made a BEAUTIFUL HAND-DRAWN picture capturing the experience of Lone Survivors!! Check it out below!!! #gamefanart #gameart",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mhefbjab622d"
+      },
+      {
+        "id": "bsky-3mgigzblr2k2m",
+        "date": "2026-03-07T18:21:53.322Z",
+        "title": "What's next for Lone Survivors?",
+        "summary": "1.1 is going to add over 45 new upgrades and achievements with class-based progression!",
+        "text": "What's next for Lone Survivors? 1.1 is going to add over 45 new upgrades and achievements with class-based progression! Take a look at one upgrade for the warrior, the Reflection Overdrive, sending out reflection projectiles for each enemy projectile blocked! #screenshotsaturday #indiegames",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mgigzblr2k2m"
+      },
+      {
+        "id": "bsky-3mgav5md23s2e",
+        "date": "2026-03-04T18:13:33.266Z",
+        "title": "Haven't started your swarm killing journey in Lone Survivors?",
+        "summary": "Now is the perfect time! 10% off, and a competition to win $10! Check out the game below,",
+        "text": "Haven't started your swarm killing journey in Lone Survivors? Now is the perfect time! 10% off, and a competition to win $10! Check out the game below, store.steampowered.com/app/3629280/... #wishlistwednesday",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mgav5md23s2e"
+      },
+      {
+        "id": "bsky-3mfu7bgaajc2k",
+        "date": "2026-02-27T17:10:01.921Z",
+        "title": "LONE SURVIVORS IS AVAILABLE NOW!",
+        "summary": "That's right, you can play my game RIGHT NOW! It's on sale 10% off, $4.49 USD / $5.03 CAD",
+        "text": "LONE SURVIVORS IS AVAILABLE NOW! That's right, you can play my game RIGHT NOW! It's on sale 10% off, $4.49 USD / $5.03 CAD Check it out at the link below, store.steampowered.com/app/3629280/...",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mfu7bgaajc2k"
+      },
+      {
+        "id": "bsky-3mfsdczxpkk24",
+        "date": "2026-02-26T23:17:11.658Z",
+        "title": "I'm not sure if I'm just the luckiest person ever, or if Steam verifies games right before release,…",
+        "summary": "Wanna see the cool GREEN CHECKMARK? Click below: store.steampowered.com/app/3629280/...",
+        "text": "I'm not sure if I'm just the luckiest person ever, or if Steam verifies games right before release, but I am happy to announce that I am Steam Verified (TM) with Lone Survivors as of today at 6:00PM! Wanna see the cool GREEN CHECKMARK? Click below: store.steampowered.com/app/3629280/... #indiedev",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mfsdczxpkk24"
+      }
+    ]
   }
 }

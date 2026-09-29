@@ -50,3 +50,10 @@ The optional project changelog uses typed Markdown frontmatter and native detail
 - Production build and `astro check` pass with zero errors, warnings, or hints; the build check covers 20 HTML files, including `/devlog/` and every dev log link to a changelog entry anchor.
 - Local Edge: 27 of 27 Playwright tests passed. New checks cover opening the sidebar from a project page, focus on Close, Escape and focus return, the unread dot, filters, axe in both themes, the home Latest link, and the `/devlog/` fallback without JavaScript. The Lone Survivors changelog test now checks that the curated history stays last and in order, and that no release is listed twice.
 - Manual review at 1366px (light and dark) and 390px covered the header button, the Latest strip, the sidebar, `/devlog/`, and the Lone Survivors Updated line and changelog.
+
+## Bluesky posts and Steam link fix (2026-09-29)
+
+- Steam news links now point at each post's Steam Community announcement page, found by following the news item's own redirect. All six Lone Survivors links, including Patch 1.2.11 and the Kingdom TD announcement, returned 200 and opened the matching post.
+- `npm run poll` read 10 sources with no failures, including 12 posts from greatcoltiniinc.bsky.social (reposts and replies excluded). All 12 were credited to Kingdom TD or Lone Survivors.
+- Production build and `astro check` pass with zero errors, warnings, or hints; 20 HTML files checked.
+- Local Edge: 28 of 28 Playwright tests passed. Local Windows WebKit: 24 passed, with 4 focus-dependent checks skipped as before. `npm run test:links` returned 200 for all project and profile links, including Bluesky.

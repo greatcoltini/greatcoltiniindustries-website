@@ -1,15 +1,17 @@
-// Fetches each project's public changelog into src/data/updates.json.
-// The poll-updates workflow runs this every six hours; it is safe to run locally.
-// Sources come from each project's action link: Steam store pages use Steam news,
-// Workshop items use their change notes, and Thunderstore packages use their changelog.
+// Fetches each project's public changelog, and recent Bluesky posts, into
+// src/data/updates.json. The poll-updates workflow runs this every six hours; it is
+// safe to run locally. Sources come from each project's action link: Steam store
+// pages use Steam news, Workshop items use their change notes, and Thunderstore
+// packages use their changelog. The Bluesky handle comes from src/lib/profiles.ts.
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 
 const dir = 'src/content/projects';
 const out = 'src/data/updates.json';
 const keep = 6;
+const keepPosts = 12;
 const previous = existsSync(out)
-  ? JSON.parse(readFileSync(out, 'utf8')).projects
-  : {};
+  ? JSON.parse(readFileSync(out, 'utf8'))
+  : { projects: {} };
 
 const entities = {
   amp: '&',
@@ -92,13 +94,33 @@ function steamTitle(title, markup, projectTitle, version) {
   return clean || (version ? 'Patch notes' : tidy(title));
 }
 
+// A news item's own url redirects to the announcement page, whose id differs from
+// the item's gid. Save the destination; fall back to the redirecting url.
+async function announcementUrl(url) {
+  try {
+    const response = await fetch(url, {
+      headers: { 'user-agent': 'greatcoltiniindustries.com update poller' },
+      signal: AbortSignal.timeout(20000),
+    });
+    await response.body?.cancel();
+    return response.ok && /\/announcements\/detail\/\d+$/.test(response.url)
+      ? response.url
+      : url;
+  } catch {
+    return url;
+  }
+}
+
 async function steamNews(appid, project) {
   const { appnews } = await get(
     `https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=${appid}&count=20&maxlength=0&format=json`,
   );
-  return (appnews?.newsitems ?? [])
+  const items = (appnews?.newsitems ?? [])
     .filter((item) => item.feedname === 'steam_community_announcements')
-    .map((item) => {
+    .sort((a, b) => b.date - a.date)
+    .slice(0, keep);
+  return Promise.all(
+    items.map(async (item) => {
       const version = versionOf(item.title);
       const patch = version || item.tags?.includes('patchnotes');
       return {
@@ -108,9 +130,10 @@ async function steamNews(appid, project) {
         summary: summarize(steamLines(item.contents)),
         version,
         kind: patch ? 'patch' : 'news',
-        url: `https://store.steampowered.com/news/app/${appid}/view/${item.gid}`,
+        url: await announcementUrl(item.url),
       };
-    });
+    }),
+  );
 }
 
 // Workshop change notes have no API; each note's element id is its Unix timestamp.
@@ -159,6 +182,48 @@ async function thunderstoreReleases(namespace, name, packageUrl) {
       url: packageUrl,
     })),
   );
+}
+
+// A post's first sentence becomes its title; lines of only hashtags are dropped.
+function postParts(text) {
+  const lines = text
+    .split('\n')
+    .map(tidy)
+    .filter((line) => line && !/^(#\S+\s*)+$/.test(line))
+    .map((line) => line.replace(/(\s+#\S+)+$/, ''));
+  const first = lines[0] ?? '';
+  const sentence = first.match(/^.+?[.!?](?=\s|$)/)?.[0] ?? first;
+  const title =
+    sentence.length <= 100
+      ? sentence
+      : `${sentence.slice(0, 100).replace(/\s+\S*$/, '')}…`;
+  const rest = [tidy(first.slice(sentence.length)), ...lines.slice(1)];
+  return { title, summary: summarize(rest.filter(Boolean)) };
+}
+
+// Bluesky's public API needs no account. Reposts and replies are left out.
+async function blueskyPosts(handle) {
+  const posts = [];
+  let cursor = '';
+  while (posts.length < keepPosts) {
+    const page = await get(
+      `https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=${encodeURIComponent(handle)}&filter=posts_no_replies&limit=50${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`,
+    );
+    for (const { post, reason } of page.feed ?? []) {
+      if (reason || post.record.reply || !post.record.text) continue;
+      const rkey = post.uri.split('/').pop();
+      posts.push({
+        id: `bsky-${rkey}`,
+        date: new Date(post.record.createdAt).toISOString(),
+        ...postParts(post.record.text),
+        text: tidy(post.record.text),
+        url: `https://bsky.app/profile/${post.author.did}/post/${rkey}`,
+      });
+    }
+    if (!page.cursor || !page.feed?.length) break;
+    cursor = page.cursor;
+  }
+  return posts.sort((a, b) => b.date.localeCompare(a.date)).slice(0, keepPosts);
 }
 
 function sourceFor(url, project) {
@@ -219,11 +284,30 @@ for (const project of projects) {
   } catch (error) {
     failed++;
     // Keep the last good entries so one failed request never empties a changelog.
-    if (previous[project.slug]) results[project.slug] = previous[project.slug];
+    if (previous.projects[project.slug])
+      results[project.slug] = previous.projects[project.slug];
     console.warn(`${project.slug}: kept previous entries (${error.message})`);
   }
 }
 
-writeFileSync(out, `${JSON.stringify({ projects: results }, null, 2)}\n`);
+let bluesky = previous.bluesky;
+const handle = readFileSync('src/lib/profiles.ts', 'utf8').match(
+  /bsky\.app\/profile\/([^'"/\s]+)/,
+)?.[1];
+if (handle) {
+  polled++;
+  try {
+    bluesky = { handle, posts: await blueskyPosts(handle) };
+    console.log(`bluesky: ${bluesky.posts.length} posts`);
+  } catch (error) {
+    failed++;
+    console.warn(`bluesky: kept previous posts (${error.message})`);
+  }
+}
+
+writeFileSync(
+  out,
+  `${JSON.stringify({ projects: results, bluesky }, null, 2)}\n`,
+);
 console.log(`Polled ${polled} sources, ${failed} failed.`);
 if (polled && failed === polled) process.exitCode = 1;
