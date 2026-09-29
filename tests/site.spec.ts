@@ -239,9 +239,23 @@ test('back to top returns to the top at every width', async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     for (const route of ['/', '/projects/kingdom-td/']) {
       await page.goto(route);
+      // The site scrolls smoothly, so jump instantly and let the page settle; clicking
+      // mid-animation lets the downward scroll win on Linux WebKit.
       await page.evaluate(() =>
-        scrollTo(0, document.documentElement.scrollHeight),
+        scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'instant',
+        }),
       );
+      await expect
+        .poll(() =>
+          page.evaluate(
+            () =>
+              scrollY + innerHeight >=
+              document.documentElement.scrollHeight - 1,
+          ),
+        )
+        .toBe(true);
       await page.getByRole('link', { name: 'Back to top' }).click();
       await expect
         .poll(() => page.evaluate(() => scrollY), `${route} at ${width}`)
