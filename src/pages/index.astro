@@ -335,6 +335,7 @@ const apps = projects.filter((p) => p.data.category === 'apps');
                 <a class="mod-index-link" href={projectUrl(project)}>
                   {project.data.artwork ? (
                     <Image
+                      class:list={{ 'pixel-art': project.data.pixelArt }}
                       src={project.data.artwork}
                       alt=""
                       width={80}

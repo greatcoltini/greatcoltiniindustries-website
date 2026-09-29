@@ -13,9 +13,14 @@ These files come from Colton’s existing project assets. They are used directly
 | Necesse mod images      | Each corresponding mod’s src/main/resources/preview.png                                             |
 | closer-mini-biomes.png  | vapok-backpack-deep-north/valheim-patches/icon.png                                                  |
 | epicloot-bounties.png   | vapok-backpack-deep-north/valheim-patches/UnofficialEpicLootBountyAdditions/icon.png                |
+| minecraft-enderman.png  | Thunderstore icon of GreatColtini/MinecraftAdditions 1.0.7 (see below)                              |
 | kingdom-td-gameplay.mp4 | Original 30-second Kingdom TD gameplay trailer                                                      |
 
-The R.E.P.O. mod uses the site's mods icon on a cobalt tile because no verified original promotional image was selected. The favicon and brand monogram use native vector/text styling. No generated mockup is used as page content.
+The R.E.P.O. mod uses its published Thunderstore package icon, a 256×256 pixel-art Enderman face, retrieved unchanged on 2026-09-29 from https://ccdn.thunderstore.io/live/repository/icons/GreatColtini-MinecraftAdditions-1.0.7.png with Colton's approval. Thunderstore's package API lists the owner as GreatColtini. The project sets `pixelArt: true`, so the site and its social card enlarge it with hard pixel edges. The favicon and brand monogram use native vector/text styling. No generated mockup is used as page content.
+
+## Dev log media
+
+Bluesky posts in the dev log show the first picture, video thumbnail, or link-card image of each post. `scripts/poll-updates.mjs` saves these unchanged to `src/assets/devlog/`, named after the post, and removes them once the post drops out of the newest twelve. It fetches Bluesky's feed thumbnail. If Bluesky's image CDN is unavailable, it fetches the original upload from the account's own server instead. Astro serves responsive WebP copies, so visitors never request Bluesky directly. Link cards to YouTube or Steam use the preview image Bluesky attached to the post.
 
 Anton and Source Sans 3 are self-hosted Fontsource packages, distributed under the SIL Open Font License. Their license files are included in the installed packages.
 

@@ -7,6 +7,7 @@ import Trailer from '../../components/Trailer.astro';
 import ProjectUpdates from '../../components/ProjectUpdates.astro';
 import ProjectAvailability from '../../components/ProjectAvailability.astro';
 import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
+import ClosingCta from '../../components/ClosingCta.astro';
 import Icon from '../../components/Icon.astro';
 import {
   projectsIn,
@@ -122,6 +123,7 @@ const isWide = (p: Project) =>
       {data.screenshots.length > 0 && <a href="#screenshots">Screenshots</a>}
       <a href="#development">Development</a>
       {updates.length > 0 && <a href="#updates">Updates</a>}
+      {data.roadmap.length > 0 && <a href="#launch">Road to launch</a>}
     </nav>
     <div
       class:list={[
@@ -170,6 +172,7 @@ const isWide = (p: Project) =>
       </div>
       {updates.length > 0 && <ProjectUpdates updates={updates} />}
     </div>
+    {data.category === 'games' && <ClosingCta project={project} />}
     {related.length > 0 && (
       <section class="onward" aria-labelledby="onward-title">
         <h2 id="onward-title">{relatedTitle}</h2>
@@ -180,7 +183,10 @@ const isWide = (p: Project) =>
                 <Image
                   class:list={[
                     'onward-thumb',
-                    { 'onward-thumb-wide': isWide(next) },
+                    {
+                      'onward-thumb-wide': isWide(next),
+                      'pixel-art': next.data.pixelArt,
+                    },
                   ]}
                   src={next.data.artwork}
                   alt=""

@@ -2,11 +2,20 @@
 // src/data/updates.json. The poll-updates workflow runs this every six hours; it is
 // safe to run locally. Sources come from each project's action link: Steam store
 // pages use Steam news, Workshop items use their change notes, and Thunderstore
-// packages use their changelog. The Bluesky handle comes from src/lib/profiles.ts.
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+// packages use their changelog. The Bluesky handle comes from src/lib/profiles.ts;
+// each post's picture, video thumbnail, or link-card image is saved to src/assets/devlog/.
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 
 const dir = 'src/content/projects';
 const out = 'src/data/updates.json';
+const mediaDir = 'src/assets/devlog';
 const keep = 6;
 const keepPosts = 12;
 const previous = existsSync(out)
@@ -56,7 +65,12 @@ async function get(url, as = 'json') {
         signal: AbortSignal.timeout(20000),
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      return as === 'json' ? await response.json() : await response.text();
+      if (as === 'json') return await response.json();
+      if (as === 'text') return await response.text();
+      return {
+        type: response.headers.get('content-type')?.split(';')[0],
+        bytes: Buffer.from(await response.arrayBuffer()),
+      };
     } catch (error) {
       if (attempt === 2) throw new Error(`${url}: ${error.message}`);
       await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -201,6 +215,78 @@ function postParts(text) {
   return { title, summary: summarize(rest.filter(Boolean)) };
 }
 
+// A post's pictures, video, or link card. `from` is the preview image to save.
+function postMedia(embed, postUrl) {
+  const view = embed?.$type?.startsWith('app.bsky.embed.recordWithMedia')
+    ? embed.media
+    : embed;
+  const type = view?.$type ?? '';
+  if (type.startsWith('app.bsky.embed.images') && view.images?.length) {
+    const [first] = view.images;
+    return {
+      kind: 'image',
+      href: postUrl,
+      alt: tidy(first.alt ?? ''),
+      ...(view.images.length > 1 && { count: view.images.length }),
+      from: first.thumb,
+    };
+  }
+  if (type.startsWith('app.bsky.embed.video'))
+    return {
+      kind: 'video',
+      href: postUrl,
+      alt: tidy(view.alt ?? ''),
+      from: view.thumbnail,
+    };
+  if (type.startsWith('app.bsky.embed.external') && view.external?.uri) {
+    const { uri, title, thumb } = view.external;
+    return {
+      kind: 'link',
+      href: uri,
+      title: tidy(decode(title ?? '')) || new URL(uri).hostname,
+      from: thumb,
+    };
+  }
+}
+
+// Video thumbnails arrive as application/octet-stream, so the bytes decide the type.
+function imageType(bytes) {
+  if (bytes[0] === 0xff && bytes[1] === 0xd8) return 'jpg';
+  if (bytes.subarray(0, 4).toString('latin1') === '\x89PNG') return 'png';
+  if (bytes.subarray(8, 12).toString('latin1') === 'WEBP') return 'webp';
+}
+
+// Preview images are named after their post and never change, so a saved one is
+// reused. When Bluesky's image CDN is down, the original comes from the account's
+// own server instead.
+async function savePreview(from, id) {
+  const saved = readdirSync(mediaDir).find((file) => file.startsWith(`${id}.`));
+  if (saved) return saved;
+  const blob = from.match(/\/img\/[^/]+\/plain\/(did:[^/]+)\/([^/@]+)/);
+  const sources = [
+    from,
+    ...(blob
+      ? [
+          `https://bsky.social/xrpc/com.atproto.sync.getBlob?did=${blob[1]}&cid=${blob[2]}`,
+        ]
+      : []),
+  ];
+  let failure;
+  for (const source of sources) {
+    try {
+      const { bytes } = await get(source, 'bytes');
+      const type = imageType(bytes);
+      if (!type) throw new Error(`${source}: not an image`);
+      const file = `${id}.${type}`;
+      writeFileSync(`${mediaDir}/${file}`, bytes);
+      return file;
+    } catch (error) {
+      failure = error;
+    }
+  }
+  throw failure;
+}
+
 // Bluesky's public API needs no account. Reposts and replies are left out.
 async function blueskyPosts(handle) {
   const posts = [];
@@ -218,12 +304,35 @@ async function blueskyPosts(handle) {
         ...postParts(post.record.text),
         text: tidy(post.record.text),
         url: `https://bsky.app/profile/${post.author.did}/post/${rkey}`,
+        embed: post.embed,
       });
     }
     if (!page.cursor || !page.feed?.length) break;
     cursor = page.cursor;
   }
-  return posts.sort((a, b) => b.date.localeCompare(a.date)).slice(0, keepPosts);
+  const kept = posts
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, keepPosts);
+  mkdirSync(mediaDir, { recursive: true });
+  for (const post of kept) {
+    const found = postMedia(post.embed, post.url);
+    delete post.embed;
+    if (!found) continue;
+    const { from, ...media } = found;
+    if (from)
+      try {
+        media.image = await savePreview(from, post.id);
+      } catch (error) {
+        // The post still links to its media; it just shows no preview.
+        console.warn(`${post.id}: no preview image (${error.message})`);
+      }
+    post.media = media;
+  }
+  // Images of posts that have dropped out of the newest few are removed.
+  for (const file of readdirSync(mediaDir))
+    if (!kept.some((post) => file.startsWith(`${post.id}.`)))
+      rmSync(`${mediaDir}/${file}`);
+  return kept;
 }
 
 function sourceFor(url, project) {

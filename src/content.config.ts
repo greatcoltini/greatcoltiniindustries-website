@@ -24,6 +24,8 @@ const projects = defineCollection({
       artStyle: z
         .enum(['cover', 'boulderlog', 'shelf', 'mod'])
         .default('cover'),
+      /** Blocky artwork that should scale with hard pixel edges, never smoothed. */
+      pixelArt: z.boolean().default(false),
       order: z.number(),
       hostGame: z.string().optional(),
       tech: z.array(z.string()).default([]),
@@ -53,6 +55,22 @@ const projects = defineCollection({
           (updates) =>
             new Set(updates.map((update) => update.id)).size === updates.length,
           'Update IDs must be unique within a project',
+        ),
+      /** Steps toward release, shown as a tracker before launch. Past steps need a public source. */
+      roadmap: z
+        .array(
+          z.object({
+            title: z.string(),
+            status: z.enum(['done', 'next', 'planned']),
+            /** Free text, such as "31 Jul 2026" or "Q1 2027". */
+            when: z.string().optional(),
+            url: z.url().optional(),
+          }),
+        )
+        .default([])
+        .refine(
+          (steps) => steps.filter((step) => step.status === 'next').length <= 1,
+          'Only one roadmap step can be next',
         ),
       trailer: z.string().optional(),
       screenshots: z

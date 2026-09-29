@@ -1,5 +1,6 @@
+import type { ImageMetadata } from 'astro';
 import polledData from '../data/updates.json';
-import type { Project } from './projects';
+import { projectUrl, type Project } from './projects';
 
 // Written by scripts/poll-updates.mjs from each project's public changelog
 // and the Bluesky account in src/lib/profiles.ts.
@@ -18,6 +19,18 @@ interface PolledProject {
   sourceUrl: string;
   entries: PolledEntry[];
 }
+interface SavedMedia {
+  kind: 'image' | 'video' | 'link';
+  /** The post itself for pictures and video; the linked page for link cards. */
+  href: string;
+  alt?: string;
+  /** Pictures in the post, when there is more than one. */
+  count?: number;
+  /** A link card's title. */
+  title?: string;
+  /** A preview image in src/assets/devlog/. */
+  image?: string;
+}
 interface BlueskyPost {
   id: string;
   date: string;
@@ -26,6 +39,7 @@ interface BlueskyPost {
   /** The whole post, used to credit it to the project it names. */
   text: string;
   url: string;
+  media?: SavedMedia;
 }
 const data = polledData as {
   projects: Record<string, PolledProject>;
@@ -44,12 +58,40 @@ export interface ProjectUpdate {
   kind: UpdateKind;
   automatic: boolean;
 }
+export interface PostMedia extends Omit<SavedMedia, 'image'> {
+  image?: ImageMetadata;
+}
 export interface FeedItem extends ProjectUpdate {
   /** Missing for Bluesky posts that don't name a project. */
   project?: Project;
   /** Further updates of the same sort to the same project that day, folded in. */
   more: number;
+  /** A Bluesky post's first picture, video, or link card. */
+  media?: PostMedia;
 }
+
+const previews = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/devlog/*.{jpg,png,webp}',
+  { eager: true },
+);
+function postMedia(media?: SavedMedia): PostMedia | undefined {
+  if (!media) return undefined;
+  const image = media.image
+    ? previews[`../assets/devlog/${media.image}`]?.default
+    : undefined;
+  return { ...media, image };
+}
+
+/**
+ * Where an entry's title leads: changelog entries to themselves on the project
+ * page, news and posts to the project, and posts that name none straight to Bluesky.
+ */
+export const entryHref = (item: FeedItem) =>
+  !item.project
+    ? item.url
+    : item.kind === 'news' || item.kind === 'post'
+      ? projectUrl(item.project)
+      : `${projectUrl(item.project)}#update-${item.id}`;
 
 const months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
 /** "28 Sep 2026"; pass `year: false` for "28 Sep". Dates are UTC days. */
@@ -196,6 +238,7 @@ export function devlogFeed(projects: Project[]): FeedItem[] {
       automatic: true,
       project: firstNamed(post.text),
       more: 0,
+      media: postMedia(post.media),
     });
   }
   items.sort((a, b) => b.date.localeCompare(a.date));

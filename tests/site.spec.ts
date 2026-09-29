@@ -92,10 +92,11 @@ test('works without JavaScript and with reduced motion', async ({
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4321/');
   // Page content only; the closed dev log panel also links to changelog entries.
+  // Links into a page's sections, like Kingdom TD's road to launch, count as that page.
   const projectLinks = await page
     .locator('main a[href^="/projects/"]')
     .evaluateAll((links) => [
-      ...new Set(links.map((link) => link.getAttribute('href'))),
+      ...new Set(links.map((link) => link.getAttribute('href')!.split('#')[0])),
     ]);
   expect(projectLinks).toHaveLength(13);
   expect(projectLinks).toEqual(
@@ -115,8 +116,9 @@ test('works without JavaScript and with reduced motion', async ({
   await page
     .getByRole('link', { name: 'Explore Kingdom TD', exact: true })
     .click();
+  // The hero action; the page also ends with it.
   await expect(
-    page.getByRole('link', { name: 'Wishlist on Steam' }),
+    page.getByRole('link', { name: 'Wishlist on Steam' }).first(),
   ).toBeVisible();
   await page.getByRole('link', { name: 'Development', exact: true }).click();
   await expect(page).toHaveURL(/#development$/);

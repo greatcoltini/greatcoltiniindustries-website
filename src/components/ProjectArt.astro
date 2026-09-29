@@ -9,10 +9,11 @@ interface Props {
   decorative?: boolean;
 }
 const { project, eager = false, decorative = false } = Astro.props;
-const { artwork, artworkAlt, icon, artStyle, hostGame, title } = project.data;
+const { artwork, artworkAlt, icon, artStyle, hostGame, title, pixelArt } =
+  project.data;
 ---
 
-<div class:list={['project-art', `art-${artStyle}`]}>
+<div class:list={['project-art', `art-${artStyle}`, { 'pixel-art': pixelArt }]}>
   {artwork ? (
     <Image
       src={artwork}

@@ -109,3 +109,69 @@ test('saved Bluesky posts appear in the full dev log', async ({ page }) => {
   for (const href of hrefs)
     expect(posts.map((post) => post.url)).toContain(href);
 });
+
+test('Bluesky posts show their pictures, videos, and link cards', async ({
+  page,
+}) => {
+  const posts: { media?: { kind: string; image?: string } }[] =
+    saved.bluesky?.posts ?? [];
+  const kinds = new Set(
+    posts.filter((post) => post.media?.image).map((post) => post.media!.kind),
+  );
+  test.skip(kinds.size === 0, 'No saved Bluesky posts have media yet.');
+  await page.goto('/devlog/');
+  for (const kind of kinds) {
+    const media = page.locator(`.devlog-media-${kind}`).first();
+    await media.scrollIntoViewIfNeeded();
+    await expect(media).toHaveAccessibleName(/\S/);
+    const image = media.locator('img');
+    // Previews are served from this site, never loaded from Bluesky.
+    expect(await image.getAttribute('src')).toMatch(/^\/_astro\//);
+    await expect
+      .poll(() => image.evaluate((img: HTMLImageElement) => img.naturalWidth))
+      .toBeGreaterThan(0);
+  }
+  // Media that opens the post replaces the entry's separate Bluesky link.
+  const video = page.locator('.devlog-entry:has(.devlog-media-video)').first();
+  if (await video.count())
+    await expect(video.locator('.devlog-links a')).toHaveCount(0);
+});
+
+test('the dev log RSS feed is linked and lists the newest entries', async ({
+  page,
+  request,
+}) => {
+  await page.goto('/devlog/');
+  await expect(
+    page.locator('link[rel="alternate"][type="application/rss+xml"]'),
+  ).toHaveAttribute('href', '/devlog/rss.xml');
+  await expect(
+    page
+      .getByRole('complementary', { name: 'Follow along' })
+      .getByRole('link', { name: 'RSS feed' }),
+  ).toHaveAttribute('href', '/devlog/rss.xml');
+  const response = await request.get('/devlog/rss.xml');
+  expect(response.ok()).toBe(true);
+  const feed = await page.evaluate(
+    (text) => {
+      const doc = new DOMParser().parseFromString(text, 'application/xml');
+      if (doc.querySelector('parsererror')) return null;
+      return [...doc.querySelectorAll('item')].map((item) => ({
+        title: item.querySelector('title')?.textContent ?? '',
+        link: item.querySelector('link')?.textContent ?? '',
+        guid: item.querySelector('guid')?.textContent ?? '',
+        date: item.querySelector('pubDate')?.textContent ?? '',
+      }));
+    },
+    await response.text(),
+  );
+  expect(feed, 'the feed is well-formed XML').not.toBeNull();
+  expect(feed!.length).toBeGreaterThan(0);
+  expect(new Set(feed!.map((item) => item.guid)).size).toBe(feed!.length);
+  for (const item of feed!) {
+    expect(item.link).toMatch(/^https:\/\//);
+    expect(Number.isNaN(Date.parse(item.date))).toBe(false);
+  }
+  const newest = await page.locator('.devlog-title').first().textContent();
+  expect(feed![0].title).toContain(newest!.trim());
+});

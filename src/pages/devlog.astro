@@ -1,9 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import DevlogEntry from '../components/DevlogEntry.astro';
+import Icon from '../components/Icon.astro';
 import { projectsIn } from '../lib/projects';
+import { profiles } from '../lib/profiles';
 import { devlogFeed, type FeedItem } from '../lib/updates';
 const feed = devlogFeed(await projectsIn());
+const bluesky = profiles.find((profile) => profile.label === 'Bluesky');
 const monthNames = [
   'January',
   'February',
@@ -40,16 +43,35 @@ const monthLabel = (key: string) =>
       automatically every six hours, alongside notes I add myself.
     </p>
   </header>
-  <div class="devlog-page">
-    {[...months].map(([key, items]) => (
-      <section class="devlog-month" aria-labelledby={`month-${key}`}>
-        <h2 id={`month-${key}`}>{monthLabel(key)}</h2>
-        <ol class="devlog-list">
-          {items.map((item) => (
-            <DevlogEntry item={item} />
-          ))}
-        </ol>
-      </section>
-    ))}
+  <div class="devlog-layout">
+    <aside class="devlog-follow" aria-labelledby="follow-title">
+      <h2 id="follow-title">Follow along</h2>
+      <p>
+        Get every new entry in your feed reader, or follow me on Bluesky for
+        posts as they happen.
+      </p>
+      <div class="devlog-follow-links">
+        <a class="button" href="/devlog/rss.xml">
+          RSS feed <Icon name="rss" size={18} />
+        </a>
+        {bluesky && (
+          <a class="text-action" href={bluesky.url}>
+            Bluesky <Icon name="external" size={17} />
+          </a>
+        )}
+      </div>
+    </aside>
+    <div class="devlog-page">
+      {[...months].map(([key, items]) => (
+        <section class="devlog-month" aria-labelledby={`month-${key}`}>
+          <h2 id={`month-${key}`}>{monthLabel(key)}</h2>
+          <ol class="devlog-list">
+            {items.map((item) => (
+              <DevlogEntry item={item} />
+            ))}
+          </ol>
+        </section>
+      ))}
+    </div>
   </div>
 </Layout>

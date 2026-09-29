@@ -27,7 +27,7 @@ const wrap = (title, max = 19) => {
   }
   return lines;
 };
-async function create(slug, title, category, artwork) {
+async function create(slug, title, category, artwork, pixelArt = false) {
   const lines = wrap(title);
   const fontSize = lines.some((line) => line.length > 21) ? 40 : 48;
   const svg =
@@ -46,6 +46,8 @@ async function create(slug, title, category, artwork) {
             .resize(486, 510, {
               fit: 'contain',
               background: { r: 0, g: 0, b: 0, alpha: 0 },
+              // Pixel art keeps its hard edges when enlarged.
+              ...(pixelArt && { kernel: 'nearest' }),
             })
             .png()
             .toBuffer(),
@@ -70,6 +72,7 @@ for (const file of await readdir(folder)) {
     field(text, 'title'),
     field(text, 'category'),
     art ? resolve(dirname(path), art) : undefined,
+    field(text, 'pixelArt') === 'true',
   );
 }
 console.log('Generated social cards for the portfolio and every project.');

@@ -3,7 +3,10 @@ title: Minecraft Enderman
 category: mods
 hostGame: R.E.P.O.
 summary: A familiar face you probably shouldn't look at. Plus a little TNT.
+artwork: ../../assets/minecraft-enderman.png
+artworkAlt: 'MinecraftAdditions mod icon: a pixel-art Enderman face with glowing purple eyes.'
 artStyle: mod
+pixelArt: true
 order: 20
 tech: [C#, BepInEx, Unity]
 features:

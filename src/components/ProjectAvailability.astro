@@ -1,16 +1,22 @@
 ---
-import type { Project } from '../lib/projects';
+import { projectUrl, type Project } from '../lib/projects';
 import { formatDate, latestRelease } from '../lib/updates';
 interface Props {
   project: Project;
   detailed?: boolean;
 }
 const { project, detailed = false } = Astro.props;
-const { availability } = project.data;
+const { availability, roadmap } = project.data;
 const latest = latestRelease(project);
 const updated =
   latest &&
   `Updated ${formatDate(latest.date)}${latest.version ? ` · v${latest.version}` : ''}`;
+// Before launch, point at the road to launch instead.
+const nextStep = roadmap.find((step) => step.status === 'next');
+const done = roadmap.filter((step) => step.status === 'done').length;
+const launch =
+  nextStep &&
+  `Next up: ${nextStep.title} · ${done} of ${roadmap.length} steps done`;
 ---
 
 <div class="project-availability">
@@ -28,6 +34,15 @@ const updated =
     ) : (
       <p class="availability-updated">{updated}</p>
     ))}
+  {launch && (
+    <a
+      class:list={['availability-launch', { 'availability-pill': detailed }]}
+      href={detailed ? '#launch' : `${projectUrl(project)}#launch`}
+    >
+      <span aria-hidden="true"></span>
+      {launch}
+    </a>
+  )}
 </div>
 <style>
   .project-availability {
@@ -49,7 +64,27 @@ const updated =
     margin-top: 6px;
     opacity: 0.85;
   }
-  a.availability-updated {
+  .availability-launch {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    margin-top: 6px;
+    color: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+  .availability-launch span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e3f684;
+    box-shadow: 0 0 0 2px var(--cobalt);
+  }
+  a.availability-updated,
+  a.availability-pill {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -61,11 +96,19 @@ const updated =
     font-size: 15px;
     font-weight: 600;
   }
-  a.availability-updated:hover {
+  a.availability-pill {
+    text-decoration: none;
+  }
+  a.availability-updated:hover,
+  a.availability-pill:hover {
     color: #171817;
     text-decoration: underline;
   }
-  a.availability-updated span {
+  a.availability-pill span {
+    box-shadow: none;
+  }
+  a.availability-updated span,
+  a.availability-pill span {
     width: 8px;
     height: 8px;
     border-radius: 50%;

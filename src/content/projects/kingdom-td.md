@@ -18,6 +18,22 @@ features:
 links:
   - label: Wishlist on Steam
     url: https://store.steampowered.com/app/4990780/Kingdom_TD_Draft_Your_Demise/
+roadmap:
+  - title: Announced, with its Steam page
+    when: 31 Jul 2026
+    status: done
+    url: https://steamcommunity.com/games/3629280/announcements/detail/715660216997250635
+  - title: First creator playthrough, by Big Bro Studios
+    when: 4 Aug 2026
+    status: done
+    url: https://www.youtube.com/watch?v=4O5h3lybihk
+  - title: Public demo
+    status: next
+  - title: Steam Next Fest
+    status: planned
+  - title: Launch on Steam
+    when: Q1 2027
+    status: planned
 screenshots:
   - image: ../../assets/screenshots/kingdom-td-1.jpg
     alt: 'Towers and combat effects along the route.'

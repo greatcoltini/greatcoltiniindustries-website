@@ -1,0 +1,64 @@
+---
+import Icon from './Icon.astro';
+import type { Project } from '../lib/projects';
+interface Props {
+  project: Project;
+}
+// Ends a game page with its main action, and the road to launch when it has one.
+const { project } = Astro.props;
+const { data } = project;
+const [primary] = data.links;
+const name = data.shortTitle || data.title;
+const steps = data.roadmap;
+const statusText = { done: 'Done', next: 'Up next', planned: 'Planned' };
+---
+
+{primary && (
+  <section
+    class="closing-cta"
+    id={steps.length ? 'launch' : undefined}
+    aria-labelledby="closing-title"
+  >
+    <div class="closing-copy">
+      <p class="eyebrow">
+        {steps.length
+          ? 'ROAD TO LAUNCH'
+          : data.availability.label.toUpperCase()}
+      </p>
+      <h2 id="closing-title">{name}</h2>
+      <p>{data.summary}</p>
+    </div>
+    {steps.length > 0 && (
+      <ol class="roadmap" style={`--steps: ${steps.length}`}>
+        {steps.map((step) => (
+          <li class={`roadmap-step roadmap-${step.status}`}>
+            <span class="roadmap-marker" aria-hidden="true">
+              {step.status === 'done' && <Icon name="check" size={16} />}
+            </span>
+            <span class="roadmap-status">{statusText[step.status]}</span>
+            <span class="roadmap-title">
+              {step.url ? (
+                <a href={step.url}>
+                  {step.title}
+                  <span aria-hidden="true"> ↗</span>
+                </a>
+              ) : (
+                step.title
+              )}
+            </span>
+            {step.when && <span class="roadmap-when">{step.when}</span>}
+          </li>
+        ))}
+      </ol>
+    )}
+    <div class="closing-action">
+      <a class="button" href={primary.url}>
+        {primary.label}
+        <Icon name="external" size={17} />
+      </a>
+      <p>
+        {data.availability.label} · {data.availability.platform}
+      </p>
+    </div>
+  </section>
+)}

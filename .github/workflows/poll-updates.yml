@@ -22,14 +22,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if git diff --quiet -- src/data/updates.json; then
+          if [ -z "$(git status --porcelain -- src/data/updates.json src/assets/devlog)" ]; then
             echo "No new updates."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/updates.json
-          git commit -m "Update project changelogs from Steam and Thunderstore"
+          git add -A src/data/updates.json src/assets/devlog
+          git commit -m "Update project changelogs and Bluesky posts"
           git push
           # Pushes made with the workflow token don't trigger other workflows, so start the deploy directly.
           gh workflow run deploy.yml --ref main

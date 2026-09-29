@@ -1,8 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
-import { projectUrl } from '../lib/projects';
 import {
+  entryHref,
   formatDate,
   sourceLabel,
   updateLabel,
@@ -12,25 +12,30 @@ interface Props {
   item: FeedItem;
 }
 const { item } = Astro.props;
-const { project } = item;
+const { project, media } = item;
 const name = project ? project.data.shortTitle || project.data.title : 'Studio';
-// Changelog entries link to themselves on the project page; posts to the project,
-// or straight to Bluesky when they name none.
-const href = !project
-  ? item.url
-  : item.kind === 'news' || item.kind === 'post'
-    ? projectUrl(project)
-    : `${projectUrl(project)}#update-${item.id}`;
-// A separate source link, unless the title already goes there.
-const source = item.url && item.url !== href;
+const href = entryHref(item);
+// A separate source link, unless the title or the post's media already goes there.
+const source = item.url && item.url !== href && media?.href !== item.url;
 const showYear = !item.date.startsWith(String(new Date().getUTCFullYear()));
 const icon = project?.data.artStyle === 'shelf';
+const mediaLabel =
+  media?.kind === 'video'
+    ? 'Watch the video on Bluesky'
+    : media?.count
+      ? `See all ${media.count} images on Bluesky`
+      : 'See the image on Bluesky';
+const host =
+  media?.kind === 'link' && new URL(media.href).hostname.replace(/^www\./, '');
 ---
 
 <li class="devlog-entry" data-category={project?.data.category ?? 'studio'}>
   {project?.data.artwork ? (
     <Image
-      class:list={['devlog-thumb', { 'devlog-thumb-icon': icon }]}
+      class:list={[
+        'devlog-thumb',
+        { 'devlog-thumb-icon': icon, 'pixel-art': project.data.pixelArt },
+      ]}
       src={project.data.artwork}
       alt=""
       width={96}
@@ -58,6 +63,46 @@ const icon = project?.data.artStyle === 'shelf';
       <a href={href}>{item.title}</a>
     </h3>
     {item.changes[0] && <p class="devlog-summary">{item.changes[0]}</p>}
+    {media && (
+      <a
+        class:list={['devlog-media', `devlog-media-${media.kind}`]}
+        href={media.href}
+      >
+        {media.image && (
+          <span class="devlog-media-frame">
+            <Image
+              src={media.image}
+              alt={media.alt ?? ''}
+              width={800}
+              widths={[480, 800]}
+              sizes="(max-width: 550px) calc(100vw - 102px), 480px"
+              format="webp"
+              quality={72}
+              loading="lazy"
+            />
+            {media.kind === 'video' && (
+              <span class="devlog-play" aria-hidden="true">
+                <Icon name="play" size={22} />
+              </span>
+            )}
+          </span>
+        )}
+        <span class="devlog-media-caption">
+          {media.kind === 'link' ? (
+            <span>
+              <strong>{media.title}</strong>
+              <span class="devlog-media-host">{host}</span>
+            </span>
+          ) : (
+            <span>
+              {mediaLabel}
+              <span class="sr-only">: {item.title}</span>
+            </span>
+          )}
+          <span aria-hidden="true">↗</span>
+        </span>
+      </a>
+    )}
     {(item.more > 0 || source) && (
       <p class="devlog-links">
         {item.more > 0 && (

@@ -42,7 +42,26 @@ The mod group display order follows Colton's requested popularity order: Meccha 
 
 Project galleries use optional `screenshots` frontmatter entries, each with an `image` path, descriptive `alt`, and a `caption`. Store originals in `src/assets/screenshots/`. Astro creates responsive WebP thumbnails and larger linked images; galleries show up to six screenshots, and a native disclosure holds any beyond that. Portrait phone captures use a compact multi-column grid. With JavaScript, an accessible dialog adds Previous/Next, captions, arrow keys, Escape, and focus return. Without JavaScript, links open the images directly and browser Back works. Preserve authentic screenshots and record their provenance in `docs/assets.md`.
 
-The home page is the only section page. `/games/`, `/apps/`, `/mods/`, and `/about/` are meta-refresh redirects to the matching home sections, configured in `astro.config.mjs`. Each project page ends with links to related projects: other mods for the same game, otherwise the rest of its category.
+Set `pixelArt: true` on a project whose artwork is blocky pixel art, such as Minecraft Enderman's 256px Thunderstore icon. The site and its social card then enlarge it with hard pixel edges instead of blurring it.
+
+The home page is the only section page. `/games/`, `/apps/`, `/mods/`, and `/about/` are meta-refresh redirects to the matching home sections, configured in `astro.config.mjs`. Game pages end with a cobalt band that repeats their first action, such as Wishlist on Steam. Each project page then links to related projects: other mods for the same game, otherwise the rest of its category.
+
+## Road to launch
+
+Before a game releases, an optional `roadmap` list shows its progress. The steps fill the game page's closing band, the page's section links gain Road to launch, and the home page and project hero show the step marked `next`. Each step has a `title` and a `status` of `done`, `next` (at most one), or `planned`. `when` is free text, so both `31 Jul 2026` and `Q1 2027` work. Give each completed step a public source `url`. Record only verified dates and plans the developer has confirmed. Remove the list once the game launches.
+
+```yaml
+roadmap:
+  - title: Announced, with its Steam page
+    when: 31 Jul 2026
+    status: done
+    url: https://steamcommunity.com/games/3629280/announcements/detail/715660216997250635
+  - title: Public demo
+    status: next
+  - title: Launch on Steam
+    when: Q1 2027
+    status: planned
+```
 
 Profile links for the About section and footer live in `src/lib/profiles.ts`; `npm run test:links` checks them with the project links.
 
@@ -71,7 +90,7 @@ Commit and push to `main` to publish through the existing deployment workflow. N
 
 ### Automatic updates
 
-`scripts/poll-updates.mjs` (`npm run poll`) reads each project's public changelog and saves it to `src/data/updates.json`. The source comes from the project's action link: Steam store pages use Steam news, Workshop items use their Change Notes page, and Thunderstore packages use their changelog. Spoiler-tagged text in Steam posts is dropped. It also saves the 12 newest posts from the Bluesky account in `src/lib/profiles.ts`, through Bluesky's public API, leaving out reposts and replies. The `Poll project updates` workflow runs it every six hours, commits the file only when something changed, and then starts the deploy workflow. A source that fails keeps its last saved entries.
+`scripts/poll-updates.mjs` (`npm run poll`) reads each project's public changelog and saves it to `src/data/updates.json`. The source comes from the project's action link: Steam store pages use Steam news, Workshop items use their Change Notes page, and Thunderstore packages use their changelog. Spoiler-tagged text in Steam posts is dropped. It also saves the 12 newest posts from the Bluesky account in `src/lib/profiles.ts`, through Bluesky's public API, leaving out reposts and replies. Each post's first picture, video thumbnail, or link-card image is saved to `src/assets/devlog/`, so the site serves it itself; images of posts that drop out of the newest 12 are removed. The `Poll project updates` workflow runs it every six hours, commits the data and images only when something changed, and then starts the deploy workflow. A source that fails keeps its last saved entries.
 
 Curated `updates` entries stay the history. Polled releases dated on or after the newest curated entry, and not already covered by it, are added automatically until you curate them. An entry counts as covered when its `url` points at the same Steam post or Workshop note. Steam news posts that are not patch notes stay out of changelogs and appear only in the dev log.
 
@@ -79,4 +98,6 @@ Scheduled workflows in public repositories pause after 60 days without repositor
 
 ### Dev log
 
-The header's Dev log button opens a sidebar with the newest entries from every project. Without JavaScript it links to `/devlog/`, which lists everything by month. The home page shows the newest entry under the hero. Everything comes from the changelogs above, so there is nothing separate to maintain. To post work in progress, add an `updates` entry without a `url` to that project; it shows as a dev note. A Steam news post that names another project, such as the Kingdom TD announcement on the Lone Survivors page, is credited to that project. A Bluesky post is credited to the first project it names, ignoring spacing and punctuation so `KingdomTD` and `#LoneSurvivors` count; a post that names none appears as studio news. Bluesky posts appear only in the dev log, never in project changelogs. Saved Steam links point at each post's announcement page on the Steam Community.
+The header's Dev log button opens a sidebar with the newest entries from every project. Without JavaScript it links to `/devlog/`, which lists everything by month. The home page shows the newest entry under the hero. Everything comes from the changelogs above, so there is nothing separate to maintain. To post work in progress, add an `updates` entry without a `url` to that project; it shows as a dev note. A Steam news post that names another project, such as the Kingdom TD announcement on the Lone Survivors page, is credited to that project. A Bluesky post is credited to the first project it names, ignoring spacing and punctuation so `KingdomTD` and `#LoneSurvivors` count; a post that names none appears as studio news. Bluesky posts appear only in the dev log, never in project changelogs. Each shows its picture, video, or link card; videos and pictures open the post on Bluesky, and link cards open their page. Saved Steam links point at each post's announcement page on the Steam Community.
+
+The same entries are published as an RSS feed at `/devlog/rss.xml`. Every page advertises it to feed readers, and the dev log panel and page link to it. News and Bluesky items link to their original post; changelog entries link to the project page.

@@ -55,10 +55,20 @@ const nav = [
       } catch {
         /* System preference remains the default. */
       }
+      // Smooth scrolling starts with the first click or key press; see html[data-smooth] in global.css.
+      const smooth = () => (document.documentElement.dataset.smooth = '');
+      addEventListener('pointerdown', smooth, { once: true });
+      addEventListener('keydown', smooth, { once: true });
     </script>
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="GreatColtini Industries dev log"
+      href="/devlog/rss.xml"
+    />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
