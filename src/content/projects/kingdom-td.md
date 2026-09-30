@@ -54,6 +54,18 @@ overview:
 availability:
   label: "Coming soon · Q1 2027"
   platform: "Windows · Steam"
+updates:
+  - id: "2026-09-30-crowds-and-blight"
+    date: "2026-09-30"
+    title: "Wider crowds, creeping blight, and a smoother tutorial"
+    changes:
+      - "Enemy crowds now spread across the whole road instead of marching in three tidy lanes. Bosses still hold the center."
+      - "Portal blight now creeps over cliff edges and drips down the rock faces below."
+      - "Widescreen, ultrawide, and taller displays fill the screen instead of showing black bars."
+      - "The tutorial's first draft is clearer: no duplicate cards, and the required pick is marked Forced."
+      - "The intro shows Skip and Continue prompts."
+      - "In the demo, winning the tutorial battle unlocks Endless."
+      - "Clearer labels throughout: the draft shows each wave's payout, the deck shows its card count, and locked landmarks name the level to clear."
 ---
 
 ## Development
