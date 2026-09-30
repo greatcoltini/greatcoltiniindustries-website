@@ -23,10 +23,6 @@ roadmap:
     when: 31 Jul 2026
     status: done
     url: https://steamcommunity.com/games/3629280/announcements/detail/715660216997250635
-  - title: First creator playthrough, by Big Bro Studios
-    when: 4 Aug 2026
-    status: done
-    url: https://www.youtube.com/watch?v=4O5h3lybihk
   - title: Public demo
     status: next
   - title: Steam Next Fest

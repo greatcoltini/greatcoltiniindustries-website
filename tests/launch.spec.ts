@@ -13,7 +13,7 @@ test('Kingdom TD shows its road to launch and ends with its Steam action', async
   await expect(band.getByRole('heading', { level: 2 })).toHaveText(
     'Kingdom TD',
   );
-  await expect(band.locator('.roadmap-step')).toHaveCount(5);
+  await expect(band.locator('.roadmap-step')).toHaveCount(4);
   await expect(band.locator('.roadmap-next')).toHaveCount(1);
   await expect(band.locator('.roadmap-next')).toContainText('Public demo');
   // Completed steps link to their public sources.
