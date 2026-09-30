@@ -372,6 +372,20 @@
     "handle": "greatcoltiniinc.bsky.social",
     "posts": [
       {
+        "id": "bsky-3mwphy3qu7k2a",
+        "date": "2026-09-30T04:10:51.598Z",
+        "title": "Day 1 vs day 82 of Kingdom TD: Draft Your Demise",
+        "summary": "July 9: flat 2D prototype. Today: floating 3D islands, storms, 12 tower types and a Goblin King boss wave.",
+        "text": "Day 1 vs day 82 of Kingdom TD: Draft Your Demise July 9: flat 2D prototype. Today: floating 3D islands, storms, 12 tower types and a Goblin King boss wave. Draft your enemies, then build a defense that survives them. Wishlist: store.steampowered.com/app/4990780 #gamedev #indiedev #godotengine",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mwphy3qu7k2a",
+        "media": {
+          "kind": "video",
+          "href": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mwphy3qu7k2a",
+          "alt": "A tower defense game 82 days apart. July 9: a flat 2D prototype with a brown path and simple sprites. Today: a 3D floating island rises from the clouds, a card draft picks enemy waves, and towers fire lightning and cannons across four battlefields in sun and rain. A Goblin King boss marches between purple portals under fire, then the Kingdom TD logo appears.",
+          "image": "bsky-3mwphy3qu7k2a.jpg"
+        }
+      },
+      {
         "id": "bsky-3mut64zfty22a",
         "date": "2026-09-06T04:34:55.193Z",
         "title": "I've always loved main menus where you can see stuff going on - and I've gotta say I'm pretty happy…",
@@ -523,20 +537,6 @@
           "href": "https://store.steampowered.com/app/3629280/Lone_Survivors/",
           "title": "Save 10% on Lone Survivors on Steam",
           "image": "bsky-3mfu7bgaajc2k.jpg"
-        }
-      },
-      {
-        "id": "bsky-3mfsdczxpkk24",
-        "date": "2026-02-26T23:17:11.658Z",
-        "title": "I'm not sure if I'm just the luckiest person ever, or if Steam verifies games right before release,…",
-        "summary": "Wanna see the cool GREEN CHECKMARK? Click below: store.steampowered.com/app/3629280/...",
-        "text": "I'm not sure if I'm just the luckiest person ever, or if Steam verifies games right before release, but I am happy to announce that I am Steam Verified (TM) with Lone Survivors as of today at 6:00PM! Wanna see the cool GREEN CHECKMARK? Click below: store.steampowered.com/app/3629280/... #indiedev",
-        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mfsdczxpkk24",
-        "media": {
-          "kind": "image",
-          "href": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mfsdczxpkk24",
-          "alt": "",
-          "image": "bsky-3mfsdczxpkk24.webp"
         }
       }
     ]
