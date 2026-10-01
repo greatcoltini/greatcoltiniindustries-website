@@ -51,6 +51,17 @@ availability:
   label: "Coming soon · Q1 2027"
   platform: "Windows · Steam"
 updates:
+  - id: "2026-10-01-first-player-polish"
+    date: "2026-10-01"
+    title: "A friendlier first hour"
+    changes:
+      - "Tutorial hints and tooltips no longer cover the things they point at, and the camera shows the whole island while you build your path."
+      - "Placing a path tile or tower with the mouse now lands exactly under the cursor."
+      - "Towers placed too far from the enemy road now warn you before you spend the gold."
+      - "The tutorial now builds its path before the first draft, just like every campaign level, and editing that path is optional."
+      - "The turret shop shows every tower's name, explains rising prices, and marks prices you can't afford yet."
+      - "Your rider is easier to spot, and your abilities explain what they do and why a cast didn't go off."
+      - "Clearer messages around boss rewards, wave events, and the speed button."
   - id: "2026-09-30-crowds-and-blight"
     date: "2026-09-30"
     title: "Wider crowds, creeping blight, and a smoother tutorial"
