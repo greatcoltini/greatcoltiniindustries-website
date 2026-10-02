@@ -62,6 +62,7 @@ updates:
       - "The turret shop shows every tower's name, explains rising prices, and marks prices you can't afford yet."
       - "Your rider is easier to spot, and your abilities explain what they do and why a cast didn't go off."
       - "Clearer messages around boss rewards, wave events, and the speed button."
+      - "Fixed level intros where some cliffs and terraces stayed missing while the island assembled, then popped in at the end. Every piece now rises into place."
   - id: "2026-09-30-crowds-and-blight"
     date: "2026-09-30"
     title: "Wider crowds, creeping blight, and a smoother tutorial"
