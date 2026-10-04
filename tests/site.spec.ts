@@ -98,11 +98,12 @@ test('works without JavaScript and with reduced motion', async ({
     .evaluateAll((links) => [
       ...new Set(links.map((link) => link.getAttribute('href')!.split('#')[0])),
     ]);
-  expect(projectLinks).toHaveLength(13);
+  expect(projectLinks).toHaveLength(14);
   expect(projectLinks).toEqual(
     expect.arrayContaining([
       '/projects/meccha-mcjannek-station/',
       '/projects/meccha-swiftbroom/',
+      '/projects/dvergr-reclaimer/',
     ]),
   );
   for (const name of ['Games', 'Apps', 'Mods', 'About']) {

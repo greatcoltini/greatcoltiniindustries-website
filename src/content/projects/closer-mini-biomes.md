@@ -8,6 +8,9 @@ artworkAlt: Closer Mini-Biomes mod icon.
 artStyle: mod
 order: 30
 tech: [C#, BepInEx, Valheim modding]
+links:
+  - label: View on Hexium
+    url: https://valheim.hexium.gg/mods/GreatColtini/CloserMiniBiomes
 features:
   - title: Adjust the distance
     description: Configure how close eligible alternative mini-biomes can generate to the world center.
@@ -18,9 +21,8 @@ overview:
   - "Closer Mini-Biomes adjusts the placement of Valheim's alternative mini-biomes. It gives players control over minimum distances and a preference for closer eligible locations."
   - "Changing distance settings does not guarantee that a biome will fit in a particular place, and already-generated areas are not rebuilt."
 availability:
-  label: "Showcase only"
-  platform: "Valheim"
-  detail: "No public download is currently linked here."
+  label: "Hexium release"
+  platform: "Valheim · Hexium"
 ---
 
 ## Development

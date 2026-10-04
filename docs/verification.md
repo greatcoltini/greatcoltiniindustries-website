@@ -57,3 +57,10 @@ The optional project changelog uses typed Markdown frontmatter and native detail
 - `npm run poll` read 10 sources with no failures, including 12 posts from greatcoltiniinc.bsky.social (reposts and replies excluded). All 12 were credited to Kingdom TD or Lone Survivors.
 - Production build and `astro check` pass with zero errors, warnings, or hints; 20 HTML files checked.
 - Local Edge: 28 of 28 Playwright tests passed. Local Windows WebKit: 24 passed, with 4 focus-dependent checks skipped as before. `npm run test:links` returned 200 for all project and profile links, including Bluesky.
+
+## Valheim mod links and Dvergr Reclaimer (2026-10-04)
+
+- Production build and `astro check` pass. The build check confirms 21 HTML files, now with fourteen projects, plus all internal links, anchors, assets and metadata.
+- `npm run test:links` returned HTTP 200 for every project action, including the three new Hexium pages and Unofficial EpicLoot BountyAdditions on Thunderstore.
+- Local Edge: 32 of 33 Playwright tests passed, including the six-image Dvergr Reclaimer gallery. The one failure, the dev log's Mods filter, fails identically on `main` without these changes.
+- Manual review covered the Dvergr Reclaimer detail page (artwork, actions, features, gallery and credits) and Closer Mini-Biomes with its new Hexium action.

@@ -13,6 +13,7 @@ These files come from Colton’s existing project assets. They are used directly
 | Necesse mod images      | Each corresponding mod’s src/main/resources/preview.png                                             |
 | closer-mini-biomes.png  | vapok-backpack-deep-north/valheim-patches/icon.png                                                  |
 | epicloot-bounties.png   | vapok-backpack-deep-north/valheim-patches/UnofficialEpicLootBountyAdditions/icon.png                |
+| dvergr-reclaimer.png    | vapok-backpack-deep-north/DvergrReclaimer/icon.png                                                  |
 | minecraft-enderman.png  | Thunderstore icon of GreatColtini/MinecraftAdditions 1.0.7 (see below)                              |
 | kingdom-td-gameplay.mp4 | Original 30-second Kingdom TD gameplay trailer                                                      |
 
@@ -24,7 +25,7 @@ Bluesky posts in the dev log show the first picture, video thumbnail, or link-ca
 
 Anton and Source Sans 3 are self-hosted Fontsource packages, distributed under the SIL Open Font License. Their license files are included in the installed packages.
 
-The collection contains thirteen projects. Nine external destinations were verified: two Steam games, six Steam Workshop entries, and MinecraftAdditions on Thunderstore. Apps and Valheim mods have no external actions until a public destination is verified. Private or unavailable GitHub repositories are not linked as public source.
+The collection contains fourteen projects. Thirteen external destinations were verified: two Steam games, six Steam Workshop entries, MinecraftAdditions on Thunderstore, the three Valheim mods on Hexium, and Unofficial EpicLoot BountyAdditions on Thunderstore. Apps have no external actions until a public destination is verified. Private or unavailable GitHub repositories are not linked as public source; on 2026-10-04 every mod's repository was private.
 
 The Kingdom TD homepage feature uses its original `kingdom-td.jpg` cover. The homepage collage uses the `kingdom-td-2.jpg` Steam screenshot instead, so the cover appears only once. The scrolling homepage additionally uses `lone-team.png` from `lone-survivors-ordered/lone-survivors-ordered/library-team.png`. These are original project assets, not generated substitutes. The small arrows are decorative SVG shapes; app homepage previews now use the authentic screenshots described below.
 
@@ -43,13 +44,14 @@ Official asset sources (retrieved 2026-09-28):
 - 27 original gameplay/UI images from the two Steam game listings and six Steam Workshop galleries. Exact public sources are recorded in `screenshot-sources.json`.
 - Six BoulderLog phone screenshots from its English (United Kingdom) Google Play Console listing, retrieved with the owner signed in. The app is in closed testing; no public Play Store action is implied.
 - Three Shelf & Score captures rendered from the actual `board-game-stats` Flutter repository using an isolated copy, an in-memory database, and synthetic game/player records. Fonts and icons are loaded from the app/Flutter assets. Captions explicitly identify sample data; no personal database was used. Shelf & Score is a local app with no store action.
-- No genuine gameplay screenshots were found for Minecraft Enderman or the two Valheim projects; their detail pages omit the gallery.
+- Six Dvergr Reclaimer captures (2026-10-04), rendered from the real game by the mod's own in-game test harness (`DvergrReclaimer/tests/StoreScreenshots.cs`, `Run-SmokeTests.ps1 -Scenario screenshots`) in an isolated test world with a test character. They show the mod as it plays: the workshop scene is staged by the harness, and the interface shots composite Valheim's own GUI over the game camera. They are the mod's store screenshots, copied unchanged from `DvergrReclaimer/screenshots/`.
+- No genuine gameplay screenshots were found for Minecraft Enderman, Closer Mini-Biomes or Unofficial EpicLoot BountyAdditions; their detail pages omit the gallery.
 
 Portrait galleries preserve the full screen, with no crop, and link to a larger image. `kingdom-td-1.jpg` is the one exception: it is cropped to rows 150–1028 of the Steam capture to remove the black bars above and below the scene, with no other changes. Re-running `scripts/collect-screenshots.mjs` restores the uncropped original. Screenshots are lazy-loaded and carry descriptive alt text.
 
 ## Availability and sharing previews (2026-09-28)
 
-Steam app details confirmed Kingdom TD (4990780) as coming soon in Q1 2027 and Lone Survivors (3629280) as released, both with Windows support. BoulderLog's authenticated Play Console state is closed testing; Shelf & Score is a local build as confirmed by Colton. Public Workshop actions are labeled Workshop release without implying current compatibility. MinecraftAdditions is marked deprecated on Thunderstore; Valheim projects remain showcase-only without verified download destinations.
+Steam app details confirmed Kingdom TD (4990780) as coming soon in Q1 2027 and Lone Survivors (3629280) as released, both with Windows support. BoulderLog's authenticated Play Console state is closed testing; Shelf & Score is a local build as confirmed by Colton. Public Workshop actions are labeled Workshop release without implying current compatibility. MinecraftAdditions is marked deprecated on Thunderstore. On 2026-10-04, Hexium listed Closer Mini-Biomes (1.2.1), Unofficial EpicLoot BountyAdditions (1.3.0) and Dvergr Reclaimer (0.2.0) under GreatColtini, and Thunderstore's package API listed Unofficial EpicLoot BountyAdditions 1.3.0 under owner GreatColtini, not deprecated. These are labeled as releases without implying current compatibility.
 
 Social preview cards are generated at build time from these existing project titles and original cover/icon assets, with selectable page text remaining separate from those images. Homepage app previews use the first and last genuine gallery captures.
 

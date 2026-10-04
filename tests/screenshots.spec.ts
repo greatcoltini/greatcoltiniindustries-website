@@ -11,6 +11,7 @@ const galleries = [
   ['necesse-power', 4],
   ['meccha-mcjannek-station', 3],
   ['meccha-swiftbroom', 4],
+  ['dvergr-reclaimer', 6],
 ] as const;
 
 test('authentic galleries load without cropping or broken full-size links', async ({

@@ -9,6 +9,11 @@ artworkAlt: Unofficial EpicLoot BountyAdditions mod icon.
 artStyle: mod
 order: 31
 tech: [C#, BepInEx, Epic Loot integration]
+links:
+  - label: View on Hexium
+    url: https://valheim.hexium.gg/mods/GreatColtini/Unofficial_EpicLoot_BountyAdditions
+  - label: View on Thunderstore
+    url: https://thunderstore.io/c/valheim/p/GreatColtini/Unofficial_EpicLoot_BountyAdditions/
 features:
   - title: More contracts
     description: Expand the bounty pool with regular enemies and boss variants.
@@ -18,9 +23,8 @@ overviewTitle: "Another reason to head out"
 overview:
   - "Unofficial EpicLoot BountyAdditions is a companion mod and data pack for Valheim's Epic Loot mod. It expands bounty variety, adds a dedicated rotating boss slot, and adjusts rewards for bounty bosses."
 availability:
-  label: "Showcase only"
+  label: "Hexium and Thunderstore release"
   platform: "Valheim · Epic Loot"
-  detail: "No public download is currently linked here."
 ---
 
 ## Development
