@@ -42,18 +42,21 @@ test('dev log opens as a sidebar from any page and remembers it was read', async
     );
     expect(found, colorScheme).toEqual([]);
   }
-  await panel.getByRole('button', { name: 'Mods' }).click();
-  await expect(panel.getByRole('button', { name: 'Mods' })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  );
-  const categories = await panel
-    .locator('.devlog-entry:visible')
-    .evaluateAll((entries) =>
-      entries.map((entry) => (entry as HTMLElement).dataset.category),
-    );
-  expect(categories.length).toBeGreaterThan(0);
-  expect(new Set(categories)).toEqual(new Set(['mods']));
+  // Filters appear only for categories among the newest entries, and those change
+  // with every dev note, so check each filter the panel offers.
+  const filters = panel.locator('.devlog-filters button:not([data-filter="all"])');
+  for (const filter of await filters.all()) {
+    const category = await filter.getAttribute('data-filter');
+    await filter.click();
+    await expect(filter).toHaveAttribute('aria-pressed', 'true');
+    const categories = await panel
+      .locator('.devlog-entry:visible')
+      .evaluateAll((entries) =>
+        entries.map((entry) => (entry as HTMLElement).dataset.category),
+      );
+    expect(categories.length).toBeGreaterThan(0);
+    expect(new Set(categories)).toEqual(new Set([category]));
+  }
   await page.keyboard.press('Escape');
   await expect(panel).toBeHidden();
   await expect(toggle).toBeFocused();
