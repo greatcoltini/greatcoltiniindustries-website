@@ -11,9 +11,9 @@ These files come from Colton’s existing project assets. They are used directly
 | boulderlog-icon.png     | Boulder-Log/artifacts/mobile/assets/images/app-icon-store.png                                       |
 | shelf-and-score.png     | board-game-stats/assets/shelf_and_score_icon.png                                                    |
 | Necesse mod images      | Each corresponding mod’s src/main/resources/preview.png                                             |
-| closer-mini-biomes.png  | vapok-backpack-deep-north/valheim-patches/icon.png                                                  |
-| epicloot-bounties.png   | vapok-backpack-deep-north/valheim-patches/UnofficialEpicLootBountyAdditions/icon.png                |
-| dvergr-reclaimer.png    | vapok-backpack-deep-north/DvergrReclaimer/icon.png                                                  |
+| closer-mini-biomes.png  | valheim-patches/CloserMiniBiomes/icon.png                                                           |
+| epicloot-bounties.png   | valheim-patches/UnofficialEpicLootBountyAdditions/icon.png                                          |
+| dvergr-reclaimer.png    | valheim-patches/DvergrReclaimer/icon.png                                                            |
 | minecraft-enderman.png  | Thunderstore icon of GreatColtini/MinecraftAdditions 1.0.7 (see below)                              |
 | kingdom-td-gameplay.mp4 | Original 30-second Kingdom TD gameplay trailer                                                      |
 
@@ -44,7 +44,7 @@ Official asset sources (retrieved 2026-09-28):
 - 27 original gameplay/UI images from the two Steam game listings and six Steam Workshop galleries. Exact public sources are recorded in `screenshot-sources.json`.
 - Six BoulderLog phone screenshots from its English (United Kingdom) Google Play Console listing, retrieved with the owner signed in. The app is in closed testing; no public Play Store action is implied.
 - Three Shelf & Score captures rendered from the actual `board-game-stats` Flutter repository using an isolated copy, an in-memory database, and synthetic game/player records. Fonts and icons are loaded from the app/Flutter assets. Captions explicitly identify sample data; no personal database was used. Shelf & Score is a local app with no store action.
-- Six Dvergr Reclaimer captures (2026-10-04), rendered from the real game by the mod's own in-game test harness (`DvergrReclaimer/tests/StoreScreenshots.cs`, `Run-SmokeTests.ps1 -Scenario screenshots`) in an isolated test world with a test character. They show the mod as it plays: the workshop scene is staged by the harness, and the interface shots composite Valheim's own GUI over the game camera. They are the mod's store screenshots, copied unchanged from `DvergrReclaimer/screenshots/`.
+- Six Dvergr Reclaimer captures (2026-10-04), rendered from the real game by the mod's own in-game test harness (`DvergrReclaimer/tests/StoreScreenshots.cs`, `Run-SmokeTests.ps1 -Scenario screenshots`) in an isolated test world with a test character. They show the mod as it plays: the workshop scene is staged by the harness, and the interface shots composite Valheim's own GUI over the game camera. They are the mod's store screenshots, copied unchanged from `valheim-patches/DvergrReclaimer/screenshots/`.
 - No genuine gameplay screenshots were found for Minecraft Enderman, Closer Mini-Biomes or Unofficial EpicLoot BountyAdditions; their detail pages omit the gallery.
 
 Portrait galleries preserve the full screen, with no crop, and link to a larger image. `kingdom-td-1.jpg` is the one exception: it is cropped to rows 150–1028 of the Steam capture to remove the black bars above and below the scene, with no other changes. Re-running `scripts/collect-screenshots.mjs` restores the uncropped original. Screenshots are lazy-loaded and carry descriptive alt text.
