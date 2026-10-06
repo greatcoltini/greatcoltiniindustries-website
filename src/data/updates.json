@@ -372,6 +372,20 @@
     "handle": "greatcoltiniinc.bsky.social",
     "posts": [
       {
+        "id": "bsky-3mx5rc2szak2b",
+        "date": "2026-10-05T20:34:46.179Z",
+        "title": "Big fan of Survivorslikes?",
+        "summary": "Now is the perfect time to jump into Lone Survivors - the Game Juice update just dropped and it's 30% off!",
+        "text": "Big fan of Survivorslikes? Now is the perfect time to jump into Lone Survivors - the Game Juice update just dropped and it's 30% off! FEATURING: MORE JUICE! (no real juice included...) Check it out here, store.steampowered.com/app/3629280/... #indiegames #gamedev #godot",
+        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mx5rc2szak2b",
+        "media": {
+          "kind": "video",
+          "href": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mx5rc2szak2b",
+          "alt": "",
+          "image": "bsky-3mx5rc2szak2b.jpg"
+        }
+      },
+      {
         "id": "bsky-3mwphy3qu7k2a",
         "date": "2026-09-30T04:10:51.598Z",
         "title": "Day 1 vs day 82 of Kingdom TD: Draft Your Demise",
@@ -523,20 +537,6 @@
           "href": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mgav5md23s2e",
           "alt": "",
           "image": "bsky-3mgav5md23s2e.jpg"
-        }
-      },
-      {
-        "id": "bsky-3mfu7bgaajc2k",
-        "date": "2026-02-27T17:10:01.921Z",
-        "title": "LONE SURVIVORS IS AVAILABLE NOW!",
-        "summary": "That's right, you can play my game RIGHT NOW! It's on sale 10% off, $4.49 USD / $5.03 CAD",
-        "text": "LONE SURVIVORS IS AVAILABLE NOW! That's right, you can play my game RIGHT NOW! It's on sale 10% off, $4.49 USD / $5.03 CAD Check it out at the link below, store.steampowered.com/app/3629280/...",
-        "url": "https://bsky.app/profile/did:plc:u4hg37hskhzvj67ni33dbdrr/post/3mfu7bgaajc2k",
-        "media": {
-          "kind": "link",
-          "href": "https://store.steampowered.com/app/3629280/Lone_Survivors/",
-          "title": "Save 10% on Lone Survivors on Steam",
-          "image": "bsky-3mfu7bgaajc2k.jpg"
         }
       }
     ]
