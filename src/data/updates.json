@@ -94,6 +94,15 @@
       "sourceUrl": "https://store.steampowered.com/news/app/3629280",
       "entries": [
         {
+          "id": "steam-1845383656395253",
+          "date": "2026-10-06T04:31:55.000Z",
+          "title": "Patch notes",
+          "summary": "More patch notes, things I wanted to fit into 1.3.0 but couldn't quick make it (and also some fixes),",
+          "version": "1.3.1",
+          "kind": "patch",
+          "url": "https://steamcommunity.com/games/3629280/announcements/detail/699903325897754931"
+        },
+        {
           "id": "steam-1845383656392710",
           "date": "2026-10-05T07:02:34.000Z",
           "title": "Game Juice Update!",
@@ -136,15 +145,6 @@
           "version": "1.2.9",
           "kind": "patch",
           "url": "https://steamcommunity.com/games/3629280/announcements/detail/669496599819322880"
-        },
-        {
-          "id": "steam-1836506165559377",
-          "date": "2026-06-29T06:31:05.000Z",
-          "title": "Patch notes",
-          "summary": "Fixed music issue with Beach Endless map Fixed issue with boss spawning in Village Endless",
-          "version": "1.2.8",
-          "kind": "patch",
-          "url": "https://steamcommunity.com/games/3629280/announcements/detail/694264948876903812"
         }
       ]
     },
