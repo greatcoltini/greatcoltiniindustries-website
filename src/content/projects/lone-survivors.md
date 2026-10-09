@@ -38,6 +38,16 @@ availability:
   label: "Available now"
   platform: "Windows · Steam"
 updates:
+  - id: "2026-10-09-post-legendaries"
+    date: "2026-10-09"
+    title: "Coming in 1.3.2: five new post-legendaries"
+    changes:
+      - "Fuma Shuriken: spent shurikens fly back to you and charge a giant shuriken that hunts the toughest enemy and grinds through everything it touches."
+      - "Lord of the Night: once Overwhelming Swarm's tide passes you, it gathers into one giant bat that latches onto the toughest enemy on screen and drains it, then bursts into three swarms."
+      - "Final Judgment: Purifying Light's True Enlightenment now ends in a nova of light that takes 4% of the max health of everything nearby."
+      - "The Reaping: a Bloodlusting Scythe that has cut 8 enemies stops and reaps the circle around it three times."
+      - "Supernova: spent Absorbing Mage Balls explode, wider the more enemies they absorbed."
+      - "Each one unlocks in the progression tree: Fuma Shuriken in the General tree, the others in their class's tree after an Ascension 3 win."
   - id: "2026-10-07-weapon-makeovers"
     date: "2026-10-07"
     title: "Coming in 1.3.2: weapon makeovers and a faster late game"
