@@ -94,6 +94,15 @@
       "sourceUrl": "https://store.steampowered.com/news/app/3629280",
       "entries": [
         {
+          "id": "steam-1846018067940070",
+          "date": "2026-10-12T05:49:48.000Z",
+          "title": "(More) Weapons Reforged",
+          "summary": "Hey Survivors! 1.4.0 is another big one. Every weapon can have its own opacity toggled, 22 weapons got new looks for their attacks and upgrades, there are six new post-legendaries, and a new engine core keeps far bigger late-game hordes…",
+          "version": "1.4.0",
+          "kind": "patch",
+          "url": "https://steamcommunity.com/games/3629280/announcements/detail/699903960312450245"
+        },
+        {
           "id": "steam-1845383656395253",
           "date": "2026-10-06T04:31:55.000Z",
           "title": "Patch notes",
@@ -136,15 +145,6 @@
           "summary": "Hi everyone! I'm excited to finally share the new project I've been working on: Kingdom TD: Draft Your Demise, a fantasy tower defense game where you choose the enemies you'll have to survive against in battle.",
           "kind": "news",
           "url": "https://steamcommunity.com/games/3629280/announcements/detail/715660216997250635"
-        },
-        {
-          "id": "steam-1837955055361712",
-          "date": "2026-07-12T19:25:41.000Z",
-          "title": "Patch notes",
-          "summary": "Alchemy table placement should be stricter, no more OOB Endless level cap is now visible in pause menu (under Pause)",
-          "version": "1.2.9",
-          "kind": "patch",
-          "url": "https://steamcommunity.com/games/3629280/announcements/detail/669496599819322880"
         }
       ]
     },
