@@ -94,6 +94,15 @@
       "sourceUrl": "https://store.steampowered.com/news/app/3629280",
       "entries": [
         {
+          "id": "steam-1847920302236476",
+          "date": "2026-10-29T21:51:25.000Z",
+          "title": "Shrines, Circles & Trials",
+          "summary": "Hey Survivors! 1.4.1 is about the things you find out on the map. Shrines, Circles of Power and trials have all been reworked and expanded: ten new or reworked shrines, circles that no longer throw away your progress and can empower a…",
+          "version": "1.4.1",
+          "kind": "patch",
+          "url": "https://steamcommunity.com/games/3629280/announcements/detail/693150463100454866"
+        },
+        {
           "id": "steam-1846018067940070",
           "date": "2026-10-12T05:49:48.000Z",
           "title": "(More) Weapons Reforged",
@@ -137,14 +146,6 @@
           "version": "1.2.10",
           "kind": "patch",
           "url": "https://steamcommunity.com/games/3629280/announcements/detail/684135653863065118"
-        },
-        {
-          "id": "steam-1839676055887096",
-          "date": "2026-07-31T04:34:12.000Z",
-          "title": "Announcing Kingdom TD: Draft Your Demise — My New Tower Defense Game",
-          "summary": "Hi everyone! I'm excited to finally share the new project I've been working on: Kingdom TD: Draft Your Demise, a fantasy tower defense game where you choose the enemies you'll have to survive against in battle.",
-          "kind": "news",
-          "url": "https://steamcommunity.com/games/3629280/announcements/detail/715660216997250635"
         }
       ]
     },
