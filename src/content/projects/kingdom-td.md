@@ -51,6 +51,16 @@ availability:
   label: "Coming soon · Q1 2027"
   platform: "Windows · Steam"
 updates:
+  - id: "2026-11-16-turret-attacks"
+    date: "2026-11-16"
+    title: "Turret attacks you can feel"
+    changes:
+      - "Most turrets have reworked attacks: the hit now lands at the moment you see and hear it."
+      - "Enemies flash in the colour of what hit them and are knocked back a little."
+      - "Slowed enemies are tinted for as long as the slow lasts."
+      - "Cannon and Meteor show their real blast size on the ground."
+      - "Ice Flurry sends out a rolling frost front with sleet falling behind it."
+      - "Most turrets have new firing and impact sounds."
   - id: "2026-10-02-calmer-look"
     date: "2026-10-02"
     title: "A calmer look, and more time to save your sparks"
