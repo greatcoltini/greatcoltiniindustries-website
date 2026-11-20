@@ -5,6 +5,14 @@
       "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523",
       "entries": [
         {
+          "id": "workshop-1795195920",
+          "date": "2026-11-20T17:32:00.000Z",
+          "title": "v1.3.0 — Necesse 1.3.3 updateUpdated for Necesse 1.3.3.",
+          "summary": "Works with the updated Necesse Power (v1.1.0).",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730900523#1795195920"
+        },
+        {
           "id": "workshop-1782754423",
           "date": "2026-06-29T17:33:43.000Z",
           "title": "Mod version 1.2.0 for game version 1.2.0",
@@ -243,6 +251,14 @@
       "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197",
       "entries": [
         {
+          "id": "workshop-1795196126",
+          "date": "2026-11-20T17:35:26.000Z",
+          "title": "v1.1.0 — Necesse 1.3.3 updateUpdated for Necesse 1.3.3.",
+          "summary": "Fixed: vein mining now works in deep desert caves (copper, iron and gold in deep sandstone) and on ancient fossil ore. The config had the wrong IDs for these.",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1795196126"
+        },
+        {
           "id": "workshop-1779814547",
           "date": "2026-05-26T16:55:47.000Z",
           "title": "Mod version 1.0.9 for game version 1.2.0",
@@ -281,14 +297,6 @@
           "version": "1.0.5",
           "kind": "workshop",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779486610"
-        },
-        {
-          "id": "workshop-1779479630",
-          "date": "2026-05-22T19:53:50.000Z",
-          "title": "Mod version 1.0.4 for game version 1.2.0",
-          "version": "1.0.4",
-          "kind": "workshop",
-          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3730263197#1779479630"
         }
       ]
     },
@@ -350,6 +358,14 @@
       "source": "workshop",
       "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3732508344",
       "entries": [
+        {
+          "id": "workshop-1795195793",
+          "date": "2026-11-20T17:29:53.000Z",
+          "title": "Mod version 1.1.0 for game version 1.3.3",
+          "version": "1.1.0",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3732508344#1795195793"
+        },
         {
           "id": "workshop-1779933891",
           "date": "2026-05-28T02:04:51.000Z",
