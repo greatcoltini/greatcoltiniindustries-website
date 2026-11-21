@@ -59,6 +59,14 @@
       "sourceUrl": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3731042527",
       "entries": [
         {
+          "id": "workshop-1795201180",
+          "date": "2026-11-20T18:59:40.000Z",
+          "title": "v1.3.0 — Necesse 1.3.3 updateUpdated for Necesse 1.3.3.",
+          "summary": "Fixed: upgrading a forge no longer moves finished bars into the input slots. Fuel, ingredients and output each stay in their own section.",
+          "kind": "workshop",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/changelog/3731042527#1795201180"
+        },
+        {
           "id": "workshop-1782752393",
           "date": "2026-06-29T16:59:53.000Z",
           "title": "Mod version 1.2.0 for game version 1.2.0",
